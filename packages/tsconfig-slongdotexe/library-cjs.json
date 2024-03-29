@@ -1,0 +1,19 @@
+{
+    "$schema": "https://json.schemastore.org/tsconfig",
+    "display": "Library CJS",
+    "extends": "./base.json",
+    "compilerOptions": {
+      "module": "CommonJS",
+      "target": "ES6",
+      "outDir": "./pack/cjs",
+      "noEmit": false,
+      "declaration": true,
+    },
+    "exclude": [
+      "node_modules",
+      "pack",
+      "**/*.spec.ts",
+      "**/*.spec.tsx"
+    ],
+  }
+  

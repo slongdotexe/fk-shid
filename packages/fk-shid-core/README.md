@@ -1,0 +1,1 @@
+# fk-shid-core

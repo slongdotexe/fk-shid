@@ -1,0 +1,8 @@
+{
+    "$schema": "https://json.schemastore.org/tsconfig",
+    "display": "FK Shid Core",
+    "extends": "tsconfig-slongdotexe/base.json",
+    "include": ["src/**/*"],
+    "exclude": ["node_modules", "dist", "coverage", "pack"],
+    
+}

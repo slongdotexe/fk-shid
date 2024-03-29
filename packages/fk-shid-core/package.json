@@ -1,0 +1,18 @@
+{
+  "name": "fk-shid-core",
+  "packageManager": "yarn@4.1.1",
+  "main": "./pack/cjs/index.js",
+  "module": "./pack/esm/index.js",
+  "types": "./pack/esm/index.d.ts",
+  "scripts": {
+    "clean": "rm -rf pack",
+    "compile": "run compile-esm & run compile-cjs & run compile-types",
+    "compile-cjs": "run -T swc --config-file .cjs.swcrc src -d ./pack/cjs --strip-leading-paths",
+    "compile-clean": "run clean && run compile",
+    "compile-esm": "run -T swc --config-file .esm.swcrc src -d ./pack/esm --strip-leading-paths",
+    "compile-types": "run -T tsc --project tsconfig-types.json",
+    "compile-watch": "run compile-esm --watch & run compile-cjs --watch & run compile-types --watch",
+    "dev": "run compile-watch",
+    "test": "run -T jest"
+  }
+}
