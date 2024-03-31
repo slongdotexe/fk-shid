@@ -12,7 +12,7 @@ import {
 
 const Page = () => {
   const [inputLink, setInputLink] = useState('')
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- I am the captain.
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- --
   const [outputLink, setOutputLink] = useState('')
 
   const router = useRouter()

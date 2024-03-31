@@ -5,13 +5,6 @@ function getTsOverride(configPath) {
       sourceType: 'module',
       project: configPath,
     },
-    // settings: {
-    //   'import/resolver': {
-    //     typescript: {
-    //       project: path.join(process.cwd(), tsconfigName),
-    //     },
-    //   },
-    // },
   }
 }
 

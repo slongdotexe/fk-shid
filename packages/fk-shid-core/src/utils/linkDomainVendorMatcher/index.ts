@@ -1,4 +1,3 @@
-/* eslint-disable no-restricted-syntax -- I am the captain.  */
 export const linkDomainVendorMatcher = (
   matchers: [string, RegExp[]][],
   linkDomain: string

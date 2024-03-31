@@ -4,5 +4,13 @@ const path = require('path')
 
 module.exports = {
   extends: ['eslint-config-slongdotexe/react'],
+  rules: {
+    'no-restricted-syntax': [
+      'error',
+      'ForInStatement',
+      'LabeledStatement',
+      'WithStatement',
+    ],
+  },
   overrides: [getTsOverride(path.join(__dirname, 'tsconfig.json'))],
 }

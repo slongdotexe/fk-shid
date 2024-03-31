@@ -30,7 +30,7 @@ const ShareIntent = () => {
   return (
     <View style={styles.container}>
       <Image
-        // eslint-disable-next-line global-require -- I am the captain.
+        // eslint-disable-next-line global-require -- RN likes this
         source={require('../assets/icon.png')}
         style={[styles.logo, styles.gap]}
       />

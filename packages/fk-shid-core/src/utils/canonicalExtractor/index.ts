@@ -1,5 +1,3 @@
-/* eslint-disable no-restricted-syntax -- I am the captain. */
-
 export const canonicalExtractor = (regexes: RegExp[], resource: string) => {
   for (const regex of regexes) {
     const match = resource.match(regex)
