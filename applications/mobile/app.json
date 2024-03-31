@@ -32,6 +32,36 @@
       "expo-share-intent",
       "expo-router"
     ],
-    "scheme": "fk-shid"
+    "scheme": "fk-shid",
+    "extra": {
+      "eas": {
+        "build": {
+          "experimental": {
+            "ios": {
+              "appExtensions": [
+                {
+                  "targetName": "ShareExtension",
+                  "bundleIdentifier": "com.fkshid.mobile.share-extension",
+                  "entitlements": {
+                    "com.apple.security.application-groups": [
+                      "group.com.fkshid.mobile"
+                    ]
+                  }
+                },
+                {
+                  "targetName": "ShareExtension",
+                  "bundleIdentifier": "com.fkshid.mobile.share-extension"
+                }
+              ]
+            }
+          }
+        },
+        "projectId": "5b39c4b9-82a1-4dc7-925a-ee41cef12afc"
+      },
+      "router": {
+        "origin": false
+      }
+    },
+    "owner": "slong.exe"
   }
 }
