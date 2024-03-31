@@ -8,13 +8,16 @@
     "ios": "expo run:ios",
     "web": "expo start --web",
     "ts:check": "tsc",
-    "clean-metro-cache": "rm -rf $TMPDIR/metro-cache"
+    "clean-metro-cache": "rm -rf $TMPDIR/metro-cache",
+    "build-local-ios": "run eas build --profile simulator-dev-local -p ios --local",
+    "build-local-android": "run eas build --profile simulator-dev-local -p android --local"
   },
   "dependencies": {
     "@types/react": "~18.2.45",
     "expo": "~50.0.14",
     "expo-clipboard": "~5.0.1",
     "expo-constants": "~15.4.5",
+    "expo-dev-client": "~3.3.11",
     "expo-linking": "~6.2.2",
     "expo-router": "~3.4.8",
     "expo-share-intent": "^1.2.1",

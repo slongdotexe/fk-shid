@@ -7,10 +7,15 @@
       "developmentClient": true,
       "distribution": "internal"
     },
-    "preview": {
+    "simulator-dev-local": {
       "distribution": "internal",
+      "developmentClient": true,
       "ios":{
         "simulator": true
+      },
+      "env": {
+        "NODE_ENV": "development",
+        "EXPO_USE_METRO_WORKSPACE_ROOT": "1"
       }
     },
     "production": {}
