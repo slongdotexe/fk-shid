@@ -1,4 +1,3 @@
-/* eslint-disable no-useless-escape -- For Regex patterns */
 export const firstPathSegmentMatcher = /(^\/[^/]+)/
 export const secondSegment = /^\/(?:[^/]+)\/([^/?]+)/
 export const thirdSegment = /^\/(?:[^/]+)\/(?:[^/?]+)([^/?]+)/

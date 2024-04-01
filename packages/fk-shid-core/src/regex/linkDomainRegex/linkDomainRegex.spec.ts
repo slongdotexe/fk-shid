@@ -1,41 +1,36 @@
 import * as linkDomainRegex from './index'
 
 const matchingFixtureData = {
-  amazon: ['www.amazon.com.au', 'www.amazon.co.uk', 'www.amazon.ca'],
-  instagram: ['www.instagram.com'],
+  amazon: ['amazon.com.au', 'amazon.co.uk', 'amazon.ca'],
+  instagram: ['instagram.com'],
 }
 
-const nonMatchingFixtureData = ['www.shinystat.com', 'shinystat.com']
+const nonMatchingFixtureData = ['shinystat.com', 'shinystat.com']
 
 const testlinkDomainRegex = (
   regexQueries: RegExp[],
   matching: string[],
   nonMatching: string[]
 ) => {
-  // it('should match matching fixture data', () => {
-  //   matching.forEach((link) => {
-  //     const match = regexQueries.some((regex) => regex.test(link))
-  //     expect(match).toBe(true)
-  //   })
-  // })
-
-  // it('should not match matching fixture data', () => {
-  //   nonMatching.forEach((link) => {
-  //     const match = regexQueries.some((regex) => regex.test(link))
-  //     expect(match).toBe(false)
-  //   })
-  // })
   matching.forEach((link) => {
     it(`it should match ${link}`, () => {
-      const match = regexQueries.some((regex) => regex.test(link))
-      expect(match).toBe(true)
+      const plainMatch = regexQueries.some((regex) => regex.test(link))
+      const withPrefixMatch = regexQueries.some((regex) =>
+        regex.test(`www.${link}`)
+      )
+      expect(plainMatch).toBe(true)
+      expect(withPrefixMatch).toBe(true)
     })
   })
 
   nonMatching.forEach((link) => {
     it(`it should not match ${link}`, () => {
-      const match = regexQueries.some((regex) => regex.test(link))
-      expect(match).toBe(false)
+      const noPlainMatches = regexQueries.every((regex) => !regex.test(link))
+      const noPrefixedMatches = regexQueries.every(
+        (regex) => !regex.test(`www.${link}`)
+      )
+      expect(noPlainMatches).toBe(true)
+      expect(noPrefixedMatches).toBe(true)
     })
   })
 }

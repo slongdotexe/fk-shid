@@ -12,5 +12,13 @@ module.exports = {
       'WithStatement',
     ],
   },
-  overrides: [getTsOverride(path.join(__dirname, 'tsconfig.json'))],
+  overrides: [
+    getTsOverride(path.join(__dirname, 'tsconfig.json')),
+    {
+      files: ['src/regex/**/*.ts'],
+      rules: {
+        'no-useless-escape': 'off',
+      },
+    },
+  ],
 }

@@ -1,7 +1,8 @@
-export const amazon = [/^(?:(?:https?:\/\/)?(?:www\.)?)?amazon\.[a-z.]{2,}.*$/i]
+import { getTLDStrictHostPattern, getTLDishHostPattern } from '../util'
 
-// export const instagram = [/^(http(s)?:\/\/)?www\.?instagram\.com.*$/i]
-export const instagram = [/^(?:(?:https?:\/\/)?(?:www\.)?)?instagram\.com/]
+export const amazon = [getTLDishHostPattern('amazon')]
+
+export const instagram = [getTLDStrictHostPattern('instagram.com')]
 
 export const linkDomainRegex = {
   amazon,
