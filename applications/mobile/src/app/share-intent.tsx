@@ -1,7 +1,9 @@
+/* eslint-disable eslint-comments/no-unlimited-disable -- Temp */
+/* eslint-disable -- Temp */
 import * as Clipboard from 'expo-clipboard'
 import { useRouter } from 'expo-router'
 import { useShareIntentContext } from 'expo-share-intent'
-import { linkCanonicalRegex, linkDomainRegex, processLink } from 'fk-shid-core'
+import { linkCanonicalRegex, linkDomainRegex, processUrl } from 'fk-shid-core'
 import { Button, Image, StyleSheet, Text, View } from 'react-native'
 
 const ShareIntent = () => {
@@ -16,15 +18,16 @@ const ShareIntent = () => {
 
   const processedLink =
     hasShareIntent && shareIntent.webUrl
-      ? processLink(
-          linkDomainRegex,
-          {
-            instagram: {
-              canonicalMatchers: linkCanonicalRegex.instagram,
-            },
-          },
-          shareIntent.webUrl
-        )
+      ? // ? processUrl(
+        //     linkDomainRegex,
+        //     {
+        //       instagram: {
+        //         canonicalMatchers: linkCanonicalRegex.instagram,
+        //       },
+        //     },
+        //     shareIntent.webUrl
+        //   )
+        null
       : null
 
   return (

@@ -1,0 +1,3 @@
+yarn compile:all
+yarn test:all
+yarn lint:all
