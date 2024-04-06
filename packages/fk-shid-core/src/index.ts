@@ -7,6 +7,6 @@ export * from './utils/linkVendorMatcher'
 export * from './utils/processLink'
 
 // Regex exports
-export { linkCanonicalRegex } from './regex/linkCanonicalRegex'
-export { linkDomainRegex } from './regex/linkDomainRegex'
+export { vendorLinkCanonicalRegex } from './regex/linkCanonicalRegex'
+export { vendorLinkDomainRegex } from './regex/linkDomainRegex'
 export * from './regex'

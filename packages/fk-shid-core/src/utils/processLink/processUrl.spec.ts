@@ -1,18 +1,19 @@
 import { linkCanonicalRegex } from '../../regex'
-import { segmentAfterSegmentValue } from '../../regex/linkCanonicalRegex'
-import { linkDomainRegex } from '../../regex/linkDomainRegex'
+import { vendorLinkDomainRegex } from '../../regex/linkDomainRegex'
 
-import { processLink } from './index'
+import { processUrl } from './index'
 
 describe('processLink', () => {
   it('should return a processed link when both the link domain and resource segment are covered by regex', () => {
-    const result = processLink(
-      linkDomainRegex,
+    const url = new URL('https://www.instagram.com/whatsonot/p/C5H847pO30-/')
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars -- temp
+    const result = processUrl(
+      vendorLinkDomainRegex,
       {
         amazon: { canonicalMatchers: linkCanonicalRegex.amazon },
         instagram: { canonicalMatchers: linkCanonicalRegex.instagram },
       },
-      'https://www.instagram.com/whatsonot/p/C5H847pO30-/'
+      url
     )
   })
 

@@ -4,9 +4,9 @@ export const amazon = [getTLDishHostPattern('amazon')]
 
 export const instagram = [getTLDStrictHostPattern('instagram.com')]
 
-export const linkDomainRegex = {
+export const vendorLinkDomainRegex = {
   amazon,
   instagram,
 }
 
-export type LinkDomainRegexVendors = keyof typeof linkDomainRegex
+export type LinkDomainRegexVendors = keyof typeof vendorLinkDomainRegex

@@ -32,7 +32,7 @@ describe('regex utils', () => {
   describe('getTLDishHostPattern', () => {
     const somewhereRegex = getTLDishHostPattern('somewhere')
     it('Should return a pattern to match a TLDish host string', () => {
-      expect(somewhereRegex).toEqual(/^(?:www.)?(somewhere.[a-z.]{2,}$)/)
+      expect(somewhereRegex).toEqual(/^(www.)?(somewhere.[a-z.]{2,}$)/)
     })
 
     it('Should return a pattern that matches TLD hosts with or without `www`', () => {
@@ -62,11 +62,22 @@ describe('regex utils', () => {
       expect(queryMatch).toBe(false)
     })
 
-    it('Should return a pattern where the first capture group is the TLD with www stripped', () => {
+    it('Should return a pattern where the first capture group is the `www` subdomain if it exists', () => {
       const plainResult = 'somewhere.com'.match(somewhereRegex)
       const prefixedResult = 'www.somewhere.com'.match(somewhereRegex)
-      expect(prefixedResult![1]).toBe('somewhere.com')
-      expect(plainResult![1]).toBe('somewhere.com')
+      // @ts-expect-error -- It won't be null.
+      expect(prefixedResult[1]).toBe('www.')
+      // @ts-expect-error -- It won't be null.
+      expect(plainResult[1]).toBe(undefined)
+    })
+
+    it('Should return a pattern where the second capture group is the TLD with www stripped', () => {
+      const plainResult = 'somewhere.com'.match(somewhereRegex)
+      const prefixedResult = 'www.somewhere.com'.match(somewhereRegex)
+      // @ts-expect-error -- It won't be null.
+      expect(prefixedResult[2]).toBe('somewhere.com')
+      // @ts-expect-error -- It won't be null.
+      expect(plainResult[2]).toBe('somewhere.com')
     })
 
     it('Should work for many domains', () => {
@@ -81,7 +92,7 @@ describe('regex utils', () => {
   describe('getTLDStrictHostPattern', () => {
     const somewhereStrictRegex = getTLDStrictHostPattern('somewhere.com')
     it('Should return a pattern to match a strict TLD host string', () => {
-      expect(somewhereStrictRegex).toEqual(/^(?:www.)?(somewhere\.com$)/)
+      expect(somewhereStrictRegex).toEqual(/^(www.)?(somewhere\.com$)/)
     })
 
     it('Should return a pattern that matches TLD hosts with or without `www`', () => {
@@ -101,11 +112,18 @@ describe('regex utils', () => {
       expect(queryMatch).toBe(false)
     })
 
-    it('Should return a pattern where the first capture group is the TLD with www stripped', () => {
+    it('Should return a pattern where the first capture group is the `www` subdomain if it exists', () => {
       const plainResult = 'somewhere.com'.match(somewhereStrictRegex)
       const prefixedResult = 'www.somewhere.com'.match(somewhereStrictRegex)
-      expect(prefixedResult![1]).toBe('somewhere.com')
-      expect(plainResult![1]).toBe('somewhere.com')
+      expect(prefixedResult![1]).toBe('www.')
+      expect(plainResult![1]).toBe(undefined)
+    })
+
+    it('Should return a pattern where the second capture group is the TLD with www stripped', () => {
+      const plainResult = 'somewhere.com'.match(somewhereStrictRegex)
+      const prefixedResult = 'www.somewhere.com'.match(somewhereStrictRegex)
+      expect(prefixedResult![2]).toBe('somewhere.com')
+      expect(plainResult![2]).toBe('somewhere.com')
     })
 
     it('Should work for many domains', () => {

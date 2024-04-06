@@ -11,9 +11,9 @@ export const amazon = [firstPathSegmentMatcher]
 
 export const instagram = [segmentAfterSegmentValue('p')]
 
-export const linkCanonicalRegex = {
+export const vendorLinkCanonicalRegex = {
   amazon,
   instagram,
 }
 
-export type CanonicalRegexVendors = keyof typeof linkCanonicalRegex
+export type CanonicalRegexVendors = keyof typeof vendorLinkCanonicalRegex

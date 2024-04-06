@@ -1,14 +1,17 @@
+export type LinkDomainVendorTuple = [string, RegExp[]][]
+
 export const linkDomainVendorMatcher = (
   matchers: [string, RegExp[]][],
-  linkDomain: string
+  linkHost: string
 ) => {
   for (const [vendor, regexes] of matchers) {
     for (const regex of regexes) {
-      const match = linkDomain.match(regex)
+      const match = linkHost.match(regex)
       if (match) {
         return {
           vendor,
-          domain: match[0],
+          domain: match[2],
+          has3WSubdomain: typeof match[1] === 'string',
         }
       }
     }

@@ -8,14 +8,14 @@ type TResourceRegex = {
   shidMatchers?: RegExp[]
 }
 
-export const processLink = (
+export const processUrl = (
   domainMatchers: Record<string, RegExp[]>,
   resourceMatchers: Record<string, TResourceRegex>,
-  link: string
+  url: URL
 ) => {
   const domainMatch = linkDomainVendorMatcher(
     Object.entries(domainMatchers),
-    link
+    url.host
   )
 
   if (!domainMatch) return null
@@ -27,9 +27,8 @@ export const processLink = (
   }
   // eslint-disable-next-line @typescript-eslint/no-unused-vars -- Temporary. TODO: Remove
   const { canonicalMatchers, shidMatchers } = matchers
-  const resourceSegment = link.replace(domainMatch.domain, '')
   const cleanedResourceSegment = canonicalMatchers
-    ? canonicalExtractor(canonicalMatchers, resourceSegment)
+    ? canonicalExtractor(canonicalMatchers, url.pathname)
     : shareIdCleaner()
 
   return `${domainMatch.domain}${cleanedResourceSegment}`
