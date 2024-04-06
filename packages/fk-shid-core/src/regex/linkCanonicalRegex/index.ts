@@ -26,7 +26,7 @@ export const facebook = [
 // Instagram
 export const instagram = [
   pathAfterSegmentValue('p', false), // Post
-  pathAfterSegmentValue('reel'), // Reel
+  pathAfterSegmentValue('reel', false), // Reel
 ]
 
 // YouTube

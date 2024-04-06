@@ -10,7 +10,7 @@ import {
   TextInput,
 } from 'react-native'
 
-import { handleCopy, processInputLink } from '../utils'
+import { handleCopy, handleShareLink, processInputLink } from '../utils'
 
 const Page = () => {
   const [inputLink, setInputLink] = useState('')
@@ -55,7 +55,12 @@ const Page = () => {
       />
       {!!outputLink?.link && <Text>Cleaned URL: {outputLink?.link}</Text>}
       {!!outputLink?.error && <Text>Error: {outputLink?.error}</Text>}
-      <Button title="copy" onPress={() => handleCopy(outputLink?.link ?? '')} />
+      <Button title="Copy" onPress={() => handleCopy(outputLink?.link ?? '')} />
+      <Button title="Clear" onPress={() => setInputLink('')} />
+      <Button
+        title="Share"
+        onPress={() => handleShareLink(outputLink.link ?? '')}
+      />
       <StatusBar />
     </View>
   )

@@ -1,34 +1,47 @@
-import Clipboard from 'expo-clipboard'
+import * as Clipboard from 'expo-clipboard'
 import { ShareIntent } from 'expo-share-intent'
 import {
   mergedVendorRegexes,
   processUrl,
   vendorLinkDomainRegex,
 } from 'fk-shid-core'
+import { Share } from 'react-native'
 
 export const processShareIntentLink = (
   shareIntent: ShareIntent,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars -- Temporary
   hasShareIntent: boolean
 ) => {
+  const url = new URL(shareIntent.webUrl ?? '')
   const processedLink = processUrl(
     vendorLinkDomainRegex,
     mergedVendorRegexes,
-    new URL(shareIntent.webUrl ?? '')
+    url
   )
 
-  return `${processedLink.domain}${processedLink.resourceSegment}`
+  return `${url.protocol}//${processedLink.domain}${processedLink.resourceSegment}`
 }
 
 export const processInputLink = (link: string) => {
+  const inputUrl = new URL(link)
   const processedLink = processUrl(
     vendorLinkDomainRegex,
     mergedVendorRegexes,
-    new URL(link)
+    inputUrl
   )
-  return `${processedLink.domain}${processedLink.resourceSegment}`
+  return `${inputUrl.protocol}//${processedLink.domain}${processedLink.resourceSegment}`
 }
 
 export const handleCopy = (link: string) => {
   return Clipboard.setStringAsync(link)
+}
+
+export const handleShareLink = async (link: string) => {
+  try {
+    await Share.share({
+      url: link,
+    })
+  } catch (error) {
+    console.log(error)
+  }
 }

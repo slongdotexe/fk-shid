@@ -1,16 +1,18 @@
 import { useRouter } from 'expo-router'
 import { ShareIntent, useShareIntentContext } from 'expo-share-intent'
+import { useRef } from 'react'
 import { Button, Image, StyleSheet, Text, View } from 'react-native'
 
-import { handleCopy, processShareIntentLink } from '../utils'
+import { handleCopy, handleShareLink, processShareIntentLink } from '../utils'
 
 const handleShareIntentLink = (
   shareIntent: ShareIntent,
   hasShareIntent: boolean
 ) => {
   try {
+    const processedLink = processShareIntentLink(shareIntent, hasShareIntent)
     return {
-      link: processShareIntentLink(shareIntent, hasShareIntent),
+      link: processedLink,
       error: null,
     }
   } catch (error) {
@@ -28,8 +30,10 @@ const ShareIntentPage = () => {
   const router = useRouter()
   const { hasShareIntent, shareIntent, error, resetShareIntent } =
     useShareIntentContext()
+  const shareIntentRef = useRef(shareIntent)
 
-  const processedLink = handleShareIntentLink(shareIntent, hasShareIntent)
+  const { webUrl } = shareIntentRef.current
+  const processedLink = handleShareIntentLink(shareIntentRef.current, true)
 
   return (
     <View style={styles.container}>
@@ -47,8 +51,8 @@ const ShareIntentPage = () => {
           gap: 10,
         }}
       >
-        <Text>Received text: {shareIntent.webUrl}</Text>
-        <Text>is webUrl: {shareIntent.webUrl ? 'true' : 'false'}</Text>
+        <Text>Received text: {webUrl}</Text>
+        <Text>is webUrl: {webUrl ? 'true' : 'false'}</Text>
         {!!processedLink?.link && (
           <Text>Cleaned URL: {processedLink.link}</Text>
         )}
@@ -56,6 +60,10 @@ const ShareIntentPage = () => {
         <Button
           title="copy"
           onPress={() => handleCopy(processedLink?.link ?? '')}
+        />
+        <Button
+          title="Share"
+          onPress={() => handleShareLink(processedLink?.link ?? '')}
         />
       </View>
       <Text style={[styles.error]}>{error}</Text>

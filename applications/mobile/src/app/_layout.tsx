@@ -1,18 +1,18 @@
-import { Slot, useRouter } from 'expo-router'
+import { Slot } from 'expo-router'
 import { ShareIntentProvider } from 'expo-share-intent'
 
 const HomeLayout = () => {
-  const router = useRouter()
+  // const router = useRouter()
 
   return (
     <ShareIntentProvider
       options={{
         debug: true,
         resetOnBackground: true,
-        onResetShareIntent: () =>
-          router.replace({
-            pathname: '/',
-          }),
+        // onResetShareIntent: () =>
+        //   router.replace({
+        //     pathname: '/',
+        //   }),
       }}
     >
       <Slot />
