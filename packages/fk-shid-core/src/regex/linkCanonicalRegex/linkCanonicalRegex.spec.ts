@@ -1,11 +1,17 @@
-import * as linkCanonicalRegex from './index'
+import { vendorLinkCanonicalRegex, CanonicalRegexVendors } from './index'
 
 const matchingFixtureData = {
-  amazon: [
-    '/Firewall-Appliance-Gigabit-Celeron-AES-NI/dp/B07G9NHRGQ/?_encoding=UTF8&pd_rd_w=fMQL9&content-id=amzn1.sym.0f8ee610-b659-4aa7-823c-064f1a0971f3%3Aamzn1.symc.79c255d6-0688-4760-bc39-1cacf7968323&pf_rd_p=0f8ee610-b659-4aa7-823c-064f1a0971f3&pf_rd_r=H6H1JN917RQDM3AZR7KF&pd_rd_wg=Diuya&pd_rd_r=ea1859bb-1c74-4b66-8ba3-e9c404e2929d&ref_=pd_gw_ci_mcx_mr_hp_atf_m',
-    '/Firewall-Appliance-Gigabit-Celeron-AES-NI/',
+  amazon: ['/some-product-Descript-ME34-Large/dp/PR0DUC11D'],
+  facebook: [
+    '/reel/878972984798472', // Reel
+    '/groups/112233445566/permalink/112233445566', // Group post
   ],
-  instagram: ['/p/C5FPDeGufXP'],
+  instagram: [
+    '/p/postId-Djasd8934bn', // Post without username segment
+    '/someInstaUser/p/postId-Djasd8934bn', // Post with username segment
+    '/reel/postId-Djasd8934bn', // Reel
+  ],
+  youtube: ['/s0mEv1d30ID', '/shorts/s0mEv1d30ID'],
 }
 
 const queryOnly =
@@ -17,7 +23,9 @@ const firstSegmentWithQuery = `/first-segment${queryOnly}`
 
 const nonMatchingFixtureData = {
   amazon: [queryOnly],
+  facebook: [queryOnly],
   instagram: [queryOnly, firstSegmentOnly, firstSegmentWithQuery],
+  youtube: [queryOnly],
 }
 
 const testLinkCanonicalRegex = (
@@ -27,7 +35,9 @@ const testLinkCanonicalRegex = (
 ) => {
   it('should match matching fixture data', () => {
     matching.forEach((link) => {
-      const match = regexQueries.some((regex) => regex.test(link))
+      const match = regexQueries.some((regex) => {
+        return regex.test(link)
+      })
       expect(match).toBe(true)
     })
   })
@@ -40,19 +50,15 @@ const testLinkCanonicalRegex = (
   })
 }
 
-describe('Link canonical regex tests', () => {
-  describe('amazon', () => {
-    testLinkCanonicalRegex(
-      linkCanonicalRegex.amazon,
-      matchingFixtureData.amazon,
-      nonMatchingFixtureData.amazon
-    )
-  })
-  describe('instagram', () => {
-    testLinkCanonicalRegex(
-      linkCanonicalRegex.instagram,
-      matchingFixtureData.instagram,
-      nonMatchingFixtureData.instagram
-    )
+describe('Generated link canonical regex tests', () => {
+  const vendorKeys = Object.keys(vendorLinkCanonicalRegex)
+  vendorKeys.forEach((vendor) => {
+    describe(vendor, () => {
+      testLinkCanonicalRegex(
+        vendorLinkCanonicalRegex[vendor as CanonicalRegexVendors],
+        matchingFixtureData[vendor as CanonicalRegexVendors],
+        nonMatchingFixtureData[vendor as CanonicalRegexVendors]
+      )
+    })
   })
 })

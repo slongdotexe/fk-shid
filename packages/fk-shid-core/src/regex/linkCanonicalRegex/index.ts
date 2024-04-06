@@ -1,19 +1,44 @@
-export const firstPathSegmentMatcher = /(^\/[^/]+)/
-export const secondSegment = /^\/(?:[^/]+)\/([^/?]+)/
-export const thirdSegment = /^\/(?:[^/]+)\/(?:[^/?]+)([^/?]+)/
+import { pathAfterSegmentValue, numberOfSegments } from '../util/canonicalUtils'
 
-export const segmentAfterSegmentValue = (segmentValue: string) => {
-  const regexPattern = `\/${segmentValue}\/([^/?]+)`
-  return new RegExp(regexPattern)
+// Amazon
+export const amazon = [numberOfSegments(3)] // Product, e.g /Some-Product-for-something-M358TF/dp/PR0DUC7ID
+
+const getPathSegmentPattern = () => {
+  return `(?:\/[^\/]+)`
 }
 
-export const amazon = [firstPathSegmentMatcher]
+const getLiteralSegmentPattern = (literalValue: string) => {
+  return `\/${literalValue}`
+}
 
-export const instagram = [segmentAfterSegmentValue('p')]
+export const facebook = [
+  pathAfterSegmentValue('reel'),
+  new RegExp(
+    [
+      getLiteralSegmentPattern('groups'),
+      getPathSegmentPattern(),
+      getLiteralSegmentPattern('permalink'),
+      getPathSegmentPattern(),
+    ].join('')
+  ),
+]
+
+// Instagram
+export const instagram = [
+  pathAfterSegmentValue('p', false), // Post
+  pathAfterSegmentValue('reel'), // Reel
+]
+
+// YouTube
+export const youtube = [numberOfSegments(1), pathAfterSegmentValue('shorts')]
+export const youtubeShortened = []
 
 export const vendorLinkCanonicalRegex = {
   amazon,
+  facebook,
   instagram,
+  youtube,
+  // 'you.be': youtubeShortened,
 }
 
 export type CanonicalRegexVendors = keyof typeof vendorLinkCanonicalRegex

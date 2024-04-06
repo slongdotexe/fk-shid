@@ -1,10 +1,10 @@
-export type LinkDomainVendorTuple = [string, RegExp[]][]
+export type LinkDomainMatchers = Record<string, RegExp[]>
 
 export const linkDomainVendorMatcher = (
-  matchers: [string, RegExp[]][],
+  matchers: LinkDomainMatchers,
   linkHost: string
 ) => {
-  for (const [vendor, regexes] of matchers) {
+  for (const [vendor, regexes] of Object.entries(matchers)) {
     for (const regex of regexes) {
       const match = linkHost.match(regex)
       if (match) {

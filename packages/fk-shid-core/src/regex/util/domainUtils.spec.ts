@@ -4,7 +4,7 @@ import {
   getTLDishHostPattern,
 } from './index'
 
-describe('regex utils', () => {
+describe('Domain regex utils', () => {
   const testHosts = [
     'bloglovin.com',
     'mozilla.org',
@@ -46,7 +46,6 @@ describe('regex utils', () => {
 
     it('Should return a pattern with several TLD segments', () => {
       expect(somewhereRegex.test('somewhere.com.au')).toEqual(true)
-      // https://www.youtube.com/watch/0ZEuWJ4muYc
       expect(somewhereRegex.test('somewhere.com.au.other.more')).toEqual(true)
     })
 

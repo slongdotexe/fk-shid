@@ -10,14 +10,32 @@ import {
   TextInput,
 } from 'react-native'
 
+import { handleCopy, processInputLink } from '../utils'
+
 const Page = () => {
   const [inputLink, setInputLink] = useState('')
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- --
-  const [outputLink, setOutputLink] = useState('')
-
   const router = useRouter()
 
   const { hasShareIntent } = useShareIntentContext()
+
+  const handleInputLink = (link: string) => {
+    try {
+      const processedLink = processInputLink(link)
+      return {
+        error: null,
+        link: processedLink,
+      }
+    } catch (error) {
+      const _error = error as Error
+      // eslint-disable-next-line no-console -- Debugging
+      console.log(_error?.message)
+      return {
+        error: _error.message,
+        link: null,
+      }
+    }
+  }
+  const outputLink = handleInputLink(inputLink)
 
   useEffect(() => {
     if (hasShareIntent) {
@@ -35,14 +53,9 @@ const Page = () => {
         defaultValue={inputLink}
         style={styled.TextInput}
       />
-      <Button
-        title="Remove tracking"
-        onPress={() => {
-          //   const link = removeTracking(inputLink)
-          //   setOutputLink(link)
-        }}
-      />
-      <Text>{outputLink}</Text>
+      {!!outputLink?.link && <Text>Cleaned URL: {outputLink?.link}</Text>}
+      {!!outputLink?.error && <Text>Error: {outputLink?.error}</Text>}
+      <Button title="copy" onPress={() => handleCopy(outputLink?.link ?? '')} />
       <StatusBar />
     </View>
   )

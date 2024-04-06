@@ -1,13 +1,16 @@
-import * as linkDomainRegex from './index'
+import { vendorLinkDomainRegex, LinkDomainRegexVendors } from './index'
 
 const matchingFixtureData = {
   amazon: ['amazon.com.au', 'amazon.co.uk', 'amazon.ca'],
+  facebook: ['facebook.com', 'facebook.com.au', 'facebook.ca'],
   instagram: ['instagram.com'],
+  youtube: ['youtube.com'],
+  'youtu.be': ['youtu.be'],
 }
 
-const nonMatchingFixtureData = ['shinystat.com', 'shinystat.com']
+const nonMatchingFixtureData = ['shinystat.com']
 
-const testlinkDomainRegex = (
+const testLinkDomainRegex = (
   regexQueries: RegExp[],
   matching: string[],
   nonMatching: string[]
@@ -35,19 +38,15 @@ const testlinkDomainRegex = (
   })
 }
 
-describe('Link domain regex tests', () => {
-  describe('amazon', () => {
-    testlinkDomainRegex(
-      linkDomainRegex.amazon,
-      matchingFixtureData.amazon,
-      nonMatchingFixtureData
-    )
-  })
-  describe('instagram', () => {
-    testlinkDomainRegex(
-      linkDomainRegex.instagram,
-      matchingFixtureData.instagram,
-      nonMatchingFixtureData
-    )
+describe('Generated link domain regex tests', () => {
+  const vendorKeys = Object.keys(vendorLinkDomainRegex)
+  vendorKeys.forEach((vendor) => {
+    describe(vendor, () => {
+      testLinkDomainRegex(
+        vendorLinkDomainRegex[vendor as LinkDomainRegexVendors],
+        matchingFixtureData[vendor as LinkDomainRegexVendors],
+        nonMatchingFixtureData
+      )
+    })
   })
 })

@@ -1,34 +1,35 @@
-/* eslint-disable eslint-comments/no-unlimited-disable -- Temp */
-/* eslint-disable -- Temp */
-import * as Clipboard from 'expo-clipboard'
 import { useRouter } from 'expo-router'
-import { useShareIntentContext } from 'expo-share-intent'
-import { linkCanonicalRegex, linkDomainRegex, processUrl } from 'fk-shid-core'
+import { ShareIntent, useShareIntentContext } from 'expo-share-intent'
 import { Button, Image, StyleSheet, Text, View } from 'react-native'
 
-const ShareIntent = () => {
+import { handleCopy, processShareIntentLink } from '../utils'
+
+const handleShareIntentLink = (
+  shareIntent: ShareIntent,
+  hasShareIntent: boolean
+) => {
+  try {
+    return {
+      link: processShareIntentLink(shareIntent, hasShareIntent),
+      error: null,
+    }
+  } catch (error) {
+    const _error = error as Error
+    // eslint-disable-next-line no-console -- Debugging
+    console.log(_error?.message)
+    return {
+      error: _error.message,
+      link: null,
+    }
+  }
+}
+
+const ShareIntentPage = () => {
   const router = useRouter()
   const { hasShareIntent, shareIntent, error, resetShareIntent } =
     useShareIntentContext()
 
-  const handleCopy = async (link: string) => {
-    await Clipboard.setStringAsync(link)
-    console.log('copied link', link)
-  }
-
-  const processedLink =
-    hasShareIntent && shareIntent.webUrl
-      ? // ? processUrl(
-        //     linkDomainRegex,
-        //     {
-        //       instagram: {
-        //         canonicalMatchers: linkCanonicalRegex.instagram,
-        //       },
-        //     },
-        //     shareIntent.webUrl
-        //   )
-        null
-      : null
+  const processedLink = handleShareIntentLink(shareIntent, hasShareIntent)
 
   return (
     <View style={styles.container}>
@@ -48,8 +49,14 @@ const ShareIntent = () => {
       >
         <Text>Received text: {shareIntent.webUrl}</Text>
         <Text>is webUrl: {shareIntent.webUrl ? 'true' : 'false'}</Text>
-        <Text>Cleaned URL: {processedLink}</Text>
-        <Button title="copy" onPress={() => handleCopy(processedLink ?? '')} />
+        {!!processedLink?.link && (
+          <Text>Cleaned URL: {processedLink.link}</Text>
+        )}
+        {!!processedLink?.error && <Text>Error: {processedLink.error}</Text>}
+        <Button
+          title="copy"
+          onPress={() => handleCopy(processedLink?.link ?? '')}
+        />
       </View>
       <Text style={[styles.error]}>{error}</Text>
       <View style={styles.horizontalContainer}>
@@ -62,7 +69,7 @@ const ShareIntent = () => {
   )
 }
 
-export default ShareIntent
+export default ShareIntentPage
 
 const styles = StyleSheet.create({
   container: {

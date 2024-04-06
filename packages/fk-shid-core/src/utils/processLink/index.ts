@@ -1,7 +1,9 @@
 import { LinkDomainRegexVendors } from '../../regex/linkDomainRegex'
 import { canonicalExtractor } from '../canonicalExtractor'
-import { linkDomainVendorMatcher } from '../linkDomainVendorMatcher'
-import { shareIdCleaner } from '../shareIdCleaner'
+import {
+  LinkDomainMatchers,
+  linkDomainVendorMatcher,
+} from '../linkDomainVendorMatcher'
 
 type TResourceRegex = {
   canonicalMatchers?: RegExp[]
@@ -9,27 +11,33 @@ type TResourceRegex = {
 }
 
 export const processUrl = (
-  domainMatchers: Record<string, RegExp[]>,
+  domainMatchers: LinkDomainMatchers,
   resourceMatchers: Record<string, TResourceRegex>,
   url: URL
 ) => {
-  const domainMatch = linkDomainVendorMatcher(
-    Object.entries(domainMatchers),
-    url.host
-  )
+  const domainMatch = linkDomainVendorMatcher(domainMatchers, url.host)
 
-  if (!domainMatch) return null
+  if (!domainMatch) {
+    return {
+      domain: null,
+      resourceSegment: null,
+    }
+  }
   const matchers =
     resourceMatchers[domainMatch.vendor as LinkDomainRegexVendors]
 
   if (!matchers) {
     throw new Error('No resource matchers for vendor')
   }
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- Temporary. TODO: Remove
-  const { canonicalMatchers, shidMatchers } = matchers
-  const cleanedResourceSegment = canonicalMatchers
-    ? canonicalExtractor(canonicalMatchers, url.pathname)
-    : shareIdCleaner()
-
-  return `${domainMatch.domain}${cleanedResourceSegment}`
+  const { canonicalMatchers } = matchers
+  const cleanedResourceSegment = canonicalExtractor(
+    canonicalMatchers ?? [],
+    url.pathname
+      // Trim trailing slash
+      .replace(/\/$/, '')
+  )
+  return {
+    domain: domainMatch.domain,
+    resourceSegment: cleanedResourceSegment,
+  }
 }

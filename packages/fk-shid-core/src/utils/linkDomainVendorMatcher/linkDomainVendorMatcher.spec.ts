@@ -1,23 +1,21 @@
-import { linkDomainVendorMatcher } from './index'
+import { LinkDomainMatchers, linkDomainVendorMatcher } from './index'
 
 describe('linkDomainRegexMatcher', () => {
-  const somewhereVendorTuple: [string, RegExp[]][] = [
-    ['some-vendor', [/^(www.)?(somewhere\.[a-z.]{2,}).*$/i]],
-  ]
+  const somewhereVendor: LinkDomainMatchers = {
+    'some-vendor': [/^(www.)?(somewhere\.[a-z.]{2,}).*$/i],
+  }
   const somewhereUrl = 'www.somewhere.com.au'
   it('Should return the vendor, domain and `has3WSubdomain` when provided', () => {
-    expect(linkDomainVendorMatcher(somewhereVendorTuple, somewhereUrl)).toEqual(
-      {
-        vendor: 'some-vendor',
-        domain: 'somewhere.com.au',
-        has3WSubdomain: true,
-      }
-    )
+    expect(linkDomainVendorMatcher(somewhereVendor, somewhereUrl)).toEqual({
+      vendor: 'some-vendor',
+      domain: 'somewhere.com.au',
+      has3WSubdomain: true,
+    })
   })
 
   it('Should return the vendor, domain and `has3WSubdomain` when provided', () => {
     expect(
-      linkDomainVendorMatcher(somewhereVendorTuple, 'somewhere.com.au')
+      linkDomainVendorMatcher(somewhereVendor, 'somewhere.com.au')
     ).toEqual({
       vendor: 'some-vendor',
       domain: 'somewhere.com.au',
@@ -27,10 +25,7 @@ describe('linkDomainRegexMatcher', () => {
 
   it("Should return null when provided a domain string that doesn't match the regex", () => {
     expect(
-      linkDomainVendorMatcher(
-        [['some-vendor', [/^www\.?somewhere\.[a-z.]{2,}.*$/i]]],
-        'www.some-different-domain.com'
-      )
+      linkDomainVendorMatcher(somewhereVendor, 'www.some-different-domain.com')
     ).toEqual(null)
   })
 })
