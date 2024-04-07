@@ -12,34 +12,34 @@ import {
 
 import { handleCopy, handleShareLink, processInputLink } from '../utils'
 
+const handleInputLink = (link: string) => {
+  try {
+    const processedLink = processInputLink(link)
+    return {
+      error: null,
+      link: processedLink,
+    }
+  } catch (error) {
+    const _error = error as Error
+    // eslint-disable-next-line no-console -- Debugging
+    console.log(_error?.message)
+    return {
+      error: _error.message,
+      link: null,
+    }
+  }
+}
+
 const Page = () => {
   const [inputLink, setInputLink] = useState('')
   const router = useRouter()
 
   const { hasShareIntent } = useShareIntentContext()
 
-  const handleInputLink = (link: string) => {
-    try {
-      const processedLink = processInputLink(link)
-      return {
-        error: null,
-        link: processedLink,
-      }
-    } catch (error) {
-      const _error = error as Error
-      // eslint-disable-next-line no-console -- Debugging
-      console.log(_error?.message)
-      return {
-        error: _error.message,
-        link: null,
-      }
-    }
-  }
   const outputLink = handleInputLink(inputLink)
 
   useEffect(() => {
     if (hasShareIntent) {
-      // we want to handle share intent event in a specific page
       router.replace({
         pathname: 'share-intent',
       })
