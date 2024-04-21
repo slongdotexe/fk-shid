@@ -1,4 +1,4 @@
-const primitiveCache = [
+const theme = [
   'none',
   'spin 1s linear infinite',
   'ping 1s cubic-bezier(0, 0, 0.2, 1) infinite',
@@ -545,6 +545,7 @@ const rootCacheData4 = {
   transparent: primitiveCache[46],
   black: primitiveCache[47],
   white: primitiveCache[48],
+
   slate: {
     50: primitiveCache[49],
     100: primitiveCache[50],
@@ -836,7 +837,11 @@ const rootCacheData4 = {
   ring: primitiveCache[293],
   background: primitiveCache[308],
   foreground: primitiveCache[309],
-  primary: { DEFAULT: primitiveCache[309], foreground: primitiveCache[297] },
+  primary: {
+    DEFAULT: primitiveCache[309],
+    foreground: primitiveCache[297],
+    90: 'hsl(210, 40%, 100%)',
+  },
   secondary: { DEFAULT: primitiveCache[304], foreground: primitiveCache[309] },
   destructive: {
     DEFAULT: primitiveCache[300],

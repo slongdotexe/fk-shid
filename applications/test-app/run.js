@@ -70,7 +70,7 @@ const splitColorTokens = (tokens) => {
     }
     return { ...acc, [key]: themePath }
   }, {})
-  // console.log(splitTokens)
+
   return splitTokens
 }
 

@@ -1,15 +1,12 @@
+import { css } from '@emotion/native'
 import { useRouter } from 'expo-router'
 import { useShareIntentContext } from 'expo-share-intent'
 import { useEffect, useState } from 'react'
-import {
-  Text,
-  StyleSheet,
-  View,
-  Button,
-  StatusBar,
-  TextInput,
-} from 'react-native'
+import { Text, StatusBar, View } from 'react-native'
 
+import { Button } from '../components/Buttons'
+import { TextInput } from '../components/Input'
+import { PageContainer } from '../components/PageContainer'
 import { handleCopy, handleShareLink, processInputLink } from '../utils'
 
 const handleInputLink = (link: string) => {
@@ -47,39 +44,42 @@ const Page = () => {
   }, [hasShareIntent, router])
 
   return (
-    <View style={styled.styles}>
+    <PageContainer>
       <TextInput
         onChangeText={(newText) => setInputLink(newText)}
         defaultValue={inputLink}
-        style={styled.TextInput}
+        size="sm"
       />
       {!!outputLink?.link && <Text>Cleaned URL: {outputLink?.link}</Text>}
       {!!outputLink?.error && <Text>Error: {outputLink?.error}</Text>}
-      <Button title="Copy" onPress={() => handleCopy(outputLink?.link ?? '')} />
-      <Button title="Clear" onPress={() => setInputLink('')} />
-      <Button
-        title="Share"
-        onPress={() => handleShareLink(outputLink.link ?? '')}
-      />
-      <StatusBar />
-    </View>
+      <View
+        style={css({
+          flexDirection: 'row',
+          gap: 6,
+        })}
+      >
+        <Button
+          size="sm"
+          variant="default"
+          label="Share"
+          onPress={() => handleShareLink(outputLink.link ?? '')}
+        />
+        <Button
+          size="sm"
+          variant="secondary"
+          label="Copy"
+          onPress={() => handleCopy(outputLink?.link ?? '')}
+        />
+        <Button
+          size="sm"
+          variant="destructive"
+          label="Clear"
+          onPress={() => setInputLink('')}
+        />
+      </View>
+      <StatusBar translucent barStyle="light-content" />
+    </PageContainer>
   )
 }
 
 export default Page
-
-const styled = StyleSheet.create({
-  styles: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: '100%',
-    height: '100%',
-    paddingHorizontal: '5%',
-  },
-  TextInput: {
-    width: '100%',
-    height: 40,
-    borderColor: 'gray',
-    borderWidth: 1,
-  },
-})
