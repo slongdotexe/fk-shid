@@ -54,24 +54,3 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 Button.displayName = 'Button'
 
 export { Button, buttonVariants }
-
-const tokens = {
-  padding: cache.size[8],
-  accentColor: {
-    inherit: cache.colors.inherit,
-    current: cache.colors.current,
-    transparent: cache.colors.transparent,
-    black: cache.colors.black,
-    white: cache.colors.white,
-    slate: {
-      50: cache.colors.slate[50],
-      100: cache.colors.slate[100],
-      200: cache.colors.slate[200],
-      300: cache.colors.slate[300],
-      400: cache.colors.slate[400],
-      500: cache.colors.slate[500],
-      600: cache.colors.slate[600],
-      700: cache.colors.slate[700],
-    },
-  },
-}

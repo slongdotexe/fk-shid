@@ -10,7 +10,7 @@
       "skipLibCheck": true,
       "strict": true,
       "target": "ESNext",
-      "noEmit": true,
+      "noEmit": true
     },
     "exclude": ["node_modules"]
   }
