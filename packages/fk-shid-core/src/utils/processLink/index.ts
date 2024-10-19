@@ -1,4 +1,4 @@
-import { LinkDomainRegexVendors } from '../../regex/linkDomainRegex'
+import { LinkDomainRegexVendors } from '../../regex/domain-matchers'
 import { canonicalExtractor } from '../canonicalExtractor'
 import {
   LinkDomainMatchers,

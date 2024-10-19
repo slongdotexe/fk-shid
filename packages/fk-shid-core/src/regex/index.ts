@@ -1,5 +1,5 @@
-import { vendorLinkCanonicalRegex } from './linkCanonicalRegex'
-import * as linkDomainRegex from './linkDomainRegex'
+import { vendorLinkCanonicalRegex } from './link-segment-matchers'
+import * as linkDomainRegex from './domain-matchers'
 
 const mergedVendorRegexes = Object.entries(vendorLinkCanonicalRegex).reduce(
   (acc, [vendor, regexes]) => {

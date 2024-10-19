@@ -1,5 +1,5 @@
 import { mergedVendorRegexes } from '../../regex'
-import { vendorLinkDomainRegex } from '../../regex/linkDomainRegex'
+import { vendorLinkDomainRegex } from '../../regex/domain-matchers'
 
 import { processUrl } from './index'
 

@@ -7,7 +7,7 @@ export * from './utils/linkVendorMatcher'
 export * from './utils/processLink'
 
 // Regex exports
-export { vendorLinkCanonicalRegex } from './regex/linkCanonicalRegex'
-export { vendorLinkDomainRegex } from './regex/linkDomainRegex'
+export { vendorLinkCanonicalRegex } from './regex/link-segment-matchers'
+export { vendorLinkDomainRegex } from './regex/domain-matchers'
 // export * from './regex'
 export { mergedVendorRegexes } from './regex'

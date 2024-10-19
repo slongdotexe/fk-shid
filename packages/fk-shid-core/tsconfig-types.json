@@ -1,17 +1,17 @@
 {
-    "$schema": "https://json.schemastore.org/tsconfig",
-    "display": "FK Shid Core",
-    "extends": "tsconfig-slongdotexe/base.json",
-    "compilerOptions": {
-        "module": "ESNext",
-        "target": "ESNext",
-        "strict": false,
-        "noEmit": false,
-        "outDir": "./pack/esm",
-        "emitDeclarationOnly": true,
-        "declaration": true,
-        "rootDir": "./src",
-    },
-    "include": ["src/**/*"],
-    "exclude": ["node_modules", "dist", "coverage", "src/**/*.spec.ts"],
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "display": "FK Shid Core",
+  "extends": "tsconfig-slongdotexe/base.json",
+  "compilerOptions": {
+    "module": "ESNext",
+    "target": "ESNext",
+    "strict": false,
+    "noEmit": false,
+    "outDir": "./pack",
+    "emitDeclarationOnly": true,
+    "declaration": true,
+    "rootDir": "./src"
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist", "coverage", "src/**/*.spec.ts"]
 }
