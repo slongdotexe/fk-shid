@@ -23,6 +23,7 @@ export const processUrl = (
       resourceSegment: null,
     }
   }
+
   const matchers =
     resourceMatchers[domainMatch.vendor as LinkDomainRegexVendors]
 
@@ -30,6 +31,7 @@ export const processUrl = (
     throw new Error('No resource matchers for vendor')
   }
   const { canonicalMatchers } = matchers
+
   const cleanedResourceSegment = canonicalExtractor(
     canonicalMatchers ?? [],
     url.pathname

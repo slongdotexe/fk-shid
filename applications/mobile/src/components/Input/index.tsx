@@ -29,11 +29,10 @@ const StyledTextInput = styled(RNTextInput)<CustomTextInputProps>(({
     width: '100%',
     borderRadius: theme.spacing(1),
     borderWidth: theme.spacing(0.25),
-    borderColor: theme.borderColor.input,
+    borderColor: theme.borderColor.gray[600],
     backgroundColor: theme.backgroundColor.background,
-
     fontWeight: '500',
-    color: theme.textColor.primary.DEFAULT,
+    color: theme.borderColor.gray[600],
     ...sizeMap[size],
   }
 })
@@ -70,7 +69,7 @@ export const TextInput = forwardRef<
       {label ? <StyledLabel>{label}</StyledLabel> : null}
       <StyledTextInput
         placeholder="placeholder..."
-        placeholderTextColor={theme.textColor.muted.DEFAULT}
+        placeholderTextColor={theme.borderColor.gray[400]}
         size={size}
         ref={ref}
         {...restProps}

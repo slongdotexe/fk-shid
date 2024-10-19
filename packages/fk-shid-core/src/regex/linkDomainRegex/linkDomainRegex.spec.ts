@@ -1,11 +1,11 @@
 import { vendorLinkDomainRegex, LinkDomainRegexVendors } from './index'
 
 const matchingFixtureData = {
-  amazon: ['amazon.com.au', 'amazon.co.uk', 'amazon.ca'],
+  amazon: ['amazon.com.au', 'amazon.co.uk', 'amazon.ca', 'amazon.com'],
   facebook: ['facebook.com', 'facebook.com.au', 'facebook.ca'],
   instagram: ['instagram.com'],
   youtube: ['youtube.com'],
-  'youtu.be': ['youtu.be'],
+  youtubeShortener: ['youtu.be'],
 }
 
 const nonMatchingFixtureData = ['shinystat.com']

@@ -9,4 +9,5 @@ export * from './utils/processLink'
 // Regex exports
 export { vendorLinkCanonicalRegex } from './regex/linkCanonicalRegex'
 export { vendorLinkDomainRegex } from './regex/linkDomainRegex'
-export * from './regex'
+// export * from './regex'
+export { mergedVendorRegexes } from './regex'

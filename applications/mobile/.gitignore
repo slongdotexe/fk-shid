@@ -36,3 +36,7 @@ yarn-error.*
 
 android
 ios
+# Expo
+.expo
+dist/
+web-build/

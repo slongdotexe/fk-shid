@@ -18,7 +18,7 @@ export const vendorLinkDomainRegex = {
   facebook,
   instagram,
   youtube,
-  // 'youtube.be': youtubeShortener,
+  youtubeShortener,
 }
 
 export type LinkDomainRegexVendors = keyof typeof vendorLinkDomainRegex

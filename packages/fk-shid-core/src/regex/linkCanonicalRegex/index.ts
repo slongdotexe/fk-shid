@@ -1,7 +1,7 @@
 import { pathAfterSegmentValue, numberOfSegments } from '../util/canonicalUtils'
 
 // Amazon
-export const amazon = [numberOfSegments(3)] // Product, e.g /Some-Product-for-something-M358TF/dp/PR0DUC7ID
+export const amazon = [numberOfSegments(3, true, false)] // Product, e.g /Some-Product-for-something-M358TF/dp/PR0DUC7ID
 
 const getPathSegmentPattern = () => {
   return `(?:\/[^\/]+)`
@@ -39,6 +39,7 @@ export const vendorLinkCanonicalRegex = {
   instagram,
   youtube,
   // 'you.be': youtubeShortened,
+  youtubeShortener: youtube,
 }
 
 export type CanonicalRegexVendors = keyof typeof vendorLinkCanonicalRegex

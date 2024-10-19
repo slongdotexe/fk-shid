@@ -1,7 +1,7 @@
-import * as linkCanonicalRegex from './linkCanonicalRegex'
+import { vendorLinkCanonicalRegex } from './linkCanonicalRegex'
 import * as linkDomainRegex from './linkDomainRegex'
 
-const mergedVendorRegexes = Object.entries(linkCanonicalRegex).reduce(
+const mergedVendorRegexes = Object.entries(vendorLinkCanonicalRegex).reduce(
   (acc, [vendor, regexes]) => {
     return {
       ...acc,
@@ -13,4 +13,4 @@ const mergedVendorRegexes = Object.entries(linkCanonicalRegex).reduce(
   {}
 )
 
-export { linkCanonicalRegex, linkDomainRegex, mergedVendorRegexes }
+export { vendorLinkCanonicalRegex, linkDomainRegex, mergedVendorRegexes }

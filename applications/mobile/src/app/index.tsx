@@ -35,16 +35,31 @@ const Page = () => {
 
   const outputLink = handleInputLink(inputLink)
 
+  const navigateTestPage = () => {
+    router.push('/modal-share-intent')
+  }
+
   useEffect(() => {
     if (hasShareIntent) {
       router.replace({
-        pathname: 'share-intent',
+        pathname: '/modal-share-intent',
       })
     }
   }, [hasShareIntent, router])
 
   return (
     <PageContainer>
+      <Button
+        size="sm"
+        variant="ghost"
+        label="Test Page"
+        onPress={navigateTestPage}
+        styles={(theme) => ({
+          position: 'absolute',
+          top: theme.spacing(8),
+          right: theme.spacing(4),
+        })}
+      />
       <TextInput
         onChangeText={(newText) => setInputLink(newText)}
         defaultValue={inputLink}

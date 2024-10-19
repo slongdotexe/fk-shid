@@ -5,7 +5,7 @@ import {
   processUrl,
   vendorLinkDomainRegex,
 } from 'fk-shid-core'
-import { Share } from 'react-native'
+import { Linking, Share } from 'react-native'
 
 export const processShareIntentLink = (
   shareIntent: ShareIntent,
@@ -41,6 +41,14 @@ export const handleShareLink = async (link: string) => {
     await Share.share({
       url: link,
     })
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export const handleOpenInBrowser = async (link: string) => {
+  try {
+    Linking.openURL(link)
   } catch (error) {
     console.log(error)
   }

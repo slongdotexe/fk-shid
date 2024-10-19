@@ -1,4 +1,5 @@
-import styled from '@emotion/native'
+import styled, { ReactNativeStyle } from '@emotion/native'
+import { Theme } from '@emotion/react'
 import { forwardRef } from 'react'
 import { TouchableOpacity } from 'react-native'
 
@@ -15,10 +16,11 @@ type TButtonSizes = 'default' | 'sm' | 'lg' | 'icon'
 interface ButtonCustomProps {
   variant: TButtonVariants
   size: TButtonSizes
+  styles?: ReactNativeStyle | ((theme: Theme) => ReactNativeStyle)
 }
 
 const StyledButton = styled.TouchableOpacity<ButtonCustomProps>(
-  ({ theme, variant, size }) => {
+  ({ theme, variant, size, styles }) => {
     const variants: Record<TButtonVariants, Record<string, unknown>> = {
       default: {
         backgroundColor: theme.backgroundColor.primary.DEFAULT,
@@ -72,6 +74,8 @@ const StyledButton = styled.TouchableOpacity<ButtonCustomProps>(
       justifyContent: 'center',
       ...variants[variant],
       ...sizes[size],
+      // ...styles,
+      ...(typeof styles === 'function' ? styles(theme) : styles),
     }
   }
 )
@@ -114,23 +118,37 @@ const StyledText = styled.Text<{ variant: TButtonVariants }>(
 export interface ButtonProps
   extends React.ComponentPropsWithoutRef<typeof TouchableOpacity>,
     Partial<ButtonCustomProps> {
-  label: string
+  label?: string
 }
 
 export const Button = forwardRef<
   React.ElementRef<typeof TouchableOpacity>,
   ButtonProps
->(({ variant = 'default', size = 'default', label, ...restProps }, ref) => {
-  return (
-    <StyledButton
-      activeOpacity={0.2}
-      size={size}
-      variant={variant}
-      ref={ref}
-      {...restProps}
-    >
-      <StyledText variant={variant}>{label}</StyledText>
-    </StyledButton>
-  )
-})
+>(
+  (
+    {
+      variant = 'default',
+      size = 'default',
+      label,
+      styles,
+      children,
+      ...restProps
+    },
+    ref
+  ) => {
+    return (
+      <StyledButton
+        activeOpacity={0.2}
+        size={size}
+        variant={variant}
+        ref={ref}
+        styles={styles}
+        {...restProps}
+      >
+        {label && <StyledText variant={variant}>{label}</StyledText>}
+        {children}
+      </StyledButton>
+    )
+  }
+)
 Button.displayName = 'Button'

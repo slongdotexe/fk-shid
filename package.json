@@ -1,6 +1,6 @@
 {
-  "name": "fk-shid2",
-  "packageManager": "yarn@4.1.1",
+  "name": "@repo/fk-shid",
+  "packageManager": "yarn@4.5.0",
   "version": "0.0.0",
   "license": "MIT",
   "type": "module",
@@ -43,6 +43,6 @@
     "packages/*"
   ],
   "resolutions": {
-    "xcode@npm:^3.0.1": "patch:xcode@npm%3A3.0.1#~/.yarn/patches/xcode-npm-3.0.1-97989f05ef.patch"
+    "xcode@npm:^3.0.1": "patch:xcode@npm%3A3.0.1#./.yarn/patches/xcode-npm-3.0.1-97989f05ef.patch"
   }
 }
