@@ -11,9 +11,7 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.fkshid.mobile"
@@ -28,40 +26,11 @@
     "web": {
       "favicon": "./src/assets/favicon.png"
     },
-    "plugins": [
-      "expo-share-intent",
-      "expo-router"
-    ],
-    
+    "plugins": ["expo-share-intent", "expo-router"],
+
     "scheme": "fk-shid",
     "extra": {
       "eas": {
-        "build": {
-          "experimental": {
-            "ios": {
-              "appExtensions": [
-                {
-                  "targetName": "ShareExtension",
-                  "bundleIdentifier": "com.fkshid.mobile.share-extension",
-                  "entitlements": {
-                    "com.apple.security.application-groups": [
-                      "group.com.fkshid.mobile"
-                    ]
-                  }
-                },
-                {
-                  "targetName": "ShareExtension",
-                  "bundleIdentifier": "com.fkshid.mobile.share-extension",
-                  "entitlements": {
-                    "com.apple.security.application-groups": [
-                      "group.com.fkshid.mobile"
-                    ]
-                  }
-                }
-              ]
-            }
-          }
-        },
         "projectId": "5b39c4b9-82a1-4dc7-925a-ee41cef12afc"
       },
       "router": {
