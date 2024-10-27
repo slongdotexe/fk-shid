@@ -1,69 +1,51 @@
 import { useTheme } from '@emotion/react'
-import { Text, View } from 'react-native'
+import { View } from 'react-native'
 
-import { PageContainer } from '../components/PageContainer'
+import { PageContainer } from '../components/atomic/PageContainer'
+import { Typography } from '../components/atomic/Typography'
 
-export const LinkCard = ({
-  titleText,
-  linkText,
-}: {
-  titleText: string
-  linkText: string
-}) => {
-  const theme = useTheme()
+const getPermutations = () => {
+  const options = {
+    sizes: ['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl'],
+    families: ['body', 'caption', 'heading'],
+    weights: ['normal', 'medium', 'semibold', 'bold', 'extrabold'],
+  }
 
-  return (
-    <View
-      style={{
-        width: '100%',
-        gap: theme.spacing(2),
-        justifyContent: 'flex-start',
-      }}
-    >
-      <Text
-        style={{
-          color: theme.textColor.gray[500],
-          fontSize: theme.spacing(4),
-          fontWeight: theme.fontWeight.semibold as '600',
-        }}
-      >
-        {titleText}
-      </Text>
-      <View
-        style={{
-          display: 'flex',
-          backgroundColor: theme.backgroundColor.gray[800],
-          borderRadius: theme.spacing(4),
-          padding: theme.spacing(8),
-        }}
-      >
-        <Text
-          style={{
-            color: theme.textColor.gray[200],
-            fontSize: theme.spacing(4),
-            fontWeight: theme.fontWeight.semibold as '600',
-          }}
-        >
-          {linkText}
-        </Text>
-      </View>
-    </View>
-  )
+  const permutations = options.sizes
+    .map((size) =>
+      options.families.map((family) =>
+        options.weights.map((weight) => ({ size, family, weight }))
+      )
+    )
+    .flat(2)
+
+  return permutations
 }
 
 const TestPage = () => {
   const theme = useTheme()
+  const permutations = getPermutations()
+  getPermutations()
   return (
     <PageContainer>
       <View
         style={{
-          width: '100%',
-          height: '100%',
           alignItems: 'center',
           paddingHorizontal: theme.spacing(4),
           gap: theme.spacing(6),
         }}
-      />
+      >
+        {permutations.map((permutation) => {
+          const joinedKey =
+            permutation.family + permutation.size + permutation.weight
+          return (
+            // @ts-expect-error -- --
+            <Typography key={joinedKey} {...permutation}>
+              Testing: {joinedKey}
+            </Typography>
+          )
+        })}
+      </View>
     </PageContainer>
   )
 }

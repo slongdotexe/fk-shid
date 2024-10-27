@@ -7,91 +7,16 @@ import { ShareIntent, useShareIntentContext } from 'expo-share-intent'
 import React, { useRef } from 'react'
 import { ScrollView, Text, View } from 'react-native'
 
-import { Button } from '../components/Buttons'
-import { Card } from '../components/Card'
-import { PageContainer } from '../components/PageContainer'
+import { Button } from '../components/atomic/Buttons'
+import { Card } from '../components/atomic/Card'
+import { LinkCard } from '../components/atomic/LinkCard'
+import { PageContainer } from '../components/atomic/PageContainer'
 import { handleCopy, handleOpenInBrowser, handleShareLink } from '../utils'
-
-// const handleShareIntentLink = (
-// shareIntent: ShareIntent,
-// hasShareIntent: boolean
-// ) => {
-//   try {
-//     const processedLink = processShareIntentLink(shareIntent, hasShareIntent)
-//     return {
-//       link: processedLink,
-//       error: null,
-//     }
-//   } catch (error) {
-//     const _error = error as Error
-//     // eslint-disable-next-line no-console -- Debugging
-//     console.log(_error?.message)
-//     return {
-//       error: _error.message,
-//       link: null,
-//     }
-//   }
-// }
+import { processShareIntentLink } from '../utils/process-link'
 
 const handleShareIntentLink = (shareIntent: ShareIntent) => {
-  if (!shareIntent.webUrl) {
-    return {}
-  }
-  const link = new URL(shareIntent.webUrl)
-  const cleanedLink = `${link.host}${link.pathname}`
-  return {
-    error: null,
-    link: cleanedLink,
-  }
-}
-const LinkCard = ({
-  titleText,
-  linkText,
-}: {
-  titleText: string
-  linkText: string
-}) => {
-  const theme = useTheme()
-
-  return (
-    <View
-      style={{
-        width: '100%',
-        gap: theme.spacing(2),
-        justifyContent: 'flex-start',
-      }}
-    >
-      <Text
-        style={{
-          color: theme.textColor.gray[500],
-          fontSize: theme.spacing(4),
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Theme types issue
-          fontWeight: theme.fontWeight.semibold as any,
-        }}
-      >
-        {titleText}
-      </Text>
-      <View
-        style={{
-          display: 'flex',
-          backgroundColor: theme.backgroundColor.gray[800],
-          borderRadius: theme.spacing(4),
-          padding: theme.spacing(8),
-        }}
-      >
-        <Text
-          style={{
-            color: theme.textColor.gray[200],
-            fontSize: theme.spacing(4),
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Theme types issue
-            fontWeight: theme.fontWeight.semibold as any,
-          }}
-        >
-          {linkText}
-        </Text>
-      </View>
-    </View>
-  )
+  const link = processShareIntentLink(shareIntent)
+  return link
 }
 
 const LinkControls = ({ link }: { link: string }) => {
@@ -235,8 +160,6 @@ const ModalShareIntent = () => {
         }}
         style={{
           width: '100%',
-          // height: '100%',
-          // alignItems: 'center',
         }}
       >
         <LinkCard titleText="Original link" linkText={webUrl ?? ''} />

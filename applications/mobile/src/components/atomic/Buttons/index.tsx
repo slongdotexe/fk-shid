@@ -20,7 +20,7 @@ interface ButtonCustomProps {
 }
 
 const StyledButton = styled.TouchableOpacity<ButtonCustomProps>(
-  ({ theme, variant, size, styles }) => {
+  ({ theme, variant, size, styles, disabled }) => {
     const variants: Record<TButtonVariants, Record<string, unknown>> = {
       default: {
         backgroundColor: theme.backgroundColor.primary.DEFAULT,
@@ -74,7 +74,7 @@ const StyledButton = styled.TouchableOpacity<ButtonCustomProps>(
       justifyContent: 'center',
       ...variants[variant],
       ...sizes[size],
-      // ...styles,
+      opacity: disabled ? 0.7 : 1,
       ...(typeof styles === 'function' ? styles(theme) : styles),
     }
   }

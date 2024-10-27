@@ -3,27 +3,13 @@ import { ShareIntent, useShareIntentContext } from 'expo-share-intent'
 import { useRef } from 'react'
 import { Button, Image, StyleSheet, Text, View } from 'react-native'
 
-import { handleCopy, handleShareLink, processShareIntentLink } from '../utils'
+import { handleCopy, handleShareLink } from '../utils'
+import { processShareIntentLink } from '../utils/process-link'
 
-const handleShareIntentLink = (
-  shareIntent: ShareIntent,
-  hasShareIntent: boolean
-) => {
-  try {
-    const processedLink = processShareIntentLink(shareIntent, hasShareIntent)
-    return {
-      link: processedLink,
-      error: null,
-    }
-  } catch (error) {
-    const _error = error as Error
-    // eslint-disable-next-line no-console -- Debugging
-    console.log(_error?.message)
-    return {
-      error: _error.message,
-      link: null,
-    }
-  }
+const handleShareIntentLink = (shareIntent: ShareIntent) => {
+  const link = processShareIntentLink(shareIntent)
+  if (link === null) return { processedLink: null, error: 'Error process link' }
+  return { link: link.toString(), error: null }
 }
 
 const ShareIntentPage = () => {
@@ -33,7 +19,7 @@ const ShareIntentPage = () => {
   const shareIntentRef = useRef(shareIntent)
 
   const { webUrl } = shareIntentRef.current
-  const processedLink = handleShareIntentLink(shareIntentRef.current, true)
+  const processedLink = handleShareIntentLink(shareIntentRef.current)
 
   return (
     <View style={styles.container}>

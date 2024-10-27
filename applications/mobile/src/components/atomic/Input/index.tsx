@@ -3,8 +3,19 @@ import { useTheme } from '@emotion/react'
 import { forwardRef } from 'react'
 import { TextInput as RNTextInput } from 'react-native'
 
+import { Typography, TypographyCustomProps } from '../Typography'
+
 interface CustomTextInputProps {
-  size: 'default' | 'sm'
+  size: 'default' | 'sm' | 'lg'
+  errorMessage?: string | null
+  slots?: {
+    label?: {
+      typographyProps?: Pick<
+        TypographyCustomProps,
+        'size' | 'family' | 'weight'
+      >
+    }
+  }
 }
 
 const StyledTextInput = styled(RNTextInput)<CustomTextInputProps>(({
@@ -12,6 +23,12 @@ const StyledTextInput = styled(RNTextInput)<CustomTextInputProps>(({
   size,
 }) => {
   const sizeMap = {
+    lg: {
+      fontSize: theme.spacing(theme.fontSize.lg),
+      height: theme.spacing(11),
+      paddingHorizontal: theme.spacing(3.5),
+      paddingVertical: theme.spacing(2.25),
+    },
     default: {
       fontSize: theme.spacing(theme.fontSize.sm),
       height: theme.spacing(10),
@@ -37,19 +54,20 @@ const StyledTextInput = styled(RNTextInput)<CustomTextInputProps>(({
   }
 })
 
-const StyledLabel = styled.Text(({ theme }) => {
-  return {
-    fontSize: theme.spacing(theme.fontSize.sm),
-    lineHeight: theme.spacing(theme.lineHeight.sm),
-    fontWeight: '500',
-    color: theme.textColor.foreground,
-  }
-})
+// const StyledLabel = styled.Text(({ theme }) => {
+//   return {
+//     fontSize: theme.spacing(theme.fontSize.sm),
+//     lineHeight: theme.spacing(theme.lineHeight.sm),
+//     fontWeight: '500',
+//     color: theme.textColor.foreground,
+//   }
+// })
 
 const StyledInputContainer = styled.View(({ theme }) => {
   return {
     width: '100%',
     gap: theme.spacing(1.5),
+    paddingVertical: theme.spacing(4),
   }
 })
 
@@ -62,11 +80,13 @@ export interface InputProps
 export const TextInput = forwardRef<
   React.ElementRef<typeof RNTextInput>,
   InputProps
->(({ label, size = 'default', ...restProps }, ref) => {
+>(({ label, size = 'default', errorMessage, slots, ...restProps }, ref) => {
   const theme = useTheme()
   return (
     <StyledInputContainer>
-      {label ? <StyledLabel>{label}</StyledLabel> : null}
+      {label ? (
+        <Typography {...slots?.label?.typographyProps}>{label}</Typography>
+      ) : null}
       <StyledTextInput
         placeholder="placeholder..."
         placeholderTextColor={theme.borderColor.gray[400]}
@@ -74,6 +94,18 @@ export const TextInput = forwardRef<
         ref={ref}
         {...restProps}
       />
+      {!!errorMessage && (
+        <Typography
+          size="xs"
+          styles={(_theme) => ({
+            color: _theme.textColor.destructive.DEFAULT,
+            position: 'absolute',
+            bottom: 0,
+          })}
+        >
+          {errorMessage}
+        </Typography>
+      )}
     </StyledInputContainer>
   )
 })
