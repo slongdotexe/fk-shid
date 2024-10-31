@@ -9,35 +9,44 @@ export function processShareIntentLink(shareIntent: ShareIntent) {
       error: 'No link',
     }
 
-  return processLinkCleaning(shareIntent.webUrl)
+  const link = processLinkCleaning(shareIntent.webUrl)
+  return link
+}
+
+const createUrlLinks = (link: string) => {
+  const url = new URL(link)
+  try {
+    return {
+      url,
+      strippedQuery: new URL(url.origin),
+    }
+  } catch (error) {
+    console.log(error)
+    return null
+  }
 }
 
 export const processLinkCleaning = (link: string) => {
-  try {
-    const url = new URL(link)
-    const strippedQuery = new URL(`https://${url.host}${url.pathname}`)
-    const matcherResult = runMatcherRules(url)
-    const result = matcherResult
-      ? matcherResult.toString()
-      : strippedQuery.toString()
-
-    return {
-      link: result,
-      error: null,
-    }
-  } catch (error) {
-    console.log({ error })
+  const urls = createUrlLinks(link)
+  if (urls === null)
     return {
       link: null,
-      error: 'Error processing link',
+      error: 'Error process your link, please try again.',
     }
+  const { strippedQuery, url } = urls
+
+  const matcherResult = runMatcherRules(url)
+  const result = matcherResult
+    ? matcherResult.toString()
+    : strippedQuery.toString()
+
+  return {
+    link: result,
+    error: null,
   }
 }
 
 export const removeRule = (url: URL, ruleMatch: Rule) => {
-  console.log({
-    ruleMatch,
-  })
   const match = url.toString().match(ruleMatch.linkMatcher)
   if (!match?.[0]) return null
   return url.toString().replace(match[0], '')
@@ -60,6 +69,5 @@ export const runMatcherRules = (url: URL) => {
   if (!ruleMatch) return null
   const rule = ruleMap[ruleMatch.mode]
   const result = rule(url, ruleMatch)
-  console.log({ result })
   return result
 }

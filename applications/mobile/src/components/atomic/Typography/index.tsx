@@ -64,6 +64,19 @@ const getLineHeight = (size: TTypographySizes, theme: Theme): number => {
   return theme.spacing(lineHeight)
 }
 
+export const getTypographyStyle = (
+  { size, weight, family }: TypographyCustomProps,
+  theme: Theme
+) => {
+  return {
+    fontFamily: getFontFamily(family ?? 'body', theme),
+    fontSize: getSize(size ?? 'md', theme),
+    lineHeight: getLineHeight(size ?? 'md', theme),
+    fontWeight: getFontWeight(weight ?? 'normal', theme),
+    color: theme.textColor.gray[200],
+  }
+}
+
 const fontFamilyMap = {
   body: 'sans',
   caption: 'sans',

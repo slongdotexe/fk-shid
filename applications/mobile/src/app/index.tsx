@@ -8,6 +8,7 @@ import {
   TextInputFocusEventData,
   View,
 } from 'react-native'
+import Toast from 'react-native-toast-message'
 
 import { Button, ButtonProps } from '../components/atomic/Buttons'
 import { TextInput } from '../components/atomic/Input'
@@ -27,6 +28,7 @@ const InputControls = ({
   handleClean?: ButtonProps['onPress']
 }) => {
   useHandleShareIntent()
+
   return (
     <View
       style={css({
@@ -35,13 +37,25 @@ const InputControls = ({
         gap: 16,
       })}
     >
-      <Button size="sm" variant="default" label="Clean" onPress={handleClean} />
+      <Button
+        size="sm"
+        variant="default"
+        label="Clean"
+        onPress={() =>
+          Toast.show({
+            text1: 'Hello',
+            visibilityTime: 2000,
+            position: 'bottom',
+            type: 'subtle',
+          })
+        }
+      />
       <Button
         disabled={!processedLink}
         size="sm"
         variant="secondary"
         label="Share"
-        onPress={() => handleShareLink(processedLink)}
+        onPress={handleClean}
       />
       <Button
         disabled={!processedLink}
@@ -96,8 +110,8 @@ const Page = () => {
   }
 
   return (
-    <PageContainer>
-      <View style={css({ gap: 16 })}>
+    <PageContainer keyboardShouldPersistTaps="never">
+      <View style={css({ gap: 16, paddingTop: theme.spacing(6) })}>
         <TextInput
           autoCapitalize="none"
           ref={inputRef}
@@ -110,11 +124,12 @@ const Page = () => {
           slots={{
             label: {
               typographyProps: {
-                size: 'sm',
+                size: 'md',
                 weight: 'bold',
               },
             },
           }}
+          defaultValue="https://www.amazon.com.au/Beelink-MINI-S12-Lake-N95-Processor-Computer/dp/B0C1N4VYBX/ref=pd_ci_mcx_mh_mcx_views_0_image?pd_rd_w=RTS9d&content-id=amzn1.sym.4acd438a-8f03-4368-a13d-db207e905984%3Aamzn1.symc.409c7fce-cbd2-4cf4-a6cb-824c258c8778&pf_rd_p=4acd438a-8f03-4368-a13d-db207e905984&pf_rd_r=A6K3T4D9WD7R8VKGSAGW&pd_rd_wg=8Wpf2&pd_rd_r=cdcebc10-701d-4e89-b21d-1980f03ae51b&pd_rd_i=B0C1N4VYBX"
         />
 
         <LinkCard titleText="Input Link:" linkText={linkInput} />
@@ -130,17 +145,17 @@ const Page = () => {
         />
       </View>
 
-      <Button
+      {/* <Button
         label="Test Page"
         styles={() => {
           return {
             position: 'absolute',
-            bottom: theme.spacing(4),
+            top: theme.spacing(4),
             right: theme.spacing(2),
           }
         }}
         onPress={navigateTestPage}
-      />
+      /> */}
     </PageContainer>
   )
 }

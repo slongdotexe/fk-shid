@@ -32,7 +32,6 @@ export const LinkCard = ({
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          minHeight: theme.spacing(36),
           backgroundColor: theme.backgroundColor.gray[800],
           borderRadius: theme.spacing(4),
           padding: theme.spacing(8),
