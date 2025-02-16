@@ -1,0 +1,42 @@
+[
+  {
+    "domainPattern": {
+      "type": "TLDish",
+      "pattern": "youtube"
+    },
+    "actions": [
+      {
+        "type": "queryParamBanList",
+        "params": ["si"]
+      }
+    ]
+  },
+  {
+    "domainPattern": {
+      "type": "TLDish",
+      "pattern": "amazon"
+    },
+    "actions": [
+      {
+        "type": "stripQueryString",
+        "params": null
+      },
+      {
+        "type": "pathSegmentBanList",
+        "params": ["ref.*"]
+      }
+    ]
+  },
+  {
+    "domainPattern": {
+      "type": "TLDish",
+      "pattern": "facebook"
+    },
+    "actions": [
+      {
+        "type": "stripQueryString",
+        "params": null
+      }
+    ]
+  }
+]
