@@ -10,7 +10,8 @@
     "ts:check": "tsc",
     "clean-metro-cache": "rm -rf $TMPDIR/metro-cache",
     "build-local-ios": "run eas build --profile simulator-dev-local -p ios --local",
-    "build-local-android": "run eas build --profile simulator-dev-local -p android --local"
+    "build-local-android": "run eas build --profile simulator-dev-local -p android --local",
+    "lint": "run -T eslint ./src"
   },
   "dependencies": {
     "@emotion/native": "^11.11.0",

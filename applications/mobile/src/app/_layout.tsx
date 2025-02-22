@@ -2,7 +2,6 @@ import { useTheme } from '@emotion/react'
 import { Stack, useRouter } from 'expo-router'
 import { ShareIntentProvider } from 'expo-share-intent'
 import { StatusBar } from 'expo-status-bar'
-import React from 'react'
 import { Button } from 'react-native'
 import Toast, { BaseToast } from 'react-native-toast-message'
 

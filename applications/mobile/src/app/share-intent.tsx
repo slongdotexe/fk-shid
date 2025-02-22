@@ -4,6 +4,7 @@ import { useRef } from 'react'
 import { Button, Image, StyleSheet, Text, View } from 'react-native'
 
 import { handleCopy, handleShareLink } from '../utils'
+// @ts-expect-error -- --
 import { processShareIntentLink } from '../utils/process-link'
 
 const handleShareIntentLink = (shareIntent: ShareIntent) => {

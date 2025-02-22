@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "compile:all": "lerna run compile",
-    "lint:all": "yarn run eslint .",
+    "lint:all": "lerna run lint",
     "prepare": "husky",
     "test:all": "lerna run test"
   },

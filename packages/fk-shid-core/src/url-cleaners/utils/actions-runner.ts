@@ -55,6 +55,7 @@ export const runUrlActions = (url: URL, urlActions: TUrlActions[]) => {
     const urlActionHandler = linkActionMap[urlAction.type]
 
     const actionResult = urlActionHandler(acc, urlAction.params ?? [])
+    // eslint-disable-next-line no-param-reassign -- Reducer
     acc = actionResult
     return acc
   }, new URL(url))

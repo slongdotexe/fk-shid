@@ -13,6 +13,7 @@
     "compile-types": "run -T tsc --project tsconfig-types.json",
     "compile-watch": "run compile-esm --watch & run compile-cjs --watch & run compile-types --watch",
     "dev": "run compile-watch",
-    "test": "run -T jest"
+    "test": "run -T jest",
+    "lint": "run -T eslint ./src"
   }
 }
