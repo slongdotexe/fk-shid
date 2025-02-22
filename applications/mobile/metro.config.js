@@ -17,16 +17,10 @@ config.resolver.nodeModulesPaths = [
   path.resolve(monorepoRoot, 'node_modules'),
 ]
 
-// config.cacheStores = [
-//   new FileStore({
-//     root: path.join(projectRoot, 'node_modules', '.cache', 'metro'),
-//   }),
-// ]
-
-config.cacheStores = ({FileStore}) => [
+config.cacheStores = ({ FileStore }) => [
   new FileStore({
     root: path.join(projectRoot, 'node_modules', '.cache', 'metro'),
-  })
+  }),
 ]
 
 module.exports = config

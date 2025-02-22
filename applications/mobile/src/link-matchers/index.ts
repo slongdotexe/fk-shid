@@ -1,5 +1,3 @@
-import { domainMatchers } from 'fk-shid-core'
-
 interface BaseRule {
   domainMatcher: RegExp[]
   linkMatcher: RegExp
@@ -20,12 +18,12 @@ export type Rule = ReplaceRule | RemoveRule
 export const rules: Record<string, Rule> = {
   amazon: {
     mode: 'remove',
-    domainMatcher: domainMatchers.amazon,
+    domainMatcher: [/'/],
     linkMatcher: /(\/ref=\S+)([/?]|$)/,
   },
   youtube: {
     mode: 'replace',
-    domainMatcher: domainMatchers.youtube,
+    domainMatcher: [/'/],
     linkMatcher: /(^\S+)(\?v=)(\S+)(?:[&/]|$)/,
     replacer: '$1/watch/$3',
   },
