@@ -35,6 +35,7 @@ export const LinkCard = ({
           backgroundColor: theme.backgroundColor.gray[800],
           borderRadius: theme.spacing(4),
           padding: theme.spacing(8),
+          minHeight: 150,
         }}
         onPress={() => setTextExpended((old) => !old)}
       >
