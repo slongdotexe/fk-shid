@@ -34,14 +34,7 @@ const Page = () => {
 
   return (
     <PageContainer>
-      <ScrollView
-        contentContainerStyle={{
-          paddingHorizontal: theme.spacing(4),
-        }}
-        style={{
-          width: '100%',
-        }}
-      >
+      <ScrollView>
         <TextInput
           autoCapitalize="none"
           size="default"

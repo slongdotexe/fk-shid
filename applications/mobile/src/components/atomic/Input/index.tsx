@@ -102,6 +102,7 @@ export const TextInput = forwardRef<
             position: 'absolute',
             bottom: 0,
             fontSize: theme.spacing(theme.fontSize.sm),
+            fontWeight: theme.fontWeight.medium,
           })}
         >
           {errorMessage}

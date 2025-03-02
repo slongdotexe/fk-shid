@@ -12,7 +12,14 @@ import { getTypographyStyle } from '../components/atomic/Typography'
 const HeaderCancelButton = () => {
   const router = useRouter()
 
-  return <Button title="Cancel" onPress={() => router.navigate('/')} />
+  return (
+    <Button
+      title="Cancel"
+      onPress={() => {
+        router.replace('/')
+      }}
+    />
+  )
 }
 
 const SubtleToast = (props: Record<string, unknown>) => {
