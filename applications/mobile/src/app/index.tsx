@@ -1,6 +1,6 @@
 import { css } from '@emotion/native'
 import { useTheme } from '@emotion/react'
-import React, { useRef, useState } from 'react'
+import { useRef } from 'react'
 import {
   NativeSyntheticEvent,
   ScrollView,
@@ -11,37 +11,25 @@ import {
 import { TextInput } from '../components/atomic/Input'
 import { PageContainer } from '../components/atomic/PageContainer'
 import { LinkCleanerLayout } from '../components/LinkCleanerLayout'
-import { TProcessedLink } from '../components/LinkCleanerLayout/types'
+import { useCleanLink } from '../hooks/useCleanLink'
 
 const Page = () => {
-  const [, setCleanedLink] = useState<string | null>(null)
-  const [linkCleaningError, setLinkCleaningError] = useState<string | null>(
-    null
-  )
+  const theme = useTheme()
+  const { linkInput, linkCleaningResult, setLinkInput, resetLinkCleaning } =
+    useCleanLink(null)
   const inputRef = useRef<React.ElementRef<typeof TextInput>>(null)
 
-  const theme = useTheme()
-
-  const [linkInput, setLinkInput] = useState<string | null>(null)
-
-  const setLinkCleaningResult = (processedLink: TProcessedLink) => {
-    if (processedLink.error) {
-      setCleanedLink(null)
-      setLinkCleaningError(processedLink.error)
-    }
-    if (processedLink.link) {
-      setCleanedLink(processedLink.link.toString())
-      setLinkCleaningError(null)
-    }
-  }
-
-  const onBlurInput = (
+  const onChange = (
     event: NativeSyntheticEvent<
       TextInputFocusEventData | TextInputEndEditingEventData
     >
   ) => {
     const linkText = event.nativeEvent.text
     setLinkInput(linkText)
+  }
+  const resetCleaningAndInput = () => {
+    inputRef.current?.clear()
+    resetLinkCleaning()
   }
 
   return (
@@ -56,16 +44,16 @@ const Page = () => {
       >
         <TextInput
           autoCapitalize="none"
-          ref={inputRef}
           size="default"
           placeholder="Drop a link..."
-          errorMessage={linkCleaningError}
+          errorMessage={linkCleaningResult?.error}
           style={css({
             color: theme.textColor.primary.DEFAULT,
             marginVertical: theme.spacing(2),
           })}
+          ref={inputRef}
           label="New Link"
-          onEndEditing={onBlurInput}
+          onEndEditing={onChange}
           slots={{
             label: {
               typographyProps: {
@@ -77,8 +65,8 @@ const Page = () => {
         />
         <LinkCleanerLayout
           linkInput={linkInput}
-          setLinkCleanerResult={setLinkCleaningResult}
-          setInputLink={setLinkInput}
+          linkCleaningResult={linkCleaningResult}
+          clearLinkCleaning={resetCleaningAndInput}
         />
       </ScrollView>
     </PageContainer>

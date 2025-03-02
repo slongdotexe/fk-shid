@@ -1,18 +1,11 @@
 import styled, { css } from '@emotion/native'
 import { useTheme } from '@emotion/react'
-import {
-  matchUrlActionObject,
-  runUrlActions,
-  urlActionsList,
-} from 'fk-shid-core'
-import { IUrlDomainActionObject } from 'fk-shid-core/pack/esm/url-cleaners/actions/types'
 import { ButtonProps, View } from 'react-native'
 
+import { LinkCleaningResult } from '../../hooks/useCleanLink'
 import { handleCopy, handleShareLink } from '../../utils'
 import { Button } from '../atomic/Buttons'
 import { LinkCard } from '../atomic/LinkCard'
-
-import { TProcessedLink } from './types'
 
 const StyledView = styled(View)(() => {
   return {
@@ -27,7 +20,7 @@ const InputControls = ({
   processedLink,
   handleClearInput,
 }: {
-  processedLink: URL | null
+  processedLink: string | null
   handleClearInput: ButtonProps['onPress']
 }) => {
   return (
@@ -56,51 +49,27 @@ const InputControls = ({
   )
 }
 
-const DEFAULT_ACTIONS: IUrlDomainActionObject = {
-  actions: [{ type: 'stripQueryString', params: null }],
-  domainPattern: '',
-}
-
-const handleCleanLink = (link: string | null) => {
-  if (link === null) {
-    return { link: null, error: 'No link provided' }
-  }
-  const urlLink = new URL(link)
-
-  const matchedActionsObject = matchUrlActionObject(urlLink, urlActionsList)
-  if (matchedActionsObject === null) {
-    const cleanedLink = runUrlActions(urlLink, DEFAULT_ACTIONS.actions)
-    return { link: cleanedLink, fallback: true, error: null }
-  }
-  const cleanedLink = runUrlActions(urlLink, matchedActionsObject.actions)
-  return { link: cleanedLink, fallback: false, error: null }
-}
-
 interface LinkCleanerLayoutProps {
   linkInput: string | null
-  setInputLink: (link: string | null) => void
-  setLinkCleanerResult: (param0: TProcessedLink) => void
+  linkCleaningResult: LinkCleaningResult
+  clearLinkCleaning: () => void
 }
 
 export const LinkCleanerLayout = ({
+  clearLinkCleaning,
+  linkCleaningResult,
   linkInput,
-  setLinkCleanerResult,
-  setInputLink,
 }: LinkCleanerLayoutProps) => {
-  const linkCleaningResult = handleCleanLink(linkInput)
-  setLinkCleanerResult(linkCleaningResult)
   const theme = useTheme()
+  const cleanedLink = linkCleaningResult?.link?.toString() ?? null
 
   return (
     <View style={css({ gap: 16, paddingTop: theme.spacing(6) })}>
       <LinkCard titleText="Input Link:" linkText={linkInput} />
-      <LinkCard
-        titleText="Cleaned Link:"
-        linkText={linkCleaningResult?.link?.toString()}
-      />
+      <LinkCard titleText="Cleaned Link:" linkText={cleanedLink} />
       <InputControls
-        processedLink={linkCleaningResult?.link ?? null}
-        handleClearInput={() => setInputLink(null)}
+        processedLink={cleanedLink}
+        handleClearInput={clearLinkCleaning}
       />
     </View>
   )
