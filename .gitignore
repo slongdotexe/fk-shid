@@ -13,3 +13,8 @@
 .pnp.*
 node_modules/
 submodules
+
+applications/next-app/
+**/build-*.tar.gz
+**/build-*.apk
+**/mobile.app/

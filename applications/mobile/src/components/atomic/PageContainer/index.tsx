@@ -44,6 +44,9 @@ export const PageContainer = (props: ScrollViewPageContainerProps) => {
   const theme = useTheme()
   return (
     <ScrollView
+      style={{
+        backgroundColor: theme.backgroundColor.background,
+      }}
       contentContainerStyle={{
         flexGrow: 1,
         padding: theme.spacing(4),

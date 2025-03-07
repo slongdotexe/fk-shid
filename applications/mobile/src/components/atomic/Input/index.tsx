@@ -101,6 +101,8 @@ export const TextInput = forwardRef<
             color: _theme.textColor.destructive.DEFAULT,
             position: 'absolute',
             bottom: 0,
+            fontSize: theme.spacing(theme.fontSize.sm),
+            fontWeight: theme.fontWeight.medium,
           })}
         >
           {errorMessage}

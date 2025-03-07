@@ -1,13 +1,13 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
   "display": "FK Shid Core",
-  "extends": "tsconfig-slongdotexe/base.json",
+  "extends": "./tsconfig.json",
   "compilerOptions": {
     "module": "ESNext",
     "target": "ESNext",
     "strict": false,
     "noEmit": false,
-    "outDir": "./pack",
+    "outDir": "./pack/esm",
     "emitDeclarationOnly": true,
     "declaration": true,
     "rootDir": "./src"
