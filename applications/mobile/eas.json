@@ -9,7 +9,7 @@
     },
     "simulator-dev-local": {
       "distribution": "internal",
-      "developmentClient": false,
+      "developmentClient": true,
       "ios": {
         "simulator": true
       },
@@ -18,8 +18,7 @@
         "EXPO_USE_METRO_WORKSPACE_ROOT": "1"
       }
     },
-
-    "internal-distribution": {
+    "latest": {
       "distribution": "internal",
       "developmentClient": false,
       "ios": {

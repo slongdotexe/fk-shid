@@ -1,7 +1,7 @@
 import { getTLDishHostPattern, getTLDStrictHostPattern } from '../../regex/util'
 import { pathSegmentBanList } from '../actions/path-segment-banlist'
+import { queryParamBanList } from '../actions/query-param-banlist'
 import { queryParamGreenList } from '../actions/query-param-greenlist'
-import { queryParamBanList } from '../actions/query-param-redlist'
 import { stripQueryString } from '../actions/strip-query-string'
 import {
   IUrlDomainActionObject,
