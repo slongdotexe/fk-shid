@@ -14,3 +14,15 @@ export {
 } from './url-cleaners/utils/actions-runner'
 
 export { urlActionsList }
+
+export type {
+  IDomainPatternAction,
+  IPathSegmentBanListAction,
+  IQueryParamBanListAction,
+  IQueryParamGreenListAction,
+  IStripQueryStringAction,
+  IUrlDomainActionObject,
+  TDomainMatchPatterns,
+  TDomainPattern,
+  TUrlActions,
+} from './url-cleaners/actions/types'

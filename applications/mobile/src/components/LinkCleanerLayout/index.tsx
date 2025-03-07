@@ -5,7 +5,7 @@ import { ButtonProps, View } from 'react-native'
 import { LinkCleaningResult } from '../../hooks/useCleanLink'
 import { handleCopy, handleShareLink } from '../../utils'
 import { Button } from '../atomic/Buttons'
-import { LinkCard } from '../LinkCard'
+import { NewLinkCard } from '../NewLinkCard'
 
 const StyledView = styled(View)(() => {
   return {
@@ -40,9 +40,10 @@ const InputControls = ({
         onPress={() => handleCopy(processedLink?.toString() ?? '')}
       />
       <Button
+        disabled={!processedLink}
         size="sm"
         variant="destructive"
-        label="Clear"
+        label="Cancel"
         onPress={handleClearInput}
       />
     </StyledView>
@@ -65,8 +66,8 @@ export const LinkCleanerLayout = ({
 
   return (
     <View style={css({ gap: 16, paddingTop: theme.spacing(6) })}>
-      <LinkCard titleText="Input Link" linkText={linkInput} />
-      <LinkCard titleText="Cleaned Link" linkText={cleanedLink} />
+      <NewLinkCard titleText="Received Link" linkText={linkInput} />
+      <NewLinkCard titleText="Cleaned Link" linkText={cleanedLink} />
       <InputControls
         processedLink={cleanedLink}
         handleClearInput={clearLinkCleaning}

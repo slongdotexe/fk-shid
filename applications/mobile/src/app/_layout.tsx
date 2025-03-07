@@ -1,21 +1,33 @@
 import { useTheme } from '@emotion/react'
 import { Stack, useRouter } from 'expo-router'
-import { ShareIntentProvider } from 'expo-share-intent'
+import { ShareIntentProvider, useShareIntent } from 'expo-share-intent'
 import { StatusBar } from 'expo-status-bar'
-import { Button } from 'react-native'
+import { Platform, UIManager } from 'react-native'
 import Toast, { BaseToast } from 'react-native-toast-message'
 
+import { Button } from '../components/atomic/Buttons'
 import { SafeArea } from '../components/atomic/PageContainer'
 import { ThemeProvider } from '../components/atomic/ThemeProvider'
 import { getTypographyStyle } from '../components/atomic/Typography'
 
+if (Platform.OS === 'android') {
+  if (UIManager.setLayoutAnimationEnabledExperimental) {
+    UIManager.setLayoutAnimationEnabledExperimental(true)
+  }
+}
+
 const HeaderCancelButton = () => {
   const router = useRouter()
+  const { resetShareIntent, shareIntent, hasShareIntent } = useShareIntent()
 
   return (
     <Button
-      title="Cancel"
+      label="Cancel"
+      variant="ghost"
+      styles={{ padding: 8 }}
       onPress={() => {
+        resetShareIntent(true)
+        console.log({ shareIntent, hasShareIntent })
         router.replace('/')
       }}
     />
@@ -75,6 +87,7 @@ const HomeLayout = () => {
     >
       <StatusBar style="light" />
       <ThemeProvider>
+        <Toast config={toastConfig} />
         <SafeArea>
           <Stack>
             <Stack.Screen name="index" options={{ headerShown: false }} />
@@ -84,10 +97,10 @@ const HomeLayout = () => {
                 presentation: 'modal',
                 title: 'Link Received',
                 headerLeft: HeaderCancelButton,
+                headerShown: false,
               }}
             />
           </Stack>
-          <Toast config={toastConfig} />
         </SafeArea>
       </ThemeProvider>
     </ShareIntentProvider>

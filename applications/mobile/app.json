@@ -1,12 +1,12 @@
 {
   "expo": {
     "newArchEnabled": true,
-    "name": "mobile",
-    "slug": "mobile",
+    "name": "Link Laundry",
+    "slug": "link-laundry",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./src/assets/icon.png",
-    "userInterfaceStyle": "light",
+    "userInterfaceStyle": "automatic",
     "splash": {
       "image": "./src/assets/splash.png",
       "resizeMode": "contain",
@@ -15,7 +15,7 @@
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.fkshid.mobile",
+      "bundleIdentifier": "com.linklaundry.mobile",
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false
       }
@@ -25,20 +25,20 @@
         "foregroundImage": "./src/assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.fkshid.mobile"
+      "package": "com.linklaundry.mobile"
     },
     "web": {
       "favicon": "./src/assets/favicon.png"
     },
     "plugins": ["expo-share-intent", "expo-router"],
-
-    "scheme": "fk-shid",
+    "scheme": "link-laundry",
     "extra": {
-      "eas": {
-        "projectId": "5b39c4b9-82a1-4dc7-925a-ee41cef12afc"
-      },
       "router": {
         "origin": false
+      },
+      "eas": {
+        "build": {},
+        "projectId": "13029648-6d6f-4050-835c-f5d06324bbf1"
       }
     },
     "owner": "slong.exe",

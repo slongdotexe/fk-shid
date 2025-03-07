@@ -2,8 +2,8 @@ import {
   matchUrlActionObject,
   runUrlActions,
   urlActionsList,
+  IUrlDomainActionObject,
 } from 'fk-shid-core'
-import { IUrlDomainActionObject } from 'fk-shid-core/pack/esm/url-cleaners/actions/types'
 import { useState, useEffect, useCallback } from 'react'
 
 const DEFAULT_ACTIONS: IUrlDomainActionObject = {

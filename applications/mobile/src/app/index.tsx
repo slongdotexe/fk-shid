@@ -10,10 +10,14 @@ import {
 
 import { TextInput } from '../components/atomic/Input'
 import { PageContainer } from '../components/atomic/PageContainer'
+import { Typography } from '../components/atomic/Typography'
 import { LinkCleanerLayout } from '../components/LinkCleanerLayout'
 import { useCleanLink } from '../hooks/useCleanLink'
+import { useHandleShareIntent } from '../hooks/useHandleShareIntent'
 
 const Page = () => {
+  useHandleShareIntent()
+
   const theme = useTheme()
   const { linkInput, linkCleaningResult, setLinkInput, resetLinkCleaning } =
     useCleanLink(null)
@@ -35,6 +39,7 @@ const Page = () => {
   return (
     <PageContainer>
       <ScrollView>
+        <Typography size="xl">Clean New Link</Typography>
         <TextInput
           autoCapitalize="none"
           size="default"
@@ -42,10 +47,8 @@ const Page = () => {
           errorMessage={linkCleaningResult?.error}
           style={css({
             color: theme.textColor.primary.DEFAULT,
-            marginVertical: theme.spacing(2),
           })}
           ref={inputRef}
-          label="New Link"
           onEndEditing={onChange}
           slots={{
             label: {

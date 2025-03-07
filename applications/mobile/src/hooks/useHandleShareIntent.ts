@@ -6,6 +6,7 @@ export const useHandleShareIntent = () => {
   const router = useRouter()
 
   const { hasShareIntent } = useShareIntentContext()
+
   useEffect(() => {
     if (hasShareIntent) {
       router.replace({
