@@ -1,5 +1,6 @@
 [
   {
+    "name": "Youtube",
     "domainPattern": {
       "type": "TLDish",
       "pattern": "youtube"
@@ -12,6 +13,20 @@
     ]
   },
   {
+    "name": "Youtube - Shortener",
+    "domainPattern": {
+      "type": "TLDstrict",
+      "pattern": "youtu.be"
+    },
+    "actions": [
+      {
+        "type": "queryParamBanList",
+        "params": ["si"]
+      }
+    ]
+  },
+  {
+    "name": "Amazon",
     "domainPattern": {
       "type": "TLDish",
       "pattern": "amazon"
@@ -29,6 +44,20 @@
   },
   {
     "domainPattern": {
+      "name": "Facebook",
+      "type": "TLDish",
+      "pattern": "facebook"
+    },
+    "actions": [
+      {
+        "type": "stripQueryString",
+        "params": null
+      }
+    ]
+  },
+  {
+    "domainPattern": {
+      "name": "Spotify",
       "type": "TLDish",
       "pattern": "facebook"
     },

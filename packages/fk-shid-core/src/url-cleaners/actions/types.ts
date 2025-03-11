@@ -33,6 +33,7 @@ export type TUrlActions =
 export type TDomainPattern = IDomainPatternAction | string
 
 export interface IUrlDomainActionObject {
+  name: string
   domainPattern: TDomainPattern
   actions: TUrlActions[]
 }
