@@ -37,7 +37,6 @@
         "origin": false
       },
       "eas": {
-        "build": {},
         "projectId": "13029648-6d6f-4050-835c-f5d06324bbf1"
       }
     },
@@ -46,7 +45,7 @@
       "policy": "appVersion"
     },
     "updates": {
-      "url": "https://u.expo.dev/5b39c4b9-82a1-4dc7-925a-ee41cef12afc"
+      "url": "https://u.expo.dev/13029648-6d6f-4050-835c-f5d06324bbf1"
     }
   }
 }

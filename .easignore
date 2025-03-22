@@ -19,3 +19,7 @@ applications/next-app/
 **/build-*.apk
 **/mobile*.app/
 credentials.json
+
+**/ios/
+**/android/
+
