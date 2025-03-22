@@ -5,6 +5,7 @@ import { ScrollView } from 'react-native'
 import { PageContainer } from '../components/atomic/PageContainer'
 import { Typography } from '../components/atomic/Typography'
 import { LinkCleanerLayout } from '../components/LinkCleanerLayout'
+import { AppToast } from '../components/Toast'
 import { useCleanLink } from '../hooks/useCleanLink'
 
 const ModalShareIntent = () => {
@@ -22,16 +23,19 @@ const ModalShareIntent = () => {
   }
 
   return (
-    <PageContainer>
-      <Typography size="xl">New Link Shared</Typography>
-      <ScrollView>
-        <LinkCleanerLayout
-          linkInput={linkInput}
-          linkCleaningResult={linkCleaningResult}
-          clearLinkCleaning={resetCleaningAndShareIntent}
-        />
-      </ScrollView>
-    </PageContainer>
+    <>
+      <PageContainer>
+        <Typography size="xl">New Link Shared</Typography>
+        <ScrollView>
+          <LinkCleanerLayout
+            linkInput={linkInput}
+            linkCleaningResult={linkCleaningResult}
+            clearLinkCleaning={resetCleaningAndShareIntent}
+          />
+        </ScrollView>
+      </PageContainer>
+      <AppToast />
+    </>
   )
 }
 
