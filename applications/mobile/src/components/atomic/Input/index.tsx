@@ -94,20 +94,19 @@ export const TextInput = forwardRef<
         ref={ref}
         {...restProps}
       />
-      {!!errorMessage && (
-        <Typography
-          size="xs"
-          styles={(_theme) => ({
-            color: _theme.textColor.destructive.DEFAULT,
-            position: 'absolute',
-            bottom: 0,
-            fontSize: theme.spacing(theme.fontSize.sm),
-            fontWeight: theme.fontWeight.medium,
-          })}
-        >
-          {errorMessage}
-        </Typography>
-      )}
+
+      <Typography
+        size="xs"
+        styles={(_theme) => ({
+          color: _theme.textColor.destructive.DEFAULT,
+
+          bottom: 0,
+          fontSize: theme.spacing(theme.fontSize.sm),
+          fontWeight: theme.fontWeight.medium,
+        })}
+      >
+        {errorMessage}
+      </Typography>
     </StyledInputContainer>
   )
 })

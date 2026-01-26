@@ -15,17 +15,11 @@ if (Platform.OS === 'android') {
 
 const HomeLayout = () => {
   return (
-    <ShareIntentProvider
-      options={{
-        resetOnBackground: true,
-      }}
-    >
+    <ShareIntentProvider options={{ resetOnBackground: false }}>
       <StatusBar style="light" />
       <ThemeProvider>
         <SafeArea>
-          <Stack>
-            <Stack.Screen name="index" options={{ headerShown: false }} />
-          </Stack>
+          <Stack screenOptions={{ headerShown: false }} />
         </SafeArea>
         <AppToast />
       </ThemeProvider>

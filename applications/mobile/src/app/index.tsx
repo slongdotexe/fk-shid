@@ -37,6 +37,7 @@ const Page = () => {
     fallbackCleaning: false,
     input: '',
   })
+
   const theme = useTheme()
 
   const { hasShareIntent, shareIntent, resetShareIntent } =
@@ -46,12 +47,10 @@ const Page = () => {
   useEffect(() => {
     if (hasShareIntent) {
       const processedLink = cleanLink(webUrl)
-      setLinkCleaningResult({ ...processedLink, input: webUrl })
-    }
-    return () => {
-      if (hasShareIntent) {
-        resetShareIntent()
-      }
+      setLinkCleaningResult({
+        ...processedLink,
+        input: processedLink.error ? '' : webUrl,
+      })
     }
   }, [hasShareIntent, resetShareIntent, webUrl])
 
@@ -63,9 +62,23 @@ const Page = () => {
     >
   ) => {
     const linkText = event.nativeEvent.text
+
+    if (!linkText) {
+      setLinkCleaningResult({
+        error: null,
+        link: null,
+        input: null,
+        fallbackCleaning: false,
+      })
+      return
+    }
+
     const processedLink = cleanLink(linkText)
 
-    setLinkCleaningResult({ ...processedLink, input: linkText })
+    setLinkCleaningResult({
+      ...processedLink,
+      input: processedLink.error ? null : linkText,
+    })
   }
 
   const handleClearInput = () => {
