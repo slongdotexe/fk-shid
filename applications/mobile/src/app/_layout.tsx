@@ -35,8 +35,8 @@ const HomeLayout = () => {
   return (
     <ShareIntentProvider
       options={{
-        debug: true,
         resetOnBackground: true,
+        debug: true,
       }}
     >
       <StatusBar style="light" />
