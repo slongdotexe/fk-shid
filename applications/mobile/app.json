@@ -5,13 +5,8 @@
     "slug": "link-laundry",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./src/assets/icon.png",
+    "icon": "./src/assets/link-laundry-dark.png",
     "userInterfaceStyle": "automatic",
-    "splash": {
-      "image": "./src/assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
-    },
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
@@ -30,7 +25,18 @@
     "web": {
       "favicon": "./src/assets/favicon.png"
     },
-    "plugins": ["expo-share-intent", "expo-router"],
+    "plugins": [
+      "expo-share-intent",
+      "expo-router",
+      [
+        "expo-splash-screen",
+        {
+          "backgroundColor": "#232323",
+          "image": "./src/assets/link-laundry-dark.png",
+          "imageWidth": 175
+        }
+      ]
+    ],
     "scheme": "link-laundry",
     "extra": {
       "router": {
