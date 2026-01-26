@@ -1,39 +1,84 @@
-import { css } from '@emotion/native'
+import styled, { css } from '@emotion/native'
 import { useTheme } from '@emotion/react'
-import { useRef } from 'react'
+import { useShareIntentContext } from 'expo-share-intent'
+import React, { useEffect, useRef, useState } from 'react'
 import {
   NativeSyntheticEvent,
   ScrollView,
   TextInputEndEditingEventData,
   TextInputFocusEventData,
+  View,
 } from 'react-native'
 
+import { Button } from '../components/atomic/Buttons'
 import { TextInput } from '../components/atomic/Input'
 import { PageContainer } from '../components/atomic/PageContainer'
 import { Typography } from '../components/atomic/Typography'
-import { LinkCleanerLayout } from '../components/LinkCleanerLayout'
-import { useCleanLink } from '../hooks/useCleanLink'
-import { useHandleShareIntent } from '../hooks/useHandleShareIntent'
+import { LinkCard } from '../components/LinkCard'
+import { handleShareLink, handleCopy } from '../utils'
+import { cleanLink, LinkCleaningResult } from '../utils/clean-link'
+
+const StyledView = styled(View)(() => {
+  return {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    gap: 16,
+    padding: 16,
+  }
+})
 
 const Page = () => {
-  useHandleShareIntent()
-
-  const theme = useTheme()
-  const { linkInput, linkCleaningResult, setLinkInput, resetLinkCleaning } =
-    useCleanLink(null)
   const inputRef = useRef<React.ElementRef<typeof TextInput>>(null)
+  const [linkCleaningResult, setLinkCleaningResult] = useState<
+    LinkCleaningResult & { input: string | null }
+  >({
+    error: null,
+    link: null,
+    fallbackCleaning: false,
+    input: '',
+  })
+  const theme = useTheme()
 
-  const onChange = (
+  const { hasShareIntent, shareIntent, resetShareIntent } =
+    useShareIntentContext()
+  const { webUrl } = shareIntent
+
+  useEffect(() => {
+    if (hasShareIntent) {
+      const processedLink = cleanLink(webUrl)
+      setLinkCleaningResult({ ...processedLink, input: webUrl })
+    }
+    return () => {
+      if (hasShareIntent) {
+        resetShareIntent()
+      }
+    }
+  }, [hasShareIntent, resetShareIntent, webUrl])
+
+  const processedLinkResult = linkCleaningResult.link
+
+  const handleOnCleanLink = (
     event: NativeSyntheticEvent<
       TextInputFocusEventData | TextInputEndEditingEventData
     >
   ) => {
     const linkText = event.nativeEvent.text
-    setLinkInput(linkText)
+    const processedLink = cleanLink(linkText)
+
+    setLinkCleaningResult({ ...processedLink, input: linkText })
   }
-  const resetCleaningAndInput = () => {
+
+  const handleClearInput = () => {
+    if (hasShareIntent) {
+      resetShareIntent()
+    }
     inputRef.current?.clear()
-    resetLinkCleaning()
+    setLinkCleaningResult({
+      error: null,
+      input: '',
+      link: null,
+      fallbackCleaning: false,
+    })
   }
 
   return (
@@ -43,13 +88,14 @@ const Page = () => {
         <TextInput
           autoCapitalize="none"
           size="default"
+          defaultValue={webUrl ?? ''}
           placeholder="Drop a link..."
           errorMessage={linkCleaningResult?.error}
           style={css({
             color: theme.textColor.primary.DEFAULT,
           })}
           ref={inputRef}
-          onEndEditing={onChange}
+          onEndEditing={handleOnCleanLink}
           slots={{
             label: {
               typographyProps: {
@@ -59,11 +105,41 @@ const Page = () => {
             },
           }}
         />
-        <LinkCleanerLayout
-          linkInput={linkInput}
-          linkCleaningResult={linkCleaningResult}
-          clearLinkCleaning={resetCleaningAndInput}
-        />
+        <View style={css({ gap: 16, paddingTop: theme.spacing(6) })}>
+          <LinkCard
+            titleText="Received Link"
+            linkText={linkCleaningResult.input}
+          />
+          <LinkCard
+            titleText="Cleaned Link"
+            linkText={linkCleaningResult.link}
+          />
+          <StyledView>
+            <Button
+              disabled={!processedLinkResult}
+              size="sm"
+              variant="secondary"
+              label="Share"
+              onPress={() =>
+                handleShareLink(processedLinkResult?.toString() ?? null)
+              }
+            />
+            <Button
+              disabled={!processedLinkResult}
+              size="sm"
+              variant="secondary"
+              label="Copy"
+              onPress={() => handleCopy(processedLinkResult?.toString() ?? '')}
+            />
+            <Button
+              disabled={!processedLinkResult}
+              size="sm"
+              variant="destructive"
+              label="Cancel"
+              onPress={handleClearInput}
+            />
+          </StyledView>
+        </View>
       </ScrollView>
     </PageContainer>
   )

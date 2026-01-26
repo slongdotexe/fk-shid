@@ -4,10 +4,10 @@ import {
   urlActionsList,
   IUrlDomainActionObject,
 } from 'fk-shid-core'
-import { useState, useEffect, useCallback } from 'react'
 
 const DEFAULT_ACTIONS: IUrlDomainActionObject = {
   actions: [{ type: 'stripQueryString', params: null }],
+  name: 'DEFAULT',
   domainPattern: '',
 }
 
@@ -26,7 +26,7 @@ const createUrlObject = (link: string | null) => {
   }
 }
 
-const cleanLink = (link: string | null): LinkCleaningResult => {
+export const cleanLink = (link: string | null): LinkCleaningResult => {
   const urlLink = createUrlObject(link)
   if (urlLink === null) {
     return {
@@ -52,40 +52,5 @@ const cleanLink = (link: string | null): LinkCleaningResult => {
     link: cleanedLink.toString(),
     fallbackCleaning: false,
     error: null,
-  }
-}
-
-export const useCleanLink = (initialInput: string | null) => {
-  const [linkInput, setLinkInput] = useState<string | null>(initialInput)
-  const [linkCleaningResult, setLinkCleaningResult] =
-    useState<LinkCleaningResult>({
-      link: null,
-      error: null,
-      fallbackCleaning: false,
-    })
-
-  useEffect(() => {
-    const result =
-      linkInput !== null
-        ? cleanLink(linkInput)
-        : { link: null, error: null, fallbackCleaning: false }
-    setLinkCleaningResult(result)
-  }, [linkInput])
-
-  const resetLinkCleaning = useCallback(() => {
-    setLinkInput(null)
-    setLinkCleaningResult({
-      link: null,
-      error: null,
-      fallbackCleaning: false,
-    })
-  }, [])
-
-  return {
-    linkInput,
-    linkCleaningResult,
-    setLinkInput,
-    resetLinkCleaning,
-    cleanLink,
   }
 }
