@@ -3,7 +3,6 @@
     "newArchEnabled": true,
     "name": "Link Laundry",
     "slug": "link-laundry",
-    "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./src/assets/link-laundry-dark.png",
     "userInterfaceStyle": "automatic",
@@ -13,6 +12,9 @@
       "bundleIdentifier": "com.linklaundry.mobile",
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false
+      },
+      "runtimeVersion": {
+        "policy": "fingerprint"
       }
     },
     "android": {
@@ -20,7 +22,10 @@
         "foregroundImage": "./src/assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.linklaundry.mobile"
+      "package": "com.linklaundry.mobile",
+      "runtimeVersion": {
+        "policy": "fingerprint"
+      }
     },
     "web": {
       "favicon": "./src/assets/favicon.png"
