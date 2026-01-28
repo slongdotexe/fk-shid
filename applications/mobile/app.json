@@ -31,7 +31,15 @@
       "favicon": "./src/assets/favicon.png"
     },
     "plugins": [
-      "expo-share-intent",
+      [
+        "expo-share-intent",
+        {
+          "iosActivationRules": {
+            "NSExtensionActivationSupportsText": true,
+            "NSExtensionActivationSupportsWebURL": true
+          }
+        }
+      ],
       "expo-router",
       [
         "expo-splash-screen",
