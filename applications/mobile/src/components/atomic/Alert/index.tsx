@@ -46,7 +46,7 @@ export const Alert = forwardRef<React.ComponentRef<typeof View>, AlertProps>(
         <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }}>
           <Ionicons
             color={theme.textColor.gray[200]}
-            size={theme.spacing(theme.fontSize.lg)}
+            size={theme.spacing(theme.fontSize.xl)}
             name="information-circle-outline"
           />
 

@@ -119,7 +119,7 @@ const Page = () => {
             },
           }}
         />
-        <View style={css({ gap: 16, paddingTop: theme.spacing(6) })}>
+        <View style={css({ gap: 16 })}>
           <LinkCard
             titleText="Received Link"
             linkText={linkCleaningResult.input}
