@@ -14,7 +14,6 @@ interface AlertCustomProps {
 }
 
 const StyledAlert = styled.View<AlertCustomProps>(({ theme, styles }) => {
-  console.log(styles)
   const variants = {
     backgroundColor: theme.backgroundColor.secondary.DEFAULT,
     paddingHorizontal: theme.spacing(4),
