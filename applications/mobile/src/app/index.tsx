@@ -17,6 +17,7 @@ import { Typography } from '../components/atomic/Typography'
 import { LinkCard } from '../components/LinkCard'
 import { handleShareLink, handleCopy } from '../utils'
 import { cleanLink, LinkCleaningResult } from '../utils/clean-link'
+import { Alert } from '../components/atomic/Alert'
 
 const StyledView = styled(View)(() => {
   return {
@@ -127,28 +128,33 @@ const Page = () => {
             titleText="Cleaned Link"
             linkText={linkCleaningResult.link}
           />
+          {linkCleaningResult.fallbackCleaning && (
+            <Alert
+              styles={{ marginTop: 16 }}
+              alertTitle="Fallback link processing"
+              alertDescription="Link is not recognised and was processed by stripping query parameters."
+            />
+          )}
           <StyledView>
             <Button
               disabled={!processedLinkResult}
               size="sm"
               variant="secondary"
               label="Share"
-              onPress={() =>
-                handleShareLink(processedLinkResult?.toString() ?? null)
-              }
+              onPress={() => handleShareLink(processedLinkResult)}
             />
             <Button
               disabled={!processedLinkResult}
               size="sm"
               variant="secondary"
               label="Copy"
-              onPress={() => handleCopy(processedLinkResult?.toString() ?? '')}
+              onPress={() => handleCopy(processedLinkResult)}
             />
             <Button
               disabled={!processedLinkResult}
               size="sm"
               variant="destructive"
-              label="Cancel"
+              label="Clear"
               onPress={handleClearInput}
             />
           </StyledView>
