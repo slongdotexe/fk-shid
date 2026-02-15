@@ -17,6 +17,7 @@
   "dependencies": {
     "@emotion/native": "^11.11.0",
     "@emotion/react": "^11.11.4",
+    "@radix-ui/colors": "^3.0.0",
     "@types/react": "~19.1.10",
     "expo": "^54.0.32",
     "expo-clipboard": "~8.0.8",
@@ -40,6 +41,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
+    "radix-theme-generator": "^0.1.1",
     "react-native-worklets": "0.5.1"
   },
   "expo": {

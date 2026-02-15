@@ -24,7 +24,7 @@ export const SafeArea = styled.View<CustomPageContainerProps>(
       paddingRight: right,
       paddingBottom: bottom,
       paddingLeft: left,
-      backgroundColor: theme.backgroundColor.background,
+      backgroundColor: theme.color.background.base,
       ...(typeof styles === 'function' ? styles(theme) : styles),
     }
   }
@@ -45,12 +45,12 @@ export const PageContainer = (props: ScrollViewPageContainerProps) => {
   return (
     <ScrollView
       style={{
-        backgroundColor: theme.backgroundColor.background,
+        backgroundColor: theme.color.background.base,
       }}
       contentContainerStyle={{
         flexGrow: 1,
         padding: theme.spacing(4),
-        backgroundColor: theme.backgroundColor.background,
+        backgroundColor: theme.color.background.base,
         ...handleStyleOverrides(
           // eslint-disable-next-line react/destructuring-assignment -- --
           props.slots?.contentContainer?.styles,

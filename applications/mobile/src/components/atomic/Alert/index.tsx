@@ -15,11 +15,11 @@ interface AlertCustomProps {
 
 const StyledAlert = styled.View<AlertCustomProps>(({ theme, styles }) => {
   const variants = {
-    backgroundColor: theme.backgroundColor.secondary.DEFAULT,
+    backgroundColor: theme.color.background.secondary,
     paddingHorizontal: theme.spacing(4),
     paddingVertical: theme.spacing(2),
     borderRadius: theme.spacing(1),
-    borderColor: theme.borderColor.gray[600],
+    borderColor: theme.color.gray.gray7,
     borderWidth: 1,
     gap: theme.spacing(1),
   }
@@ -44,8 +44,8 @@ export const Alert = forwardRef<React.ComponentRef<typeof View>, AlertProps>(
       <StyledAlert styles={styles} variant="default">
         <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }}>
           <Ionicons
-            color={theme.textColor.gray[200]}
-            size={theme.spacing(theme.fontSize.xl)}
+            color={theme.color.gray.gray11}
+            size={theme.spacing(theme.typography.fontSize.xl)}
             name="information-circle-outline"
           />
 

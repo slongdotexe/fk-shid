@@ -23,28 +23,28 @@ const StyledButton = styled.TouchableOpacity<ButtonCustomProps>(
   ({ theme, variant, size, styles, disabled }) => {
     const variants: Record<TButtonVariants, Record<string, unknown>> = {
       default: {
-        backgroundColor: theme.backgroundColor.primary.DEFAULT,
+        backgroundColor: theme.color.background.primary,
         height: theme.spacing(10),
         paddingHorizontal: theme.spacing(4),
         paddingVertical: theme.spacing(2),
         borderRadius: theme.spacing(1),
       },
       destructive: {
-        backgroundColor: theme.backgroundColor.destructive.DEFAULT,
+        backgroundColor: theme.color.background.destructive,
       },
       outline: {
         borderWidth: theme.spacing(0.25),
-        borderColor: theme.borderColor.input,
-        backgroundColor: theme.backgroundColor.background,
+        borderColor: theme.color.border.input,
+        backgroundColor: theme.color.background.base,
       },
       ghost: {
-        backgroundColor: theme.backgroundColor.primary.foreground,
+        backgroundColor: theme.color.foreground.primary,
       },
       link: {
-        backgroundColor: theme.backgroundColor.primary.foreground,
+        backgroundColor: theme.color.foreground.primary,
       },
       secondary: {
-        backgroundColor: theme.backgroundColor.secondary.DEFAULT,
+        backgroundColor: theme.color.background.secondary,
       },
     }
     const sizes: Record<TButtonSizes, Record<string, unknown>> = {
@@ -87,29 +87,29 @@ const StyledText = styled.Text<{ variant: TButtonVariants }>(
       Record<string, unknown>
     > = {
       default: {
-        color: theme.backgroundColor.primary.foreground,
+        color: theme.color.foreground.primary,
       },
       destructive: {
-        color: theme.backgroundColor.destructive.foreground,
+        color: theme.color.foreground.destructive,
       },
       outline: {
-        color: theme.textColor.foreground,
+        color: theme.color.foreground.base,
       },
       ghost: {
-        color: theme.textColor.foreground,
+        color: theme.color.foreground.base,
       },
       link: {
-        color: theme.textColor.foreground,
+        color: theme.color.foreground.base,
         textDecorationLine: 'underline',
       },
       secondary: {
-        color: theme.textColor.secondary.foreground,
+        color: theme.color.foreground.secondary,
       },
     }
     return {
       ...variants[variant],
-      lineHeight: theme.spacing(theme.lineHeight.sm),
-      fontSize: theme.spacing(theme.fontSize.sm),
+      lineHeight: theme.spacing(theme.typography.lineHeight.sm),
+      fontSize: theme.spacing(theme.typography.fontSize.sm),
       fontWeight: '500',
     }
   }

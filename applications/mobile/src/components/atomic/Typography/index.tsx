@@ -53,14 +53,19 @@ const remapKeys: RemapSizes = {
 } as const
 
 const getSize = (size: TTypographySizes, theme: Theme): number => {
-  const remappedSize = (remapKeys[size] ?? size) as keyof Theme['fontSize']
-  const fontSize = theme.fontSize[remappedSize] ?? theme.fontSize.base // Fallback to base size
+  const remappedSize = (remapKeys[size] ??
+    size) as keyof Theme['typography']['fontSize']
+  const fontSize =
+    theme.typography.fontSize[remappedSize] ?? theme.typography.fontSize.base // Fallback to base size
   return theme.spacing(fontSize)
 }
 
 const getLineHeight = (size: TTypographySizes, theme: Theme): number => {
-  const remappedSize = (remapKeys[size] ?? size) as keyof Theme['lineHeight']
-  const lineHeight = theme.lineHeight[remappedSize] ?? theme.lineHeight.base // Fallback to base size
+  const remappedSize = (remapKeys[size] ??
+    size) as keyof Theme['typography']['lineHeight']
+  const lineHeight =
+    theme.typography.lineHeight[remappedSize] ??
+    theme.typography.lineHeight.base // Fallback to base size
   return theme.spacing(lineHeight)
 }
 
@@ -73,7 +78,7 @@ export const getTypographyStyle = (
     fontSize: getSize(size ?? 'md', theme),
     lineHeight: getLineHeight(size ?? 'md', theme),
     fontWeight: getFontWeight(weight ?? 'normal', theme),
-    color: theme.textColor.gray[200],
+    color: theme.color.gray.gray11,
   }
 }
 
@@ -87,7 +92,7 @@ const getFontFamily = (
   theme: Theme
 ): string => {
   const remap = fontFamilyMap[family] ?? 'sans'
-  return theme.fontFamily[remap]
+  return theme.typography.fontFamily[remap]
 }
 
 const fontWeightMap: TTypographyWeight = {
@@ -99,7 +104,7 @@ const fontWeightMap: TTypographyWeight = {
 } as const
 
 const getFontWeight = (weight: keyof TTypographyWeight, theme: Theme) => {
-  const fontWeight = theme.fontWeight[
+  const fontWeight = theme.typography.fontWeight[
     weight
   ] as (typeof fontWeightMap)[keyof typeof fontWeightMap]
 
@@ -113,7 +118,7 @@ const StyledTypography = styled.Text<TypographyCustomProps>(
       fontSize: getSize(size ?? 'md', theme),
       lineHeight: getLineHeight(size ?? 'md', theme),
       fontWeight: getFontWeight(weight ?? 'normal', theme),
-      color: theme.textColor.gray[200],
+      color: theme.color.gray.gray11,
       ...handleStyleOverrides(styles, theme),
     }
   }

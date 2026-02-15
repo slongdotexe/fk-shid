@@ -39,7 +39,7 @@ export const LinkCard = ({ titleText, linkText, onPress }: LinkCardProps) => {
     const backgroundColor = interpolateColor(
       pressed.value,
       [0, 1],
-      [theme.backgroundColor.gray[800], theme.backgroundColor.gray[700]]
+      [theme.color.background.card, theme.color.gray.gray5]
     )
 
     return {
@@ -119,7 +119,7 @@ export const LinkCard = ({ titleText, linkText, onPress }: LinkCardProps) => {
         <Animated.View
           style={[
             {
-              backgroundColor: theme.backgroundColor.gray[800],
+              backgroundColor: theme.color.background.card,
               borderRadius: theme.spacing(4),
               overflow: 'hidden',
               paddingHorizontal,
@@ -150,7 +150,7 @@ export const LinkCard = ({ titleText, linkText, onPress }: LinkCardProps) => {
               family="body"
               weight="normal"
               size="sm"
-              style={{ color: theme.textColor.gray[200] }}
+              style={{ color: theme.color.gray.gray11 }}
             >
               {linkText || ''}
             </Typography>

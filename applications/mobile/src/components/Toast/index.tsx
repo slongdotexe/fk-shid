@@ -14,20 +14,20 @@ const SubtleToast = (props: Record<string, unknown>) => {
           paddingVertical: theme.spacing(2),
           paddingHorizontal: theme.spacing(2),
           borderRadius: theme.spacing(2),
-          borderLeftColor: theme.borderColor.green[900],
-          backgroundColor: theme.backgroundColor.background,
-          borderColor: theme.borderColor.slate[700],
+          borderLeftColor: theme.color.success.border,
+          backgroundColor: theme.color.background.base,
+          borderColor: theme.color.gray.gray7,
           borderWidth: theme.spacing(0.25),
           borderLeftWidth: theme.spacing(1),
         },
       }}
       style={{
-        borderLeftColor: theme.borderColor.green[700],
+        borderLeftColor: theme.color.success.border,
 
         padding: 0,
-        backgroundColor: theme.backgroundColor.background,
+        backgroundColor: theme.color.background.base,
 
-        borderColor: theme.borderColor.slate[700],
+        borderColor: theme.color.gray.gray7,
         borderWidth: theme.spacing(0.25),
       }}
       text1Style={getTypographyStyle(

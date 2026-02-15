@@ -3410,6 +3410,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@radix-ui/colors@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "@radix-ui/colors@npm:3.0.0"
+  checksum: 10c0/612c6bb4efe987f2d49aaca2f785687d08150da59a248328bc2b4e187ece4ef731c1dc5c6a9430fffcac4af9e65cf2f89ceb9806f8809940c9eb238b79d2cf2f
+  languageName: node
+  linkType: hard
+
 "@radix-ui/primitive@npm:1.1.3":
   version: 1.1.3
   resolution: "@radix-ui/primitive@npm:1.1.3"
@@ -5856,6 +5863,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"bezier-easing@npm:^2.1.0":
+  version: 2.1.0
+  resolution: "bezier-easing@npm:2.1.0"
+  checksum: 10c0/138a160698de3c12501479cc80280d5cc0ab47df73e20d7b5058cba6d62c0876eb97e63aa1e398233269aa2a6bb396fb0ee394da391de7258c9da20729df5158
+  languageName: node
+  linkType: hard
+
 "big-integer@npm:1.6.x":
   version: 1.6.52
   resolution: "big-integer@npm:1.6.52"
@@ -6561,6 +6575,13 @@ __metadata:
     color-convert: "npm:^2.0.1"
     color-string: "npm:^1.9.0"
   checksum: 10c0/7fbe7cfb811054c808349de19fb380252e5e34e61d7d168ec3353e9e9aacb1802674bddc657682e4e9730c2786592a4de6f8283e7e0d3870b829bb0b7b2f6118
+  languageName: node
+  linkType: hard
+
+"colorjs.io@npm:^0.5.2":
+  version: 0.5.2
+  resolution: "colorjs.io@npm:0.5.2"
+  checksum: 10c0/2e6ea43629e325e721b92429239de3a6f42fb6d88ba6e4c2aeff0288c196d876f2f7ee82aea95bd40072d5cdc8cb87f042f4d94c134dcabf0e34a717e4caacb9
   languageName: node
   linkType: hard
 
@@ -12594,6 +12615,7 @@ __metadata:
     "@babel/core": "npm:^7.25.2"
     "@emotion/native": "npm:^11.11.0"
     "@emotion/react": "npm:^11.11.4"
+    "@radix-ui/colors": "npm:^3.0.0"
     "@types/react": "npm:~19.1.10"
     expo: "npm:^54.0.32"
     expo-clipboard: "npm:~8.0.8"
@@ -12608,6 +12630,7 @@ __metadata:
     expo-system-ui: "npm:~6.0.9"
     expo-updates: "npm:~29.0.16"
     fk-shid-core: "workspace:^"
+    radix-theme-generator: "npm:^0.1.1"
     react: "npm:19.1.0"
     react-native: "npm:0.81.5"
     react-native-reanimated: "npm:~4.1.1"
@@ -14226,6 +14249,17 @@ __metadata:
   version: 5.1.1
   resolution: "quick-lru@npm:5.1.1"
   checksum: 10c0/a24cba5da8cec30d70d2484be37622580f64765fb6390a928b17f60cd69e8dbd32a954b3ff9176fa1b86d86ff2ba05252fae55dc4d40d0291c60412b0ad096da
+  languageName: node
+  linkType: hard
+
+"radix-theme-generator@npm:^0.1.1":
+  version: 0.1.1
+  resolution: "radix-theme-generator@npm:0.1.1"
+  dependencies:
+    "@radix-ui/colors": "npm:^3.0.0"
+    bezier-easing: "npm:^2.1.0"
+    colorjs.io: "npm:^0.5.2"
+  checksum: 10c0/f88bfcd909b7903c5976be09952cee695babf329904126d94ad8fbaa3c25bc2b8d401e8958ed625d7767e950e36d1afe0baa7c5ee9b85288302f7e2298164779
   languageName: node
   linkType: hard
 

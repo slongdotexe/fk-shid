@@ -105,9 +105,6 @@ const Page = () => {
           defaultValue={webUrl ?? ''}
           placeholder="Drop a link..."
           errorMessage={linkCleaningResult?.error}
-          style={css({
-            color: theme.textColor.primary.DEFAULT,
-          })}
           ref={inputRef}
           onEndEditing={handleOnCleanLink}
           slots={{

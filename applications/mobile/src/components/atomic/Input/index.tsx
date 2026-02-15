@@ -24,20 +24,20 @@ const StyledTextInput = styled(RNTextInput)<CustomTextInputProps>(({
 }) => {
   const sizeMap = {
     lg: {
-      fontSize: theme.spacing(theme.fontSize.lg),
+      fontSize: theme.spacing(theme.typography.fontSize.lg),
       height: theme.spacing(11),
       paddingHorizontal: theme.spacing(3.5),
       paddingVertical: theme.spacing(2.25),
     },
     default: {
-      fontSize: theme.spacing(theme.fontSize.sm),
+      fontSize: theme.spacing(theme.typography.fontSize.sm),
       height: theme.spacing(10),
       paddingHorizontal: theme.spacing(3),
       paddingVertical: theme.spacing(2),
     },
     sm: {
       height: theme.spacing(9),
-      fontSize: theme.spacing(theme.fontSize.xs),
+      fontSize: theme.spacing(theme.typography.fontSize.xs),
       paddingHorizontal: theme.spacing(2.5),
       paddingVertical: theme.spacing(1.75),
     },
@@ -46,22 +46,13 @@ const StyledTextInput = styled(RNTextInput)<CustomTextInputProps>(({
     width: '100%',
     borderRadius: theme.spacing(1),
     borderWidth: theme.spacing(0.25),
-    borderColor: theme.borderColor.gray[600],
-    backgroundColor: theme.backgroundColor.background,
+    borderColor: theme.color.gray.gray7,
+    backgroundColor: theme.color.background.base,
     fontWeight: '500',
-    color: theme.borderColor.gray[600],
+    color: theme.color.typography.secondary,
     ...sizeMap[size],
   }
 })
-
-// const StyledLabel = styled.Text(({ theme }) => {
-//   return {
-//     fontSize: theme.spacing(theme.fontSize.sm),
-//     lineHeight: theme.spacing(theme.lineHeight.sm),
-//     fontWeight: '500',
-//     color: theme.textColor.foreground,
-//   }
-// })
 
 const StyledInputContainer = styled.View(({ theme }) => {
   return {
@@ -89,7 +80,7 @@ export const TextInput = forwardRef<
       ) : null}
       <StyledTextInput
         placeholder="placeholder..."
-        placeholderTextColor={theme.borderColor.gray[400]}
+        placeholderTextColor={theme.color.gray.gray5}
         size={size}
         ref={ref}
         {...restProps}
@@ -98,11 +89,11 @@ export const TextInput = forwardRef<
       <Typography
         size="xs"
         styles={(_theme) => ({
-          color: _theme.textColor.destructive.DEFAULT,
+          color: _theme.color.foreground.destructive,
 
           bottom: 0,
-          fontSize: theme.spacing(theme.fontSize.sm),
-          fontWeight: theme.fontWeight.medium,
+          fontSize: theme.spacing(theme.typography.fontSize.sm),
+          fontWeight: theme.typography.fontWeight.medium,
         })}
       >
         {errorMessage}
