@@ -136,14 +136,14 @@ const Page = () => {
             <Button
               disabled={!processedLinkResult}
               size="sm"
-              variant="secondary"
+              variant="default"
               label="Share"
               onPress={() => handleShareLink(processedLinkResult)}
             />
             <Button
               disabled={!processedLinkResult}
               size="sm"
-              variant="secondary"
+              variant="default"
               label="Copy"
               onPress={() => handleCopy(processedLinkResult)}
             />

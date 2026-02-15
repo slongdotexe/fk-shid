@@ -84,6 +84,7 @@ import {
   greenDark,
 } from '@radix-ui/colors'
 
+// console.log({ kp: blueDarkP3.blue1 })
 const BASE_SPACING = 4
 const commonTheme = {
   typography: {
@@ -130,6 +131,9 @@ type ColorConfig = {
     secondary: string
     destructive: string
     muted: string
+    accent: string
+    pressed: string
+    disabled: string
   }
   foreground: {
     base: string
@@ -137,11 +141,17 @@ type ColorConfig = {
     secondary: string
     destructive: string
     muted: string
+    accent: string
+    disabled: string
   }
   border: {
     primary: string
     input: string
     muted: string
+    default: string
+  }
+  input: {
+    placeholder: string
   }
   success: {
     background: string
@@ -177,24 +187,33 @@ function createTheme(colorConfig: ColorConfig) {
 
 export const theme = createTheme({
   background: {
-    base: blue.blue1, // Generic background - subtle blue tint
-    card: gray.gray3, // Card backgrounds - gray for contrast
-    primary: blue.blue9, // Primary action backgrounds
-    secondary: blue.blue4, // Secondary backgrounds - interactive blue
-    destructive: red.red9, // Destructive action backgrounds
-    muted: blue.blue3, // Muted backgrounds (hover states, etc.) - soft blue
+    base: blue.blue1, // Generic background - subtle blue tint (Radix 1-2)
+    card: gray.gray2, // Card backgrounds - gray for contrast (Radix 1-2)
+    primary: blue.blue9, // Primary action backgrounds (Radix 9)
+    secondary: gray.gray3, // Secondary backgrounds - interactive (Radix 3-5)
+    destructive: red.red9, // Destructive action backgrounds (Radix 9)
+    muted: gray.gray2, // Muted backgrounds (Radix 1-2)
+    accent: blue.blue4, // Accent interactive surfaces (Radix 3-5)
+    pressed: blue.blue5, // Pressed state for interactive elements (Radix 3-5)
+    disabled: gray.gray3, // Disabled background (Radix 3-5)
   },
   foreground: {
-    base: gray.gray12, // Default text color
-    primary: gray.gray1, // Text on primary backgrounds
-    secondary: gray.gray11, // Secondary text - gray for readability
+    base: gray.gray12, // Default text color (Radix 11-12)
+    primary: gray.gray1, // Text on primary backgrounds - high contrast
+    secondary: gray.gray11, // Secondary text (Radix 11-12)
     destructive: gray.gray1, // Text on destructive backgrounds
-    muted: gray.gray11, // Text on muted backgrounds - gray for readability
+    muted: gray.gray10, // Muted text (Radix 9-10)
+    accent: blue.blue11, // Accent text (Radix 11-12)
+    disabled: gray.gray8, // Disabled text for contrast (Radix 9-10)
   },
   border: {
-    primary: gray.gray6, // Default border - gray for contrast
-    input: blue.blue7, // Input borders - blue for interactive elements
-    muted: gray.gray5, // Subtle borders - gray
+    primary: blue.blue7, // Primary borders (Radix 6-8)
+    input: blue.blue7, // Input borders (Radix 6-8)
+    muted: gray.gray6, // Subtle borders (Radix 6-8)
+    default: gray.gray7, // Standard border (Radix 6-8)
+  },
+  input: {
+    placeholder: gray.gray9, // Placeholder text (Radix 9-10)
   },
   success: {
     background: green.green9,
@@ -204,7 +223,7 @@ export const theme = createTheme({
   typography: {
     base: gray.gray12, // Primary text - high contrast (Radix 11-12)
     secondary: gray.gray11, // Secondary text - readable contrast (Radix 11-12)
-    muted: gray.gray10, // Muted text - lower emphasis (Radix 10)
+    muted: gray.gray10, // Muted text - lower emphasis (Radix 9-10)
     accent: blue.blue11, // Accent text - blue tint for highlights (Radix 11-12)
     link: blue.blue11, // Link text - blue for interactivity (Radix 11-12)
   },
@@ -216,24 +235,33 @@ export const theme = createTheme({
 
 export const darkTheme = createTheme({
   background: {
-    base: blueDark.blue1,
+    base: '#0A0A0A',
     card: grayDark.gray3,
-    primary: blueDark.blue9,
-    secondary: blueDark.blue4,
+    primary: blueDark.blue5,
+    secondary: grayDark.gray3,
     destructive: redDark.red9,
-    muted: blueDark.blue3,
+    muted: grayDark.gray2,
+    accent: blueDark.blue4,
+    pressed: blueDark.blue5,
+    disabled: blueDark.blue2,
   },
   foreground: {
     base: grayDark.gray12,
-    primary: grayDark.gray1,
+    primary: grayDark.gray12,
     secondary: grayDark.gray11,
     destructive: grayDark.gray1,
-    muted: grayDark.gray11,
+    muted: grayDark.gray10,
+    accent: blueDark.blue11,
+    disabled: grayDark.gray11,
   },
   border: {
-    primary: grayDark.gray6,
+    primary: blueDark.blue7,
     input: blueDark.blue7,
-    muted: grayDark.gray5,
+    muted: grayDark.gray6,
+    default: grayDark.gray7,
+  },
+  input: {
+    placeholder: grayDark.gray9,
   },
   success: {
     background: greenDark.green9,
@@ -241,11 +269,11 @@ export const darkTheme = createTheme({
     border: greenDark.green7,
   },
   typography: {
-    base: grayDark.gray12, // Primary text - high contrast (Radix 11-12)
-    secondary: grayDark.gray11, // Secondary text - readable contrast (Radix 11-12)
-    muted: grayDark.gray10, // Muted text - lower emphasis (Radix 10)
-    accent: blueDark.blue11, // Accent text - blue tint for highlights (Radix 11-12)
-    link: blueDark.blue11, // Link text - blue for interactivity (Radix 11-12)
+    base: grayDark.gray12,
+    secondary: grayDark.gray11,
+    muted: grayDark.gray10,
+    accent: blueDark.blue11,
+    link: blueDark.blue11,
   },
   gray: grayDark,
   blue: blueDark,

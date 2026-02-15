@@ -150,7 +150,7 @@ export const LinkCard = ({ titleText, linkText, onPress }: LinkCardProps) => {
               family="body"
               weight="normal"
               size="sm"
-              style={{ color: theme.color.gray.gray11 }}
+              style={{ color: theme.color.typography.secondary }}
             >
               {linkText || ''}
             </Typography>

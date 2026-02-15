@@ -16,7 +16,7 @@ const SubtleToast = (props: Record<string, unknown>) => {
           borderRadius: theme.spacing(2),
           borderLeftColor: theme.color.success.border,
           backgroundColor: theme.color.background.base,
-          borderColor: theme.color.gray.gray7,
+          borderColor: theme.color.border.default,
           borderWidth: theme.spacing(0.25),
           borderLeftWidth: theme.spacing(1),
         },
@@ -27,7 +27,7 @@ const SubtleToast = (props: Record<string, unknown>) => {
         padding: 0,
         backgroundColor: theme.color.background.base,
 
-        borderColor: theme.color.gray.gray7,
+        borderColor: theme.color.border.default,
         borderWidth: theme.spacing(0.25),
       }}
       text1Style={getTypographyStyle(

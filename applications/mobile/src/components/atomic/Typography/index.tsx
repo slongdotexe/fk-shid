@@ -46,79 +46,39 @@ export interface TypographyCustomProps extends BaseCustomComponentProps {
   weight?: keyof TTypographyWeight
 }
 
-interface RemapSizes extends Partial<Record<TTypographySizes, string>> {}
-
-const remapKeys: RemapSizes = {
-  md: 'base',
-} as const
-
-const getSize = (size: TTypographySizes, theme: Theme): number => {
-  const remappedSize = (remapKeys[size] ??
-    size) as keyof Theme['typography']['fontSize']
-  const fontSize =
-    theme.typography.fontSize[remappedSize] ?? theme.typography.fontSize.base // Fallback to base size
-  return theme.spacing(fontSize)
-}
-
-const getLineHeight = (size: TTypographySizes, theme: Theme): number => {
-  const remappedSize = (remapKeys[size] ??
-    size) as keyof Theme['typography']['lineHeight']
-  const lineHeight =
-    theme.typography.lineHeight[remappedSize] ??
-    theme.typography.lineHeight.base // Fallback to base size
-  return theme.spacing(lineHeight)
-}
+const FAMILY_MAP = { body: 'sans', caption: 'sans', heading: 'serif' } as const
 
 export const getTypographyStyle = (
-  { size, weight, family }: TypographyCustomProps,
+  { size = 'md', weight = 'normal', family = 'body' }: TypographyCustomProps,
   theme: Theme
 ) => {
+  const sizeKey = (
+    size === 'md' ? 'base' : size
+  ) as keyof Theme['typography']['fontSize']
+  const familyKey = FAMILY_MAP[family]
+
   return {
-    fontFamily: getFontFamily(family ?? 'body', theme),
-    fontSize: getSize(size ?? 'md', theme),
-    lineHeight: getLineHeight(size ?? 'md', theme),
-    fontWeight: getFontWeight(weight ?? 'normal', theme),
-    color: theme.color.gray.gray11,
+    fontFamily: theme.typography.fontFamily[familyKey],
+    fontSize: theme.spacing(theme.typography.fontSize[sizeKey]),
+    lineHeight: theme.spacing(theme.typography.lineHeight[sizeKey]),
+    fontWeight: theme.typography.fontWeight[weight],
+    color: theme.typography.color.base,
   }
 }
 
-const fontFamilyMap = {
-  body: 'sans',
-  caption: 'sans',
-  heading: 'serif',
-} as const
-const getFontFamily = (
-  family: keyof TTypographyFamilies,
-  theme: Theme
-): string => {
-  const remap = fontFamilyMap[family] ?? 'sans'
-  return theme.typography.fontFamily[remap]
-}
-
-const fontWeightMap: TTypographyWeight = {
-  normal: '400',
-  medium: '500',
-  semibold: '600',
-  bold: '700',
-  extrabold: '800',
-} as const
-
-const getFontWeight = (weight: keyof TTypographyWeight, theme: Theme) => {
-  const fontWeight = theme.typography.fontWeight[
-    weight
-  ] as (typeof fontWeightMap)[keyof typeof fontWeightMap]
-
-  return fontWeight
-}
-
 const StyledTypography = styled.Text<TypographyCustomProps>(
-  ({ theme, size, family, weight, styles }) => {
+  ({ theme, size = 'md', family = 'body', weight = 'normal', styles }) => {
+    const sizeKey = (
+      size === 'md' ? 'base' : size
+    ) as keyof Theme['typography']['fontSize']
+    const familyKey = FAMILY_MAP[family]
+
     return {
-      fontFamily: getFontFamily(family ?? 'body', theme),
-      fontSize: getSize(size ?? 'md', theme),
-      lineHeight: getLineHeight(size ?? 'md', theme),
-      fontWeight: getFontWeight(weight ?? 'normal', theme),
-      color: theme.color.gray.gray11,
+      fontFamily: theme.typography.fontFamily[familyKey],
+      fontSize: theme.spacing(theme.typography.fontSize[sizeKey]),
+      lineHeight: theme.spacing(theme.typography.lineHeight[sizeKey]),
+      fontWeight: theme.typography.fontWeight[weight],
+      color: theme.typography.color.base,
       ...handleStyleOverrides(styles, theme),
     }
   }

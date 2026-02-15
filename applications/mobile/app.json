@@ -44,7 +44,7 @@
       [
         "expo-splash-screen",
         {
-          "backgroundColor": "#232323",
+          "backgroundColor": "#0A0A0A",
           "image": "./src/assets/link-laundry-dark.png",
           "imageWidth": 175
         }

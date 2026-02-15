@@ -15,11 +15,11 @@ interface AlertCustomProps {
 
 const StyledAlert = styled.View<AlertCustomProps>(({ theme, styles }) => {
   const variants = {
-    backgroundColor: theme.color.background.secondary,
+    backgroundColor: theme.color.background.card,
     paddingHorizontal: theme.spacing(4),
     paddingVertical: theme.spacing(2),
     borderRadius: theme.spacing(1),
-    borderColor: theme.color.gray.gray7,
+    borderColor: theme.color.border.default,
     borderWidth: 1,
     gap: theme.spacing(1),
   }
@@ -36,7 +36,6 @@ export interface AlertProps
   alertTitle?: string
 }
 
-// export function Alert({ alertDescription, alertTitle }: AlertProps) {
 export const Alert = forwardRef<React.ComponentRef<typeof View>, AlertProps>(
   ({ alertTitle, alertDescription, styles }, ref) => {
     const theme = useTheme()
@@ -44,13 +43,12 @@ export const Alert = forwardRef<React.ComponentRef<typeof View>, AlertProps>(
       <StyledAlert styles={styles} variant="default">
         <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }}>
           <Ionicons
-            color={theme.color.gray.gray11}
+            color={theme.color.typography.base}
             size={theme.spacing(theme.typography.fontSize.xl)}
             name="information-circle-outline"
           />
-
           {alertTitle && (
-            <Typography family="heading" weight="normal" size="lg">
+            <Typography family="body" weight="semibold" size="lg">
               {alertTitle}
             </Typography>
           )}
