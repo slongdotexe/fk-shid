@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "compile:all": "lerna run compile",
+    "find-unused-files": "yarn workspace find-unused-files compile && node packages/find-unused-files/dist/cli.js",
     "lint:all": "lerna run lint",
     "prepare": "husky",
     "test:all": "lerna run test"

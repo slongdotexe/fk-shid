@@ -1,0 +1,15 @@
+{
+  "name": "find-unused-files",
+  "version": "0.0.0",
+  "private": true,
+  "bin": "./dist/cli.js",
+  "scripts": {
+    "compile": "run -T swc --config-file .swcrc src -d ./dist --strip-leading-paths",
+    "test": "run -T jest",
+    "lint": "run -T eslint ./src"
+  },
+  "dependencies": {
+    "minimatch": "^10.2.4",
+    "ts-morph": "^27.0.2"
+  }
+}
