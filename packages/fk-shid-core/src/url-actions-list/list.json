@@ -58,8 +58,8 @@
   {
     "domainPattern": {
       "name": "Spotify",
-      "type": "TLDish",
-      "pattern": "facebook"
+      "type": "TLDstrict",
+      "pattern": "open.spotify.com"
     },
     "actions": [
       {

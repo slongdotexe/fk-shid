@@ -12,7 +12,6 @@ import {
 
 import { Button } from '../components/atomic/Buttons'
 import { TextInput } from '../components/atomic/Input'
-import { PageContainer } from '../components/atomic/PageContainer'
 import { Typography } from '../components/atomic/Typography'
 import { LinkCard } from '../components/LinkCard'
 import { handleShareLink, handleCopy } from '../utils'
@@ -96,27 +95,10 @@ const Page = () => {
   }
 
   return (
-    <PageContainer>
-      <ScrollView>
+    <ScrollView style={{backgroundColor:theme.color.background.base}} contentInset={{top:20, bottom:40}} automaticallyAdjustKeyboardInsets>
+      {/* <KeyboardAvoidingView behavior="padding"> */}
         <Typography size="xl">Clean New Link</Typography>
-        <TextInput
-          autoCapitalize="none"
-          size="default"
-          defaultValue={webUrl ?? ''}
-          placeholder="Drop a link..."
-          errorMessage={linkCleaningResult?.error}
-          ref={inputRef}
-          onEndEditing={handleOnCleanLink}
-          slots={{
-            label: {
-              typographyProps: {
-                size: 'md',
-                weight: 'bold',
-              },
-            },
-          }}
-        />
-        <View style={css({ gap: 16 })}>
+        <View style={css({ gap: 32, })}>
           <LinkCard
             titleText="Received Link"
             linkText={linkCleaningResult.input}
@@ -132,32 +114,54 @@ const Page = () => {
               alertDescription="Link is not recognised and was processed by stripping query parameters."
             />
           )}
+          <View >
+        <TextInput
+          autoCapitalize="none"
+          size="default"
+          defaultValue={webUrl ?? ''}
+          placeholder="Drop a link..."
+          errorMessage={linkCleaningResult?.error}
+          ref={inputRef}
+          onEndEditing={handleOnCleanLink}
+          style={{borderRadius:999}}
+          slots={{
+            label: {
+              typographyProps: {
+                size: 'md',
+                weight: 'bold',
+              },
+            },
+          }}
+        />
           <StyledView>
+            
             <Button
               disabled={!processedLinkResult}
               size="sm"
               variant="default"
               label="Share"
               onPress={() => handleShareLink(processedLinkResult)}
-            />
+              />
             <Button
               disabled={!processedLinkResult}
               size="sm"
               variant="default"
               label="Copy"
               onPress={() => handleCopy(processedLinkResult)}
-            />
+              />
             <Button
               disabled={!processedLinkResult}
               size="sm"
               variant="destructive"
               label="Clear"
               onPress={handleClearInput}
-            />
+              />
           </StyledView>
+              </View>
         </View>
-      </ScrollView>
-    </PageContainer>
+      {/* </KeyboardAvoidingView> */}
+
+    </ScrollView>
   )
 }
 
