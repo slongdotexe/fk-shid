@@ -39,7 +39,7 @@ export const LinkCard = ({ titleText, linkText, onPress }: LinkCardProps) => {
     const backgroundColor = interpolateColor(
       pressed.value,
       [0, 1],
-      [theme.color.background.card, theme.color.background.accent]
+      [theme.color.surface.subtle, theme.color.accent.cyan4]
     )
 
     return {
@@ -150,7 +150,7 @@ export const LinkCard = ({ titleText, linkText, onPress }: LinkCardProps) => {
               family="body"
               weight="normal"
               size="sm"
-              style={{ color: theme.color.typography.secondary }}
+              style={{ color: theme.color.text.medium }}
             >
               {linkText || ''}
             </Typography>

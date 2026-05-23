@@ -97,12 +97,12 @@ const Page = () => {
   return (
     <ScrollView
       contentContainerStyle={{
-        backgroundColor: theme.color.background.base,
+        backgroundColor: theme.color.surface.app,
         flexGrow: 1,
-        margin: 20,
-        marginTop: 32,
+        margin: 24,
+        marginTop: 60,
       }}
-      style={{ backgroundColor: theme.color.background.base, flex: 1 }}
+      style={{ backgroundColor: theme.color.surface.app, flex: 1 }}
       automaticallyAdjustKeyboardInsets={false}
     >
       {/* <KeyboardAvoidingView behavior="padding"> */}
@@ -126,7 +126,7 @@ const Page = () => {
           <View >
         <TextInput
           autoCapitalize="none"
-          size="default"
+          size="lg"
           defaultValue={webUrl ?? ''}
           placeholder="Drop a link..."
           errorMessage={linkCleaningResult?.error}

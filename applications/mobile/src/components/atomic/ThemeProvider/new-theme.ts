@@ -1,84 +1,21 @@
-/**
- * - Backgrounds
-  - Blue: 1-2
-  - Gray: 1-2
-- Interactive Components:
-  - Blue: 3-5
-  - Gray: 3-5
-- Borders and Separators
-  - Blue: 6-8
-  - Gray: 6-8
- * 
- */
-
-/**
- * NEW THEME STRUCTURE - IMPLEMENTED ✓
- * ====================================
- *
- * Goals:
- * 1. Consistent, predictable naming (no .DEFAULT suffix) ✓
- * 2. Semantic color organization ✓
- * 3. Clear separation of concerns ✓
- * 4. TypeScript-friendly structure ✓
- *
- * STRUCTURE:
- *
- * theme.color.background.{semantic}    - All background colors
- * theme.color.foreground.{semantic}    - All text/foreground colors
- * theme.color.border.{semantic}        - All border colors
- * theme.color.success.{property}       - Success state colors
- * theme.color.{gray|blue|red|green}    - Full Radix UI color scales
- * theme.typography.fontFamily.{family} - Font families
- * theme.typography.fontSize.{size}     - Font sizes (multipliers)
- * theme.typography.lineHeight.{size}   - Line heights (multipliers)
- * theme.typography.fontWeight.{weight} - Font weights
- * theme.spacing(multiplier)            - Spacing utility (base 4px)
- *
- * MIGRATION COMPLETED:
- *
- * backgroundColor.primary.DEFAULT      → color.background.primary ✓
- * backgroundColor.primary.foreground   → color.foreground.primary ✓
- * backgroundColor.destructive.DEFAULT  → color.background.destructive ✓
- * backgroundColor.destructive.foreground → color.foreground.destructive ✓
- * backgroundColor.secondary.DEFAULT    → color.background.secondary ✓
- * backgroundColor.background           → color.background.base ✓
- * backgroundColor.card.DEFAULT         → color.background.card ✓
- * backgroundColor.gray[800]            → color.gray.gray8 ✓
- *
- * textColor.foreground                 → color.foreground.base ✓
- * textColor.primary.DEFAULT            → color.foreground.base ✓
- * textColor.secondary.foreground       → color.foreground.secondary ✓
- * textColor.destructive.DEFAULT        → color.foreground.destructive ✓
- * textColor.gray[200]                  → color.gray.gray11 ✓
- *
- * borderColor.input                    → color.border.input ✓
- * borderColor.primary.DEFAULT          → color.border.primary ✓
- * borderColor.gray[600]                → color.gray.gray7 ✓
- * borderColor.green[700]               → color.success.border ✓
- *
- * fontFamily.sans                      → typography.fontFamily.sans ✓
- * fontSize.sm                          → typography.fontSize.sm ✓
- * lineHeight.sm                        → typography.lineHeight.sm ✓
- * fontWeight.medium                    → typography.fontWeight.medium ✓
- *
- * COMPONENTS REFACTORED:
- * - Button ✓
- * - Card (Card, CardTitle, CardContent, CardFooter) ✓
- * - Typography ✓
- * - Input (TextInput) ✓
- * - Alert ✓
- * - PageContainer (SafeArea, PageContainer) ✓
- * - LinkCard ✓
- * - Toast ✓
- * - ThemeProvider ✓
- */
-
 import {
   gray,
   blue,
   red,
   green,
   teal,
+  slate,
+  slateDark,
+  iris,
+  irisDark,
+  cyan,
+  cyanDark,
+  ruby,
+  rubyDark,
+  jade,
+  jadeDark,
+  amber,
+  amberDark,
   grayDark,
   blueDark,
   redDark,
@@ -86,7 +23,6 @@ import {
   tealDark,
 } from '@radix-ui/colors'
 
-// console.log({ kp: blueDarkP3.blue1 })
 const BASE_SPACING = 4
 const commonTheme = {
   typography: {
@@ -126,6 +62,56 @@ const commonTheme = {
 } as const
 
 type ColorConfig = {
+  surface: {
+    app: string
+    subtle: string
+    elevated: string
+    hover: string
+    active: string
+  }
+  action: {
+    primaryBg: string
+    primaryBgHover: string
+    primaryFg: string
+    secondaryBg: string
+    secondaryBgHover: string
+    secondaryFg: string
+  }
+  text: {
+    high: string
+    medium: string
+    low: string
+    accent: string
+    link: string
+    onPrimary: string
+    disabled: string
+  }
+  status: {
+    success: {
+      background: string
+      solid: string
+      text: string
+      border: string
+    }
+    error: {
+      background: string
+      solid: string
+      text: string
+      border: string
+    }
+    warning: {
+      background: string
+      solid: string
+      text: string
+      border: string
+    }
+    info: {
+      background: string
+      solid: string
+      text: string
+      border: string
+    }
+  }
   background: {
     base: string
     card: string
@@ -151,8 +137,14 @@ type ColorConfig = {
     input: string
     muted: string
     default: string
+    strong: string
+    focus: string
   }
   input: {
+    background: string
+    border: string
+    borderFocus: string
+    borderInvalid: string
     placeholder: string
   }
   success: {
@@ -172,6 +164,12 @@ type ColorConfig = {
   red: Record<string, string>
   green: Record<string, string>
   teal: Record<string, string>
+  neutral: Record<string, string>
+  brand: Record<string, string>
+  accent: Record<string, string>
+  warningScale: Record<string, string>
+  errorScale: Record<string, string>
+  successScale: Record<string, string>
 }
 
 function createTheme(colorConfig: ColorConfig) {
@@ -189,34 +187,91 @@ function createTheme(colorConfig: ColorConfig) {
 }
 
 export const theme = createTheme({
+  surface: {
+    app: slate.slate1,
+    subtle: slate.slate2,
+    elevated: slate.slate3,
+    hover: slate.slate4,
+    active: slate.slate5,
+  },
+  action: {
+    primaryBg: iris.iris9,
+    primaryBgHover: iris.iris10,
+    primaryFg: slate.slate1,
+    secondaryBg: slate.slate3,
+    secondaryBgHover: slate.slate4,
+    secondaryFg: slate.slate12,
+  },
+  text: {
+    high: slate.slate12,
+    medium: slate.slate11,
+    low: slate.slate10,
+    accent: iris.iris11,
+    link: cyan.cyan11,
+    onPrimary: slate.slate1,
+    disabled: slate.slate8,
+  },
+  status: {
+    success: {
+      background: jade.jade3,
+      solid: jade.jade9,
+      text: jade.jade11,
+      border: jade.jade7,
+    },
+    error: {
+      background: ruby.ruby3,
+      solid: ruby.ruby9,
+      text: ruby.ruby11,
+      border: ruby.ruby7,
+    },
+    warning: {
+      background: amber.amber3,
+      solid: amber.amber9,
+      text: amber.amber11,
+      border: amber.amber7,
+    },
+    info: {
+      background: blue.blue3,
+      solid: blue.blue9,
+      text: blue.blue11,
+      border: blue.blue7,
+    },
+  },
   background: {
-    base: gray.gray1, // Generic background (Radix 1-2)
-    card: gray.gray2, // Card backgrounds (Radix 1-2)
-    primary: blue.blue9, // Primary action backgrounds (Radix 9)
-    secondary: gray.gray3, // Secondary backgrounds - interactive (Radix 3-5)
-    destructive: red.red9, // Destructive action backgrounds (Radix 9)
-    muted: gray.gray2, // Muted backgrounds (Radix 1-2)
-    accent: teal.teal4, // Accent interactive surfaces (Radix 3-5)
-    pressed: blue.blue10, // Pressed state for primary actions (Radix 10)
-    disabled: gray.gray3, // Disabled background (Radix 3-5)
+    // Compatibility aliases mapped to the new semantic groups.
+    base: slate.slate1,
+    card: slate.slate2,
+    primary: iris.iris9,
+    secondary: slate.slate3,
+    destructive: ruby.ruby9,
+    muted: slate.slate2,
+    accent: cyan.cyan4,
+    pressed: iris.iris10,
+    disabled: slate.slate3,
   },
   foreground: {
-    base: gray.gray12, // Default text color (Radix 11-12)
-    primary: gray.gray1, // Text on primary backgrounds - high contrast
-    secondary: gray.gray11, // Secondary text (Radix 11-12)
-    destructive: gray.gray1, // Text on destructive backgrounds
-    muted: gray.gray10, // Muted text (Radix 9-10)
-    accent: blue.blue11, // Accent text (Radix 11-12)
-    disabled: gray.gray8, // Disabled text for contrast (Radix 9-10)
+    base: slate.slate12,
+    primary: slate.slate1,
+    secondary: slate.slate11,
+    destructive: slate.slate1,
+    muted: slate.slate10,
+    accent: iris.iris11,
+    disabled: slate.slate8,
   },
   border: {
-    primary: gray.gray7, // Primary borders (Radix 6-8)
-    input: gray.gray7, // Input borders (Radix 6-8)
-    muted: gray.gray6, // Subtle borders (Radix 6-8)
-    default: gray.gray7, // Standard border (Radix 6-8)
+    primary: slate.slate7,
+    input: slate.slate7,
+    muted: slate.slate6,
+    default: slate.slate7,
+    strong: slate.slate8,
+    focus: iris.iris8,
   },
   input: {
-    placeholder: gray.gray10, // Placeholder text (Radix 9-10)
+    background: slate.slate2,
+    border: slate.slate7,
+    borderFocus: iris.iris8,
+    borderInvalid: ruby.ruby8,
+    placeholder: slate.slate10,
   },
   success: {
     background: green.green9,
@@ -224,48 +279,110 @@ export const theme = createTheme({
     border: green.green7,
   },
   typography: {
-    base: gray.gray12, // Primary text - high contrast (Radix 11-12)
-    secondary: gray.gray11, // Secondary text - readable contrast (Radix 11-12)
-    muted: gray.gray10, // Muted text - lower emphasis (Radix 9-10)
-    accent: blue.blue11, // Accent text - blue tint for highlights (Radix 11-12)
-    link: blue.blue11, // Link text - blue for interactivity (Radix 11-12)
+    base: slate.slate12,
+    secondary: slate.slate11,
+    muted: slate.slate10,
+    accent: iris.iris11,
+    link: cyan.cyan11,
   },
   gray, // Full gray scale (gray1-gray12)
   blue, // Full blue scale
   red, // Full red scale
   green, // Full green scale
   teal, // Full teal scale
+  neutral: slate,
+  brand: iris,
+  accent: cyan,
+  warningScale: amber,
+  errorScale: ruby,
+  successScale: jade,
 })
 
 export const darkTheme = createTheme({
+  surface: {
+    app: slateDark.slate1,
+    subtle: slateDark.slate3,
+    elevated: slateDark.slate4,
+    hover: slateDark.slate5,
+    active: slateDark.slate6,
+  },
+  action: {
+    primaryBg: irisDark.iris9,
+    primaryBgHover: irisDark.iris10,
+    primaryFg: slateDark.slate1,
+    secondaryBg: slateDark.slate3,
+    secondaryBgHover: slateDark.slate4,
+    secondaryFg: slateDark.slate12,
+  },
+  text: {
+    high: slateDark.slate12,
+    medium: slateDark.slate11,
+    low: slateDark.slate10,
+    accent: irisDark.iris11,
+    link: cyanDark.cyan11,
+    onPrimary: slateDark.slate1,
+    disabled: slateDark.slate9,
+  },
+  status: {
+    success: {
+      background: jadeDark.jade3,
+      solid: jadeDark.jade9,
+      text: jadeDark.jade11,
+      border: jadeDark.jade7,
+    },
+    error: {
+      background: rubyDark.ruby3,
+      solid: rubyDark.ruby9,
+      text: rubyDark.ruby11,
+      border: rubyDark.ruby7,
+    },
+    warning: {
+      background: amberDark.amber3,
+      solid: amberDark.amber9,
+      text: amberDark.amber11,
+      border: amberDark.amber7,
+    },
+    info: {
+      background: blueDark.blue3,
+      solid: blueDark.blue9,
+      text: blueDark.blue11,
+      border: blueDark.blue7,
+    },
+  },
   background: {
-    base: grayDark.gray1,
-    card: grayDark.gray3,
-    primary: blueDark.blue8,
-    secondary: grayDark.gray3,
-    destructive: redDark.red9,
-    muted: grayDark.gray2,
-    accent: tealDark.teal4,
-    pressed: blueDark.blue9,
-    disabled: grayDark.gray2,
+    base: slateDark.slate1,
+    card: slateDark.slate3,
+    primary: irisDark.iris9,
+    secondary: slateDark.slate3,
+    destructive: rubyDark.ruby9,
+    muted: slateDark.slate2,
+    accent: cyanDark.cyan4,
+    pressed: irisDark.iris10,
+    disabled: slateDark.slate4,
   },
   foreground: {
-    base: grayDark.gray12,
-    primary: grayDark.gray12,
-    secondary: grayDark.gray11,
-    destructive: grayDark.gray1,
-    muted: grayDark.gray10,
-    accent: blueDark.blue11,
-    disabled: grayDark.gray8,
+    base: slateDark.slate12,
+    primary: slateDark.slate1,
+    secondary: slateDark.slate11,
+    destructive: slateDark.slate1,
+    muted: slateDark.slate10,
+    accent: irisDark.iris11,
+    disabled: slateDark.slate9,
   },
   border: {
-    primary: grayDark.gray7,
-    input: grayDark.gray7,
-    muted: grayDark.gray6,
-    default: grayDark.gray7,
+    primary: slateDark.slate8,
+    input: slateDark.slate7,
+    muted: slateDark.slate6,
+    default: slateDark.slate8,
+    strong: slateDark.slate8,
+    focus: irisDark.iris8,
   },
   input: {
-    placeholder: grayDark.gray10,
+    background: slateDark.slate2,
+    border: slateDark.slate7,
+    borderFocus: irisDark.iris8,
+    borderInvalid: rubyDark.ruby8,
+    placeholder: slateDark.slate10,
   },
   success: {
     background: greenDark.green9,
@@ -273,17 +390,23 @@ export const darkTheme = createTheme({
     border: greenDark.green7,
   },
   typography: {
-    base: grayDark.gray12,
-    secondary: grayDark.gray11,
-    muted: grayDark.gray10,
-    accent: blueDark.blue11,
-    link: blueDark.blue11,
+    base: slateDark.slate12,
+    secondary: slateDark.slate11,
+    muted: slateDark.slate10,
+    accent: irisDark.iris11,
+    link: cyanDark.cyan11,
   },
   gray: grayDark,
   blue: blueDark,
   red: redDark,
   green: greenDark,
   teal: tealDark,
+  neutral: slateDark,
+  brand: irisDark,
+  accent: cyanDark,
+  warningScale: amberDark,
+  errorScale: rubyDark,
+  successScale: jadeDark,
 })
 
 export type Theme = ReturnType<typeof createTheme>

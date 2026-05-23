@@ -25,24 +25,24 @@ const StyledButton = styled.TouchableOpacity<ButtonCustomProps>(
       default: {
         backgroundColor: disabled
           ? theme.color.background.disabled
-          : theme.color.background.primary,
+          : theme.color.action.primaryBg,
       },
       destructive: {
         backgroundColor: disabled
           ? theme.color.background.disabled
-          : theme.color.background.destructive,
+          : theme.color.status.error.solid,
       },
       outline: {
         borderWidth: theme.spacing(0.25),
         borderColor: disabled
           ? theme.color.border.muted
-          : theme.color.border.default,
-        backgroundColor: theme.color.background.base,
+          : theme.color.border.input,
+        backgroundColor: theme.color.surface.app,
       },
       secondary: {
         backgroundColor: disabled
           ? theme.color.background.disabled
-          : theme.color.background.secondary,
+          : theme.color.action.secondaryBg,
       },
       ghost: {
         backgroundColor: 'transparent',
@@ -95,34 +95,34 @@ const StyledText = styled.Text<{
   > = {
     default: {
       color: disabled
-        ? theme.color.foreground.disabled
-        : theme.color.foreground.primary,
+        ? theme.color.text.disabled
+        : theme.color.text.onPrimary,
     },
     destructive: {
       color: disabled
-        ? theme.color.foreground.disabled
-        : theme.color.foreground.destructive,
+        ? theme.color.text.disabled
+        : theme.color.text.onPrimary,
     },
     outline: {
       color: disabled
-        ? theme.color.foreground.disabled
-        : theme.color.foreground.base,
+        ? theme.color.text.disabled
+        : theme.color.text.high,
     },
     ghost: {
       color: disabled
-        ? theme.color.foreground.disabled
-        : theme.color.foreground.base,
+        ? theme.color.text.disabled
+        : theme.color.text.high,
     },
     link: {
       color: disabled
-        ? theme.color.foreground.disabled
-        : theme.color.foreground.accent,
+        ? theme.color.text.disabled
+        : theme.color.text.link,
       textDecorationLine: 'underline',
     },
     secondary: {
       color: disabled
-        ? theme.color.foreground.disabled
-        : theme.color.foreground.base,
+        ? theme.color.text.disabled
+        : theme.color.action.secondaryFg,
     },
   }
   return {

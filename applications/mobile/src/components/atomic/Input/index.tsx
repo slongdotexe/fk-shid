@@ -24,8 +24,8 @@ const StyledTextInput = styled(RNTextInput)<CustomTextInputProps>(({
 }) => {
   const sizeMap = {
     lg: {
-      fontSize: theme.spacing(theme.typography.fontSize.lg),
-      height: theme.spacing(11),
+      fontSize: theme.spacing(theme.typography.fontSize.base),
+      height: theme.spacing(12),
       paddingHorizontal: theme.spacing(3.5),
       paddingVertical: theme.spacing(2.25),
     },
@@ -46,10 +46,10 @@ const StyledTextInput = styled(RNTextInput)<CustomTextInputProps>(({
     width: '100%',
     borderRadius: theme.spacing(1),
     borderWidth: theme.spacing(0.25),
-    borderColor: theme.color.border.default,
-    backgroundColor: theme.color.background.card,
+    borderColor: theme.color.input.border,
+    backgroundColor: theme.color.input.background,
     fontWeight: '500',
-    color: theme.color.typography.base,
+    color: theme.color.text.high,
     ...sizeMap[size],
   }
 })
@@ -82,6 +82,7 @@ export const TextInput = forwardRef<
         placeholder="placeholder..."
         placeholderTextColor={theme.color.input.placeholder}
         size={size}
+        selectionColor={theme.color.text.accent}
         ref={ref}
         {...restProps}
       />
@@ -89,11 +90,11 @@ export const TextInput = forwardRef<
       <Typography
         size="xs"
         styles={(_theme) => ({
-          color: _theme.color.foreground.destructive,
-
-          bottom: 0,
+          color: _theme.color.status.error.text,
           fontSize: theme.spacing(theme.typography.fontSize.sm),
           fontWeight: theme.typography.fontWeight.medium,
+          marginLeft: 14,
+          marginTop: 4
         })}
       >
         {errorMessage}

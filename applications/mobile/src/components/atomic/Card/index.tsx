@@ -17,8 +17,8 @@ const StyledCard = styled.View<CustomCardProps>(
   ({ theme, fullWidth, styles }) => {
     return {
       borderRadius: theme.spacing(1),
-      backgroundColor: theme.color.background.card,
-      borderColor: theme.color.border.default,
+      backgroundColor: theme.color.surface.subtle,
+      borderColor: theme.color.border.primary,
       borderWidth: theme.spacing(0.25),
       width: fullWidth ? '100%' : 'auto',
       paddingHorizontal: theme.spacing(4),
@@ -54,7 +54,7 @@ const StyledCardTitle = styled.Text<CustomCardTitleProps>(
       // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Issue with theme types
       fontWeight: theme.typography.fontWeight.semibold as any,
       fontSize: theme.spacing(6),
-      color: theme.color.foreground.base,
+      color: theme.color.text.high,
       ...(typeof styles === 'function' ? styles(theme) : styles),
     }
   }
