@@ -11,19 +11,12 @@ function getUniqueIdentifier(): string {
   return 'com.slongdotexe.linklaundry'
 }
 
-function getGroupIdentifier(): string {
-    if (IS_DEV) {
-    return 'slongdotexe.linklaundry.dev'
-  }
-  return 'slongdotexe.linklaundry'
-}
-
 function getShareExtensionBundleIdentifier(): string {
   return `${getUniqueIdentifier()}.share-extension`
 }
 
 function getAppGroupIdentifier(): string {
-  return `group.${getGroupIdentifier()}`
+  return `group.${getUniqueIdentifier()}`
 }
 
 function getScheme(): string {
@@ -40,26 +33,14 @@ function getAppName(): string {
 }
 
 function getShareIntentPluginConfig() {
-  const config: {
-    iosShareExtensionBundleIdentifier: string
-    iosAppGroupIdentifier?: string
-    iosActivationRules: {
-      NSExtensionActivationSupportsText: boolean
-      NSExtensionActivationSupportsWebURL: boolean
-    }
-  } = {
+  return {
     iosShareExtensionBundleIdentifier: getShareExtensionBundleIdentifier(),
+    iosAppGroupIdentifier: getAppGroupIdentifier(),
     iosActivationRules: {
       NSExtensionActivationSupportsText: true,
       NSExtensionActivationSupportsWebURL: true,
     },
   }
-
-  if (IS_DEV) {
-    config.iosAppGroupIdentifier = getAppGroupIdentifier()
-  }
-
-  return config
 }
 
 export default {

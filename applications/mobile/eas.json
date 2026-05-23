@@ -17,6 +17,9 @@
       "developmentClient": true,
       "ios": {
         "simulator": false
+      },
+      "env": {
+        "APP_VARIANT": "preview"
       }
     },
     "testflight": {
