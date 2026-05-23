@@ -95,10 +95,19 @@ const Page = () => {
   }
 
   return (
-    <ScrollView style={{backgroundColor:theme.color.background.base}} contentInset={{top:20, bottom:40}} automaticallyAdjustKeyboardInsets>
+    <ScrollView
+      contentContainerStyle={{
+        backgroundColor: theme.color.background.base,
+        flexGrow: 1,
+        margin: 20,
+        marginTop: 32,
+      }}
+      style={{ backgroundColor: theme.color.background.base, flex: 1 }}
+      automaticallyAdjustKeyboardInsets={false}
+    >
       {/* <KeyboardAvoidingView behavior="padding"> */}
         <Typography size="xl">Clean New Link</Typography>
-        <View style={css({ gap: 32, })}>
+        <View style={css({ gap: 32, marginTop: 16 })}>
           <LinkCard
             titleText="Received Link"
             linkText={linkCleaningResult.input}

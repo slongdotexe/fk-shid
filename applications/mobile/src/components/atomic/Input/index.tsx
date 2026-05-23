@@ -47,9 +47,9 @@ const StyledTextInput = styled(RNTextInput)<CustomTextInputProps>(({
     borderRadius: theme.spacing(1),
     borderWidth: theme.spacing(0.25),
     borderColor: theme.color.border.default,
-    backgroundColor: theme.color.background.base,
+    backgroundColor: theme.color.background.card,
     fontWeight: '500',
-    color: theme.color.typography.secondary,
+    color: theme.color.typography.base,
     ...sizeMap[size],
   }
 })

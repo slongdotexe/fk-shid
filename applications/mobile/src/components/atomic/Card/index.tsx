@@ -18,7 +18,7 @@ const StyledCard = styled.View<CustomCardProps>(
     return {
       borderRadius: theme.spacing(1),
       backgroundColor: theme.color.background.card,
-      borderColor: theme.color.border.primary,
+      borderColor: theme.color.border.default,
       borderWidth: theme.spacing(0.25),
       width: fullWidth ? '100%' : 'auto',
       paddingHorizontal: theme.spacing(4),

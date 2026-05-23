@@ -4,10 +4,12 @@ import { Platform } from 'react-native'
 import { darkTheme, theme } from './new-theme'
 
 export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
+  const activeTheme = darkTheme
+
   return (
     <EmotionThemeProvider
       theme={{
-        ...darkTheme,
+        ...activeTheme,
         platform: Platform.OS,
       }}
     >

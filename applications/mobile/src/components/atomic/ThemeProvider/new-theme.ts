@@ -78,10 +78,12 @@ import {
   blue,
   red,
   green,
+  teal,
   grayDark,
   blueDark,
   redDark,
   greenDark,
+  tealDark,
 } from '@radix-ui/colors'
 
 // console.log({ kp: blueDarkP3.blue1 })
@@ -169,6 +171,7 @@ type ColorConfig = {
   blue: Record<string, string>
   red: Record<string, string>
   green: Record<string, string>
+  teal: Record<string, string>
 }
 
 function createTheme(colorConfig: ColorConfig) {
@@ -187,14 +190,14 @@ function createTheme(colorConfig: ColorConfig) {
 
 export const theme = createTheme({
   background: {
-    base: blue.blue1, // Generic background - subtle blue tint (Radix 1-2)
-    card: gray.gray2, // Card backgrounds - gray for contrast (Radix 1-2)
+    base: gray.gray1, // Generic background (Radix 1-2)
+    card: gray.gray2, // Card backgrounds (Radix 1-2)
     primary: blue.blue9, // Primary action backgrounds (Radix 9)
     secondary: gray.gray3, // Secondary backgrounds - interactive (Radix 3-5)
     destructive: red.red9, // Destructive action backgrounds (Radix 9)
     muted: gray.gray2, // Muted backgrounds (Radix 1-2)
-    accent: blue.blue4, // Accent interactive surfaces (Radix 3-5)
-    pressed: blue.blue5, // Pressed state for interactive elements (Radix 3-5)
+    accent: teal.teal4, // Accent interactive surfaces (Radix 3-5)
+    pressed: blue.blue10, // Pressed state for primary actions (Radix 10)
     disabled: gray.gray3, // Disabled background (Radix 3-5)
   },
   foreground: {
@@ -207,13 +210,13 @@ export const theme = createTheme({
     disabled: gray.gray8, // Disabled text for contrast (Radix 9-10)
   },
   border: {
-    primary: blue.blue7, // Primary borders (Radix 6-8)
-    input: blue.blue7, // Input borders (Radix 6-8)
+    primary: gray.gray7, // Primary borders (Radix 6-8)
+    input: gray.gray7, // Input borders (Radix 6-8)
     muted: gray.gray6, // Subtle borders (Radix 6-8)
     default: gray.gray7, // Standard border (Radix 6-8)
   },
   input: {
-    placeholder: gray.gray9, // Placeholder text (Radix 9-10)
+    placeholder: gray.gray10, // Placeholder text (Radix 9-10)
   },
   success: {
     background: green.green9,
@@ -231,19 +234,20 @@ export const theme = createTheme({
   blue, // Full blue scale
   red, // Full red scale
   green, // Full green scale
+  teal, // Full teal scale
 })
 
 export const darkTheme = createTheme({
   background: {
-    base: '#0A0A0A',
+    base: grayDark.gray1,
     card: grayDark.gray3,
-    primary: blueDark.blue5,
+    primary: blueDark.blue8,
     secondary: grayDark.gray3,
     destructive: redDark.red9,
     muted: grayDark.gray2,
-    accent: blueDark.blue4,
-    pressed: blueDark.blue5,
-    disabled: blueDark.blue2,
+    accent: tealDark.teal4,
+    pressed: blueDark.blue9,
+    disabled: grayDark.gray2,
   },
   foreground: {
     base: grayDark.gray12,
@@ -252,16 +256,16 @@ export const darkTheme = createTheme({
     destructive: grayDark.gray1,
     muted: grayDark.gray10,
     accent: blueDark.blue11,
-    disabled: grayDark.gray11,
+    disabled: grayDark.gray8,
   },
   border: {
-    primary: blueDark.blue7,
-    input: blueDark.blue7,
+    primary: grayDark.gray7,
+    input: grayDark.gray7,
     muted: grayDark.gray6,
     default: grayDark.gray7,
   },
   input: {
-    placeholder: grayDark.gray9,
+    placeholder: grayDark.gray10,
   },
   success: {
     background: greenDark.green9,
@@ -279,6 +283,7 @@ export const darkTheme = createTheme({
   blue: blueDark,
   red: redDark,
   green: greenDark,
+  teal: tealDark,
 })
 
 export type Theme = ReturnType<typeof createTheme>

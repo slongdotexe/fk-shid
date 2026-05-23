@@ -29,14 +29,14 @@ const StyledButton = styled.TouchableOpacity<ButtonCustomProps>(
       },
       destructive: {
         backgroundColor: disabled
-          ? theme.color.red.red2
+          ? theme.color.background.disabled
           : theme.color.background.destructive,
       },
       outline: {
         borderWidth: theme.spacing(0.25),
         borderColor: disabled
           ? theme.color.border.muted
-          : theme.color.border.primary,
+          : theme.color.border.default,
         backgroundColor: theme.color.background.base,
       },
       secondary: {

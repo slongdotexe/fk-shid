@@ -39,7 +39,7 @@ export const LinkCard = ({ titleText, linkText, onPress }: LinkCardProps) => {
     const backgroundColor = interpolateColor(
       pressed.value,
       [0, 1],
-      [theme.color.background.card, theme.color.gray.gray5]
+      [theme.color.background.card, theme.color.background.accent]
     )
 
     return {
