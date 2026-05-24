@@ -8442,6 +8442,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"expo-build-properties@npm:~55.0.14":
+  version: 55.0.14
+  resolution: "expo-build-properties@npm:55.0.14"
+  dependencies:
+    "@expo/schema-utils": "npm:^55.0.4"
+    resolve-from: "npm:^5.0.0"
+    semver: "npm:^7.6.0"
+  peerDependencies:
+    expo: "*"
+  checksum: 10c0/694dd5eaebf3c1dfffcf9d141f490eb601c82d14538fb1b8e9052ed8ed8295f0c1be6087f69ad328a00c64c62da3f6fea57ebf52056dce4ed1a997dcf4025ddd
+  languageName: node
+  linkType: hard
+
 "expo-clipboard@npm:~55.0.13":
   version: 55.0.13
   resolution: "expo-clipboard@npm:55.0.13"
@@ -12736,6 +12749,7 @@ __metadata:
     "@radix-ui/colors": "npm:^3.0.0"
     "@types/react": "npm:~19.2.10"
     expo: "npm:~55.0.24"
+    expo-build-properties: "npm:~55.0.14"
     expo-clipboard: "npm:~55.0.13"
     expo-constants: "npm:~55.0.16"
     expo-dev-client: "npm:~55.0.34"

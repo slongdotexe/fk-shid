@@ -22,19 +22,19 @@
         "APP_VARIANT": "preview"
       }
     },
-    "testflight": {
-      "developmentClient": false,
-      "channel": "latest",
+    "staging": {
+      "channel": "staging",
       "ios": {
         "simulator": false
+      },
+      "env": {
+        "APP_VARIANT": "production"
       }
     },
     "production": {
-      "distribution": "internal",
-      "developmentClient": true,
       "channel": "production",
-      "ios": {
-        "simulator": false
+      "env": {
+        "APP_VARIANT": "production"
       }
     }
   },

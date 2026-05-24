@@ -1,8 +1,6 @@
-declare const process: {
-  env: Record<string, string | undefined>
-}
-
-const IS_DEV = process.env.APP_VARIANT === 'preview' || process.env.APP_VARIANT === 'simulator'
+const IS_DEV =
+  process.env.APP_VARIANT === 'preview' ||
+  process.env.APP_VARIANT === 'simulator'
 
 function getUniqueIdentifier(): string {
   if (IS_DEV) {
@@ -36,18 +34,23 @@ function getShareIntentPluginConfig() {
   return {
     iosShareExtensionBundleIdentifier: getShareExtensionBundleIdentifier(),
     iosAppGroupIdentifier: getAppGroupIdentifier(),
-    iosActivationRules: {
-      NSExtensionActivationSupportsText: true,
-      NSExtensionActivationSupportsWebURL: true,
-    },
+    androidIntentFilters: ['text/*', 'image/*'],
   }
+}
+
+function getSlug() {
+  if (IS_DEV) {
+    return 'link-laundry-dev'
+  }
+  return 'link-laundry'
 }
 
 export default {
   expo: {
     newArchEnabled: true,
     name: getAppName(),
-    slug: 'link-laundry',
+    slug: getSlug(),
+    jsEngine: 'hermes',
     orientation: 'portrait',
     icon: './src/assets/link-laundry-dark.png',
     scheme: getScheme(),
@@ -77,10 +80,7 @@ export default {
       favicon: './src/assets/favicon.png',
     },
     plugins: [
-      [
-        'expo-share-intent',
-        getShareIntentPluginConfig(),
-      ],
+      ['expo-share-intent', getShareIntentPluginConfig()],
       'expo-router',
       [
         'expo-splash-screen',
@@ -88,6 +88,17 @@ export default {
           backgroundColor: '#0A0A0A',
           image: './src/assets/link-laundry-dark.png',
           imageWidth: 175,
+        },
+      ],
+      [
+        'expo-build-properties',
+        {
+          android: {
+            buildReactNativeFromSource: true,
+          },
+          ios: {
+            buildReactNativeFromSource: true,
+          },
         },
       ],
     ],
