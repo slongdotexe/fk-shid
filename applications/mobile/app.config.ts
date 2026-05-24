@@ -1,64 +1,54 @@
-const IS_DEV =
-  process.env.APP_VARIANT === 'preview' ||
-  process.env.APP_VARIANT === 'simulator'
+type AppVariant = 'simulator' | 'development' | 'stage' | 'production'
+type BuildSettings = { name: string; scheme: string }
 
-function getUniqueIdentifier(): string {
-  if (IS_DEV) {
-    return 'com.slongdotexe.linklaundry.dev'
-  }
-  return 'com.slongdotexe.linklaundry'
+const APP_IDENTIFIER_MAP: Record<AppVariant, string> = {
+  simulator: 'com.slongdotexe.linklaundry.dev',
+  development: 'com.slongdotexe.linklaundry.dev',
+  stage: 'com.slongdotexe.linklaundry.stage',
+  production: 'com.slongdotexe.linklaundry',
 }
 
-function getShareExtensionBundleIdentifier(): string {
-  return `${getUniqueIdentifier()}.share-extension`
+const BUILD_SETTINGS_MAP: Record<AppVariant, BuildSettings> = {
+  simulator: { name: 'Link Laundry Dev', scheme: 'linklaundry-dev' },
+  development: { name: 'Link Laundry Dev', scheme: 'linklaundry-dev' },
+  stage: { name: 'Link Laundry Stage', scheme: 'linklaundry-stage' },
+  production: { name: 'Link Laundry', scheme: 'linklaundry' },
 }
 
-function getAppGroupIdentifier(): string {
-  return `group.${getUniqueIdentifier()}`
-}
+function getAppVariant(): AppVariant {
+  const appVariant = process.env.APP_VARIANT
 
-function getScheme(): string {
-  if (IS_DEV) return 'link-laundry-dev'
-  return 'link-laundry'
-}
-
-function getAppName(): string {
-  if (IS_DEV) {
-    return 'Link Laundry Dev'
+  if (!appVariant || !(appVariant in BUILD_SETTINGS_MAP)) {
+    throw new Error(`Invalid app variant. Received ${appVariant}`)
   }
 
-  return 'Link Laundry'
+  return appVariant as AppVariant
 }
+
+const BUILD_SETTINGS = BUILD_SETTINGS_MAP[getAppVariant()]
+const APP_IDENTIFIER = APP_IDENTIFIER_MAP[getAppVariant()]
 
 function getShareIntentPluginConfig() {
   return {
-    iosShareExtensionBundleIdentifier: getShareExtensionBundleIdentifier(),
-    iosAppGroupIdentifier: getAppGroupIdentifier(),
+    iosShareExtensionBundleIdentifier: `${APP_IDENTIFIER}.share-extension`,
+    iosAppGroupIdentifier: `group.${APP_IDENTIFIER}`,
     androidIntentFilters: ['text/*', 'image/*'],
   }
-}
-
-function getSlug() {
-  if (IS_DEV) {
-    return 'link-laundry-dev'
-  }
-  return 'link-laundry'
 }
 
 export default {
   expo: {
     newArchEnabled: true,
-    name: getAppName(),
-    slug: getSlug(),
+    name: BUILD_SETTINGS.name,
     jsEngine: 'hermes',
     orientation: 'portrait',
     icon: './src/assets/link-laundry-dark.png',
-    scheme: getScheme(),
+    scheme: BUILD_SETTINGS.scheme,
     userInterfaceStyle: 'automatic',
     assetBundlePatterns: ['**/*'],
     ios: {
       supportsTablet: true,
-      bundleIdentifier: getUniqueIdentifier(),
+      bundleIdentifier: APP_IDENTIFIER,
       infoPlist: {
         ITSAppUsesNonExemptEncryption: false,
       },
@@ -71,7 +61,7 @@ export default {
         foregroundImage: './src/assets/adaptive-icon.png',
         backgroundColor: '#ffffff',
       },
-      package: getUniqueIdentifier(),
+      package: APP_IDENTIFIER,
       runtimeVersion: {
         policy: 'fingerprint',
       },

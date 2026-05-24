@@ -9,29 +9,32 @@
         "simulator": true
       },
       "env": {
+        "APP_VARIANT": "simulator",
         "NODE_ENV": "development"
       }
     },
-    "preview": {
+    "development": {
       "distribution": "internal",
       "developmentClient": true,
       "ios": {
         "simulator": false
       },
       "env": {
-        "APP_VARIANT": "preview"
+        "APP_VARIANT": "development"
       }
     },
-    "staging": {
+    "stage": {
+      "distribution": "store",
       "channel": "staging",
       "ios": {
         "simulator": false
       },
       "env": {
-        "APP_VARIANT": "production"
+        "APP_VARIANT": "stage"
       }
     },
     "production": {
+      "distribution": "store",
       "channel": "production",
       "env": {
         "APP_VARIANT": "production"
