@@ -19,3 +19,4 @@ applications/next-app/
 **/build-*.apk
 **/mobile*.app/
 credentials.json
+applications/mobile/build/
