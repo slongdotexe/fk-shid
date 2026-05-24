@@ -54,6 +54,12 @@ function getShareIntentPluginConfig() {
     iosShareExtensionBundleIdentifier: `${APP_IDENTIFIER}.share-extension`,
     iosAppGroupIdentifier: `group.${APP_IDENTIFIER}`,
     androidIntentFilters: ['text/*', 'image/*'],
+    iosActivationRules: {
+      NSExtensionActivationSupportsText: true,
+      NSExtensionActivationSupportsWebURL: true,
+      NSExtensionActivationSupportsWebURLWithMaxCount: 1,
+      NSExtensionActivationSupportsWebPageWithMaxCount: 1,
+    },
   }
 }
 
