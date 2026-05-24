@@ -15,14 +15,35 @@ const BUILD_SETTINGS_MAP: Record<AppVariant, BuildSettings> = {
   production: { name: 'Link Laundry', scheme: 'linklaundry' },
 }
 
-function getAppVariant(): AppVariant {
-  const appVariant = process.env.APP_VARIANT
+const LEGACY_VARIANT_MAP: Record<string, AppVariant> = {
+  preview: 'development',
+  staging: 'stage',
+}
 
-  if (!appVariant || !(appVariant in BUILD_SETTINGS_MAP)) {
-    throw new Error(`Invalid app variant. Received ${appVariant}`)
+function normalizeVariant(value?: string): AppVariant | undefined {
+  if (!value) {
+    return undefined
   }
 
-  return appVariant as AppVariant
+  if (value in BUILD_SETTINGS_MAP) {
+    return value as AppVariant
+  }
+
+  return LEGACY_VARIANT_MAP[value]
+}
+
+function getAppVariant(): AppVariant {
+  const appVariantFromEnv = normalizeVariant(process.env.APP_VARIANT)
+  if (appVariantFromEnv) {
+    return appVariantFromEnv
+  }
+
+  const appVariantFromProfile = normalizeVariant(process.env.EAS_BUILD_PROFILE)
+  if (appVariantFromProfile) {
+    return appVariantFromProfile
+  }
+
+  return 'development'
 }
 
 const BUILD_SETTINGS = BUILD_SETTINGS_MAP[getAppVariant()]
