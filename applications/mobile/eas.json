@@ -23,7 +23,7 @@
         "APP_VARIANT": "development"
       }
     },
-    "stage": {
+    "staging": {
       "distribution": "store",
       "channel": "staging",
       "ios": {

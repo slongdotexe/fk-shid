@@ -68,6 +68,7 @@ export default {
     newArchEnabled: true,
     name: BUILD_SETTINGS.name,
     jsEngine: 'hermes',
+    slug: 'link-laundry',
     orientation: 'portrait',
     icon: './src/assets/link-laundry-dark.png',
     scheme: BUILD_SETTINGS.scheme,
