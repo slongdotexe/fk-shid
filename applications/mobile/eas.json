@@ -11,7 +11,8 @@
       "env": {
         "APP_VARIANT": "simulator",
         "NODE_ENV": "development"
-      }
+      },
+      "channel": "simulator"
     },
     "development": {
       "distribution": "internal",
@@ -21,7 +22,8 @@
       },
       "env": {
         "APP_VARIANT": "development"
-      }
+      },
+      "channel": "development"
     },
     "staging": {
       "distribution": "store",
@@ -30,7 +32,7 @@
         "simulator": false
       },
       "env": {
-        "APP_VARIANT": "stage"
+        "APP_VARIANT": "staging"
       }
     },
     "production": {
