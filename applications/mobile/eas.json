@@ -1,6 +1,7 @@
 {
   "cli": {
-    "version": ">= 7.6.2"
+    "version": ">= 7.6.2",
+    "appVersionSource": "remote"
   },
   "build": {
     "simulator": {
@@ -21,25 +22,30 @@
         "simulator": false
       },
       "env": {
-        "APP_VARIANT": "development"
+        "APP_VARIANT": "development",
+        "EXPO_PUBLIC_APP_SCHEME": "linklaundry-dev"
       },
       "channel": "development"
     },
     "staging": {
       "distribution": "store",
+      "autoIncrement": true,
       "channel": "staging",
       "ios": {
         "simulator": false
       },
       "env": {
-        "APP_VARIANT": "staging"
+        "APP_VARIANT": "staging",
+        "EXPO_PUBLIC_APP_SCHEME": "linklaundry-stage"
       }
     },
     "production": {
       "distribution": "store",
+      "autoIncrement": true,
       "channel": "production",
       "env": {
-        "APP_VARIANT": "production"
+        "APP_VARIANT": "production",
+        "EXPO_PUBLIC_APP_SCHEME": "linklaundry"
       }
     }
   },

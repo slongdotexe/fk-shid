@@ -5,6 +5,7 @@ interface BuildSettings {
   name: string
   scheme: string
   iosIcon: string
+  iosShareExtensionName: string
 }
 
 const APP_VARIANTS: AppVariant[] = [
@@ -24,24 +25,28 @@ const BUILD_SETTINGS_MAP: Record<AppVariant, BuildSettings> = {
     name: 'Link Laundry Dev',
     scheme: 'linklaundry-dev',
     iosIcon: './src/icons/V1Develop.icon',
+    iosShareExtensionName: 'Link Laundry Dev Share',
   },
   development: {
     appIdentifier: 'com.slongdotexe.linklaundry.dev',
     name: 'Link Laundry Dev',
     scheme: 'linklaundry-dev',
     iosIcon: './src/icons/V1Develop.icon',
+    iosShareExtensionName: 'Link Laundry Dev Share',
   },
   staging: {
     appIdentifier: 'com.slongdotexe.linklaundry.stage',
     name: 'Link Laundry Stg',
     scheme: 'linklaundry-stage',
     iosIcon: './src/icons/V1Staging.icon',
+    iosShareExtensionName: 'Link Laundry Stg Share',
   },
   production: {
     appIdentifier: 'com.slongdotexe.linklaundry',
     name: 'Link Laundry',
     scheme: 'linklaundry',
     iosIcon: './src/icons/V1Staging.icon',
+    iosShareExtensionName: 'Link Laundry Share',
   },
 }
 
@@ -64,6 +69,7 @@ function getAppVariant(): AppVariant {
 
 const APP_VARIANT = getAppVariant()
 const BUILD_SETTINGS = BUILD_SETTINGS_MAP[APP_VARIANT]
+const APP_SCHEME = BUILD_SETTINGS.scheme
 
 export default {
   expo: {
@@ -73,7 +79,7 @@ export default {
     slug: 'link-laundry',
     orientation: 'portrait',
     icon: './src/assets/link-laundry-dark.png',
-    scheme: BUILD_SETTINGS.scheme,
+    scheme: APP_SCHEME,
     userInterfaceStyle: 'automatic',
     assetBundlePatterns: ['**/*'],
     ios: {
@@ -83,9 +89,6 @@ export default {
       infoPlist: {
         ITSAppUsesNonExemptEncryption: false,
       },
-      runtimeVersion: {
-        policy: 'fingerprint',
-      },
     },
     android: {
       adaptiveIcon: {
@@ -93,9 +96,6 @@ export default {
         backgroundColor: '#ffffff',
       },
       package: BUILD_SETTINGS.appIdentifier,
-      runtimeVersion: {
-        policy: 'fingerprint',
-      },
     },
     web: {
       favicon: './src/assets/favicon.png',
@@ -105,13 +105,14 @@ export default {
         'expo-share-intent',
         {
           iosShareExtensionBundleIdentifier: `${BUILD_SETTINGS.appIdentifier}.share-extension`,
+          iosShareExtensionName: BUILD_SETTINGS.iosShareExtensionName,
           iosAppGroupIdentifier: `group.${BUILD_SETTINGS.appIdentifier}`,
           androidIntentFilters: ['text/*', 'image/*'],
           iosActivationRules: {
             NSExtensionActivationSupportsText: true,
             NSExtensionActivationSupportsWebURL: true,
             NSExtensionActivationSupportsWebURLWithMaxCount: 1,
-            NSExtensionActivationSupportsWebPageWithMaxCount: 1,
+            // NSExtensionActivationSupportsWebPageWithMaxCount: 1,
           },
         },
       ],
@@ -144,6 +145,8 @@ export default {
       ],
     ],
     extra: {
+      appVariant: APP_VARIANT,
+      appScheme: APP_SCHEME,
       router: {
         origin: false,
       },
@@ -160,3 +163,8 @@ export default {
     },
   },
 }
+
+console.warn('############################################')
+console.warn(`App variant is: ${APP_VARIANT}`)
+console.warn(`App scheme is: ${APP_SCHEME}`)
+console.warn('############################################')

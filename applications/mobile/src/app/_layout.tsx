@@ -1,6 +1,5 @@
-import { Slot, useRouter } from "expo-router";
-
 import { Stack } from 'expo-router'
+
 import { ShareIntentProvider } from 'expo-share-intent'
 import { StatusBar } from 'expo-status-bar'
 import { Platform, UIManager } from 'react-native'
@@ -16,13 +15,13 @@ if (Platform.OS === 'android') {
 }
 
 const HomeLayout = () => {
-  const router = useRouter();
 
- return (
+  return (
     <ShareIntentProvider
       options={{
         debug: true,
         resetOnBackground: true,
+        scheme: process.env.EXPO_PUBLIC_APP_SCHEME
       }}
     >
       <StatusBar style="light" />
@@ -33,7 +32,7 @@ const HomeLayout = () => {
         <AppToast />
       </ThemeProvider>
     </ShareIntentProvider>
-  );
+  )
 }
 
 export default HomeLayout
